@@ -16,7 +16,7 @@
 <meta property="og:description" content="大数据竞赛题目操作手册基础部分1、基础搭建本次集群搭建共有三个节点，包括一个主节点master，和两个从节点slave1和slave2。具体操作如下： 1.1更改本地源1.修改主机名： 1hostnamectl set-hostname master（在master执行）   立即生效： 1bash  同理修改slave1和slave2的主机名。 123hostnamectl set-hostna">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-10-28T16:15:50.000Z">
-<meta property="article:modified_time" content="2021-10-28T16:18:04.911Z">
+<meta property="article:modified_time" content="2022-06-16T16:03:56.463Z">
 <meta property="article:author" content="ulquiola">
 <meta property="article:tag" content="大数据分析">
 <meta name="twitter:card" content="summary">
@@ -184,13 +184,13 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pkill -9 yum</span><br></pre></td></tr></table></figure>
 
 <p>进入yum源配置文件：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/yum.repos.d</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;etc&#x2F;yum.repos.d</span><br></pre></td></tr></table></figure>
 
 <p>l 删除所有文件：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf *</span><br></pre></td></tr></table></figure>
 
 <p>下载yum源：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">##wget http://172.31.10.254:8000/bigdata/repofile/bigdata.repo</span><br><span class="line">mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">##wget http:&#x2F;&#x2F;172.31.10.254:8000&#x2F;bigdata&#x2F;repofile&#x2F;bigdata.repo</span><br><span class="line">mv &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Base.repo &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Base.repo.backup curl -o &#x2F;etc&#x2F;yum.repos.d&#x2F;CentOS-Base.repo http:&#x2F;&#x2F;mirrors.aliyun.com&#x2F;repo&#x2F;Centos-7.repo</span><br></pre></td></tr></table></figure>
 
 <p>清除YUM缓存：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum clean all</span><br></pre></td></tr></table></figure>
@@ -199,7 +199,7 @@
 
 <h3 id="1-2-配置hosts文件"><a href="#1-2-配置hosts文件" class="headerlink" title="1.2 配置hosts文件"></a>1.2 配置hosts文件</h3><p>可以通过ifconfig命令进行查看机器的ip地址或者直接输入比赛平台提供的ip地址。</p>
 <p>查看节点地址之后将三个节点的ip地址以及其对应的名称写进hosts文件。这里我们设置为master、slave1、slave2。注意保存退出。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/hosts（三台机器都执行)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;hosts（三台机器都执行)</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">172.16.10.62 master</span><br><span class="line">172.16.10.64 slave1</span><br><span class="line">172.16.10.65 slave2</span><br></pre></td></tr></table></figure>
 
@@ -214,7 +214,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tzselect ## 5 9 1 yes 1</span><br></pre></td></tr></table></figure>
 
 <p>给出相应的提示之后，将时间设置写入环境变量。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;TZ=&apos;Asia/Shanghai&apos;; export TZ&quot; &gt;&gt; /etc/profile &amp;&amp; source /etc/profile</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;TZ&#x3D;&#39;Asia&#x2F;Shanghai&#39;; export TZ&quot; &gt;&gt; &#x2F;etc&#x2F;profile &amp;&amp; source &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
 
 
 
@@ -222,26 +222,26 @@
 
 <p><strong>master**</strong>作为ntp<strong>**服务器：</strong><a href="#_msocom_2">[U2]</a> </p>
 <p>修改ntp配置文件。屏蔽掉默认的server，设置master作为局域网内时钟源，设置时间服务器的层级为10，为集群主机提供时间服务。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/ntp.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;ntp.conf</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#注释掉server 0 ~ n</span><br><span class="line"></span><br><span class="line">#server 0.centos.pool.ntp.org iburst</span><br><span class="line"></span><br><span class="line">#server 1.centos.pool.ntp.org iburst</span><br><span class="line"></span><br><span class="line">#server 2.centos.pool.ntp.org iburst</span><br><span class="line"></span><br><span class="line">#server 3.centos.pool.ntp.org iburst</span><br><span class="line"></span><br><span class="line">server 127.127.1.0        # local clock</span><br><span class="line"></span><br><span class="line">fudge 127.127.1.0 stratum 10  #stratum设置为其它值也是可以的，其范围为0~15</span><br></pre></td></tr></table></figure>
 
 <p>修改后注意保存退出。</p>
 <p>重启ntp服务(master上执行)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/systemctl restart ntpd.service</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;bin&#x2F;systemctl restart ntpd.service</span><br></pre></td></tr></table></figure>
 
 <p>其他机器进行同步（在slave1，slave2中执行）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ntpdate master</span><br></pre></td></tr></table></figure>
 
 <h3 id="1-6-制作定时任务"><a href="#1-6-制作定时任务" class="headerlink" title="1.6 制作定时任务"></a>1.6 制作定时任务</h3><p>确保crontab服务开启：   </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service crond status</span><br><span class="line">/sbin/service crond start</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service crond status</span><br><span class="line">&#x2F;sbin&#x2F;service crond start</span><br></pre></td></tr></table></figure>
 
 <p>要求：从节点（slave1、slave2）在早十晚五时间段每隔半个小时同步一次时间</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab -e</span><br></pre></td></tr></table></figure>
 
 <p> 输入i</p>
 <p>添加定时任务：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*/30 10-17 * * * /usr/sbin/ntpdate master</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*&#x2F;30 10-17 * * * &#x2F;usr&#x2F;sbin&#x2F;ntpdate master</span><br></pre></td></tr></table></figure>
 
 <p>查看定时任务列表：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab –l</span><br></pre></td></tr></table></figure>
@@ -250,72 +250,72 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
 
 <p>2.然后将公钥文件内容添加到授权文件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /root/.ssh/id_rsa.pub &gt;&gt; /root/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat &#x2F;root&#x2F;.ssh&#x2F;id_rsa.pub &gt;&gt; &#x2F;root&#x2F;.ssh&#x2F;authorized_keys</span><br></pre></td></tr></table></figure>
 
 <p>可以将master授权文件复制到slave1、slave2信任授权设置。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scp ~/.ssh/authorized_keys root@slave1:~/.ssh/</span><br><span class="line"></span><br><span class="line">scp ~/.ssh/authorized_keys root@slave2:~/.ssh/</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scp ~&#x2F;.ssh&#x2F;authorized_keys root@slave1:~&#x2F;.ssh&#x2F;</span><br><span class="line"></span><br><span class="line">scp ~&#x2F;.ssh&#x2F;authorized_keys root@slave2:~&#x2F;.ssh&#x2F;</span><br></pre></td></tr></table></figure>
 
 <h2 id="2、安装JDK"><a href="#2、安装JDK" class="headerlink" title="2、安装JDK"></a>2、安装JDK</h2><p><strong>以下操作为先在master**</strong>上操作，然后远程复制到slave1<strong><strong>和slave2</strong></strong>。参赛选手仅供参考。**</p>
 <p>首先在根目录下建立工作路径/usr/java。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /usr/java</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p &#x2F;usr&#x2F;java</span><br></pre></td></tr></table></figure>
 
 <p>进入创建的java工作路径。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/java</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;java</span><br></pre></td></tr></table></figure>
 
 <p>下载java安装包(master上执行)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget  ip/jdk-8u171-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget  ip&#x2F;jdk-8u171-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf jdk-8u171-linux-x64.tar.gz -C /usr/java/</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf jdk-8u171-linux-x64.tar.gz -C &#x2F;usr&#x2F;java&#x2F;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf /usr/java/jdk-8u171-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf &#x2F;usr&#x2F;java&#x2F;jdk-8u171-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
 
 <p>修改环境变量：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
 
 <p>添加内容如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#java</span><br><span class="line">export JAVA_HOME=/usr/java/jdk1.8.0_221</span><br><span class="line">export CLASSPATH=$JAVA_HOMEb/</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line">export PATH JAVA_HOME CLASSPATH</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#java</span><br><span class="line">export JAVA_HOME&#x3D;&#x2F;usr&#x2F;java&#x2F;jdk1.8.0_221</span><br><span class="line">export CLASSPATH&#x3D;$JAVA_HOMEb&#x2F;</span><br><span class="line">export PATH&#x3D;$PATH:$JAVA_HOME&#x2F;bin</span><br><span class="line">export PATH JAVA_HOME CLASSPATH</span><br></pre></td></tr></table></figure>
 
 <p> 生效环境变量：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
 
 <p>查看java版本：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -version</span><br></pre></td></tr></table></figure>
 
 <p>在master中将JDK复制到slave1和slave2中。（在master执行）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp -r /usr/java root@slave1:/usr/</span><br><span class="line">scp -r /usr/java root@slave2:/usr/</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp -r &#x2F;usr&#x2F;java root@slave1:&#x2F;usr&#x2F;</span><br><span class="line">scp -r &#x2F;usr&#x2F;java root@slave2:&#x2F;usr&#x2F;</span><br></pre></td></tr></table></figure>
 
 
 
 <p>​    <strong>注意：此时需要去slave1**</strong>和slave2<strong><strong>上配置java</strong></strong>的环境变量，并使环境变量生效。**</p>
 <h2 id="3、安装zookeeper"><a href="#3、安装zookeeper" class="headerlink" title="3、安装zookeeper"></a>3、安装zookeeper</h2><h3 id="3-1-下载软件"><a href="#3-1-下载软件" class="headerlink" title="3.1 下载软件"></a>3.1 下载软件</h3><p>创建工作路径/usr/zookeeper，下载相应软件，解压至工作路径。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /usr/zookeeper &amp;&amp; cd /usr/zookeeper</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p &#x2F;usr&#x2F;zookeeper &amp;&amp; cd &#x2F;usr&#x2F;zookeeper</span><br></pre></td></tr></table></figure>
 
 <p>wget <a href="http://172.31.10.254:8000/bigdata/bigdata_tar/zookeeper-3.4.10.tar.gz" target="_blank" rel="noopener">http://172.31.10.254:8000/bigdata/bigdata_tar/zookeeper-3.4.10.tar.gz</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf /usr/zookeeper/zookeeper-3.4.14.tar.gz -C /usr/zookeeper/</span><br><span class="line"></span><br><span class="line">rm -rf /usr/zookeeper/zookeeper-3.4.14.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf &#x2F;usr&#x2F;zookeeper&#x2F;zookeeper-3.4.14.tar.gz -C &#x2F;usr&#x2F;zookeeper&#x2F;</span><br><span class="line"></span><br><span class="line">rm -rf &#x2F;usr&#x2F;zookeeper&#x2F;zookeeper-3.4.14.tar.gz</span><br></pre></td></tr></table></figure>
 
-<h3 id="3-2-配置zookeeper环境变量"><a href="#3-2-配置zookeeper环境变量" class="headerlink" title="3.2 配置zookeeper环境变量"></a>3.2 配置zookeeper环境变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/profile</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-配置zookeeper环境变量"><a href="#3-2-配置zookeeper环境变量" class="headerlink" title="3.2 配置zookeeper环境变量"></a>3.2 配置zookeeper环境变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#zookeeper</span><br><span class="line">export ZOOKEEPER_HOME=/usr/zookeeper/zookeeper-3.4.14</span><br><span class="line">PATH=$PATH:$ZOOKEEPER_HOME/bin</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#zookeeper</span><br><span class="line">export ZOOKEEPER_HOME&#x3D;&#x2F;usr&#x2F;zookeeper&#x2F;zookeeper-3.4.14</span><br><span class="line">PATH&#x3D;$PATH:$ZOOKEEPER_HOME&#x2F;bin</span><br></pre></td></tr></table></figure>
 
 <p>生效环境变量：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
 
 
 
 <h3 id="3-3-配置文件zoo-cfg"><a href="#3-3-配置文件zoo-cfg" class="headerlink" title="3.3 配置文件zoo.cfg"></a>3.3 配置文件zoo.cfg</h3><p>1.进入zookeeper配置文件夹conf，将zoo_sample.cfg文件拷贝一份命名为zoo.cfg，Zookeeper 在启动时会找这个文件作为默认配置文件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/zookeeper/zookeeper-3.4.14/conf/ &amp;&amp; mv zoo_sample.cfg zoo.cfg &amp;&amp; vim zoo.cfg</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;zookeeper&#x2F;zookeeper-3.4.14&#x2F;conf&#x2F; &amp;&amp; mv zoo_sample.cfg zoo.cfg &amp;&amp; vim zoo.cfg</span><br></pre></td></tr></table></figure>
 
 <p>2.对zoo.cfg文件配置如下： </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim zoo.cfg</span><br></pre></td></tr></table></figure>
 
 <p>修改如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tickTime=2000  </span><br><span class="line">initLimit=10</span><br><span class="line">syncLimit=5</span><br><span class="line">dataDir=/usr/zookeeper/zookeeper-3.4.14/zkdata</span><br><span class="line">clientPort=2181</span><br><span class="line">dataLogDir=/usr/zookeeper/zookeeper-3.4.14/zkdatalog</span><br><span class="line">server.1=master:2888:3888</span><br><span class="line">server.2=slave1:2888:3888</span><br><span class="line">server.3=slave2:2888:3888</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">tickTime&#x3D;2000  </span><br><span class="line">initLimit&#x3D;10</span><br><span class="line">syncLimit&#x3D;5</span><br><span class="line">dataDir&#x3D;&#x2F;usr&#x2F;zookeeper&#x2F;zookeeper-3.4.14&#x2F;zkdata</span><br><span class="line">clientPort&#x3D;2181</span><br><span class="line">dataLogDir&#x3D;&#x2F;usr&#x2F;zookeeper&#x2F;zookeeper-3.4.14&#x2F;zkdatalog</span><br><span class="line">server.1&#x3D;master:2888:3888</span><br><span class="line">server.2&#x3D;slave1:2888:3888</span><br><span class="line">server.3&#x3D;slave2:2888:3888</span><br></pre></td></tr></table></figure>
 
 <p>3.在zookeeper的目录中，创建配置中所需的zkdata和zkdatalog两个文件夹。（在master执行）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/zookeeper/zookeeper-3.4.14 &amp;&amp; mkdir zkdata zkdatalog</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;zookeeper&#x2F;zookeeper-3.4.14 &amp;&amp; mkdir zkdata zkdatalog</span><br></pre></td></tr></table></figure>
 
 <p>4.进入zkdata文件夹，创建文件myid，用于表示是几号服务器，用来标识当前主机。master主机中，设置服务器id为1。（集群中设置master为1号服务器，slave1为2号服务器，slave2为3号服务器）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/zookeeper/zookeeper-3.4.10/zkdata</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;usr&#x2F;zookeeper&#x2F;zookeeper-3.4.10&#x2F;zkdata</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo 1 &gt;&gt; myid #master</span><br><span class="line">echo 2 &gt;&gt; myid #slave1</span><br><span class="line">echo 3 &gt;&gt; myid #slave2</span><br></pre></td></tr></table></figure>
 
@@ -330,16 +330,16 @@
 <p>至此，zookeeper安装成功。</p>
 <h2 id="4、安装hadoop"><a href="#4、安装hadoop" class="headerlink" title="4、安装hadoop"></a>4、安装hadoop</h2><p>以下步骤逻辑仅供选手参考：即hadoop安装同样在主节点master上进行配置操作，然后将文件复制到到子节点slave1和slave2。</p>
 <h3 id="4-1-解压安装包，配置环境变量"><a href="#4-1-解压安装包，配置环境变量" class="headerlink" title="4.1 解压安装包，配置环境变量"></a>4.1 解压安装包，配置环境变量</h3><p>创建工作路径/usr/hadoop，下载相应软件，解压至工作路径。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /usr/hadoop &amp;&amp; cd /usr/hadoop</span><br><span class="line">wget http://172.31.10.254:8000/bigdata/bigdata_tar/hadoop-2.7.3.tar.gz</span><br><span class="line">tar -zxvf /usr/hadoop/hadoop-2.7.3.tar.gz -C /usr/hadoop/</span><br><span class="line">rm -rf /usr/hadoop/hadoop-2.7.3.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p &#x2F;usr&#x2F;hadoop &amp;&amp; cd &#x2F;usr&#x2F;hadoop</span><br><span class="line">wget http:&#x2F;&#x2F;172.31.10.254:8000&#x2F;bigdata&#x2F;bigdata_tar&#x2F;hadoop-2.7.3.tar.gz</span><br><span class="line">tar -zxvf &#x2F;usr&#x2F;hadoop&#x2F;hadoop-2.7.3.tar.gz -C &#x2F;usr&#x2F;hadoop&#x2F;</span><br><span class="line">rm -rf &#x2F;usr&#x2F;hadoop&#x2F;hadoop-2.7.3.tar.gz</span><br></pre></td></tr></table></figure>
 
 <p>2.添加hadoop环境变量（三台机器执行）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
 
 <p>添加如下内容：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#hadoop</span><br><span class="line">export HADOOP_HOME=/usr/hadoop/hadoop-2.7.3</span><br><span class="line">export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#hadoop</span><br><span class="line">export HADOOP_HOME&#x3D;&#x2F;usr&#x2F;hadoop&#x2F;hadoop-2.7.3</span><br><span class="line">export PATH&#x3D;$PATH:$HADOOP_HOME&#x2F;bin:$HADOOP_HOME&#x2F;sbin</span><br></pre></td></tr></table></figure>
 
 <p>使用以下命令使profile生效：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
 
 <h3 id="4-2-配置hadoop各组件"><a href="#4-2-配置hadoop各组件" class="headerlink" title="4.2 配置hadoop各组件"></a>4.2 配置hadoop各组件</h3><p>hadoop的各个组件的都是使用XML进行配置，这些文件存放在hadoop的etc/hadoop目录下。</p>
 <table>
@@ -376,32 +376,32 @@
 <td>配置ResourceManager ，nodeManager的通信端口，web监控端口等；</td>
 </tr>
 </tbody></table>
-<h4 id="1-hadoop-env-sh运行环境"><a href="#1-hadoop-env-sh运行环境" class="headerlink" title="1. hadoop-env.sh运行环境"></a>1. hadoop-env.sh运行环境</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $HADOOP_HOME/etc/hadoop</span><br><span class="line">vim hadoop-env.sh</span><br></pre></td></tr></table></figure>
+<h4 id="1-hadoop-env-sh运行环境"><a href="#1-hadoop-env-sh运行环境" class="headerlink" title="1. hadoop-env.sh运行环境"></a>1. hadoop-env.sh运行环境</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd $HADOOP_HOME&#x2F;etc&#x2F;hadoop</span><br><span class="line">vim hadoop-env.sh</span><br></pre></td></tr></table></figure>
 
 <p>输入以下内容，修改java环境变量：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.8.0_221</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME&#x3D;&#x2F;usr&#x2F;java&#x2F;jdk1.8.0_221</span><br></pre></td></tr></table></figure>
 
 <p>也可以直接输入命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;export JAVA_HOME=/usr/java/jdk1.8.0_221&quot; &gt;&gt; hadoop-env.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;export JAVA_HOME&#x3D;&#x2F;usr&#x2F;java&#x2F;jdk1.8.0_221&quot; &gt;&gt; hadoop-env.sh</span><br></pre></td></tr></table></figure>
 
 <p>键入“Esc”，退出编辑模式，使用命令“:wq”进行保存退出。</p>
 <h4 id="2-core-site-xml全局参数"><a href="#2-core-site-xml全局参数" class="headerlink" title="2. core-site.xml全局参数"></a>2. core-site.xml全局参数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim core-site.xml</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;fs.default.name&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;hdfs://master:9000&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;/usr/hadoop/hadoop-2.7.3/hdfs/tmp&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;io.file.buffer.size&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;131072&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;fs.checkpoint.period&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;60&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;fs.checkpoint.size&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;67108864&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;fs.default.name&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;hdfs:&#x2F;&#x2F;master:9000&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;hadoop.tmp.dir&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;&#x2F;usr&#x2F;hadoop&#x2F;hadoop-2.7.3&#x2F;hdfs&#x2F;tmp&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;io.file.buffer.size&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;131072&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;fs.checkpoint.period&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;60&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;fs.checkpoint.size&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;67108864&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure>
 
 <p>master：在主节点的ip或者映射名。</p>
 <p>9000：主节点和从节点配置的端口都是9000。</p>
 <h4 id="3-hdfs-site-xml配置文件"><a href="#3-hdfs-site-xml配置文件" class="headerlink" title="3. hdfs-site.xml配置文件"></a>3. hdfs-site.xml配置文件</h4><p>dfs.replication：因为hadoop是具有可靠性的，它会备份多个文本，这里value就是指备份的数量（小于等于从节点的数量）。</p>
 <p>在<configuration></configuration>中加入以下代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;2&lt;/value&gt;</span><br><span class="line"> &lt;/property&gt;</span><br><span class="line"> &lt;property&gt;</span><br><span class="line">  &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;file:/usr/hadoop/hadoop-2.7.3/hdfs/name&lt;/value&gt;</span><br><span class="line"> &lt;/property&gt;</span><br><span class="line"> &lt;property&gt;</span><br><span class="line">  &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;file:/usr/hadoop/hadoop-2.7.3/hdfs/data&lt;/value&gt;</span><br><span class="line"> &lt;/property&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;dfs.replication&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;2&lt;&#x2F;value&gt;</span><br><span class="line"> &lt;&#x2F;property&gt;</span><br><span class="line"> &lt;property&gt;</span><br><span class="line">  &lt;name&gt;dfs.namenode.name.dir&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;file:&#x2F;usr&#x2F;hadoop&#x2F;hadoop-2.7.3&#x2F;hdfs&#x2F;name&lt;&#x2F;value&gt;</span><br><span class="line"> &lt;&#x2F;property&gt;</span><br><span class="line"> &lt;property&gt;</span><br><span class="line">  &lt;name&gt;dfs.datanode.data.dir&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;file:&#x2F;usr&#x2F;hadoop&#x2F;hadoop-2.7.3&#x2F;hdfs&#x2F;data&lt;&#x2F;value&gt;</span><br><span class="line"> &lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
 
 
 
 <h4 id="4-YARN框架运行环境"><a href="#4-YARN框架运行环境" class="headerlink" title="4. YARN框架运行环境"></a>4. YARN框架运行环境</h4><p>找到JAVA_HOME参数位置，将前面的#去掉，将其值修改为本机安装的JDK的实际位置。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim yarn-env.sh</span><br><span class="line"></span><br><span class="line">export JAVA_HOME=/usr/java/jdk1.8.0_221</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim yarn-env.sh</span><br><span class="line"></span><br><span class="line">export JAVA_HOME&#x3D;&#x2F;usr&#x2F;java&#x2F;jdk1.8.0_221</span><br></pre></td></tr></table></figure>
 
 <p>也可以直接输入命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;export JAVA_HOME=/usr/java/jdk1.8.0_221&quot; &gt;&gt; yarn-env.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;export JAVA_HOME&#x3D;&#x2F;usr&#x2F;java&#x2F;jdk1.8.0_221&quot; &gt;&gt; yarn-env.sh</span><br></pre></td></tr></table></figure>
 
 
 
@@ -411,7 +411,7 @@
 <p>在<configuration></configuration>中加入以下代码：</p>
 <!-- 指定ResourceManager的地址-->
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;yarn.resourcemanager.address&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;master:18040&lt;/value&gt;</span><br><span class="line"> &lt;/property&gt;</span><br><span class="line"> &lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.scheduler.address&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;master:18030&lt;/value&gt;</span><br><span class="line"> &lt;/property&gt;</span><br><span class="line"> &lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.webapp.address&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;master:18088&lt;/value&gt;</span><br><span class="line"> &lt;/property&gt;</span><br><span class="line"> &lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.resource-tracker.address&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;master:18025&lt;/value&gt;</span><br><span class="line"> &lt;/property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;yarn.resourcemanager.admin.address&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;master:18141&lt;/value&gt;</span><br><span class="line"> &lt;/property&gt;</span><br><span class="line">&lt;!-- 指定reducer获取数据的方式--&gt;</span><br><span class="line"> &lt;property&gt;</span><br><span class="line"> &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line"> &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line"> &lt;/property&gt;</span><br><span class="line"> &lt;property&gt;</span><br><span class="line"> &lt;name&gt;yarn.nodemanager.auxservices.mapreduce.shuffle.class&lt;/name&gt;</span><br><span class="line"> &lt;value&gt;org.apache.hadoop.mapred.ShuffleHandler&lt;/value&gt;</span><br><span class="line"> &lt;/property&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;yarn.resourcemanager.address&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;master:18040&lt;&#x2F;value&gt;</span><br><span class="line"> &lt;&#x2F;property&gt;</span><br><span class="line"> &lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.scheduler.address&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;master:18030&lt;&#x2F;value&gt;</span><br><span class="line"> &lt;&#x2F;property&gt;</span><br><span class="line"> &lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.webapp.address&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;master:18088&lt;&#x2F;value&gt;</span><br><span class="line"> &lt;&#x2F;property&gt;</span><br><span class="line"> &lt;property&gt;</span><br><span class="line">  &lt;name&gt;yarn.resourcemanager.resource-tracker.address&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;master:18025&lt;&#x2F;value&gt;</span><br><span class="line"> &lt;&#x2F;property&gt;</span><br><span class="line"></span><br><span class="line">&lt;property&gt;</span><br><span class="line"> &lt;name&gt;yarn.resourcemanager.admin.address&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;master:18141&lt;&#x2F;value&gt;</span><br><span class="line"> &lt;&#x2F;property&gt;</span><br><span class="line">&lt;!-- 指定reducer获取数据的方式--&gt;</span><br><span class="line"> &lt;property&gt;</span><br><span class="line"> &lt;name&gt;yarn.nodemanager.aux-services&lt;&#x2F;name&gt;</span><br><span class="line"> &lt;value&gt;mapreduce_shuffle&lt;&#x2F;value&gt;</span><br><span class="line"> &lt;&#x2F;property&gt;</span><br><span class="line"> &lt;property&gt;</span><br><span class="line"> &lt;name&gt;yarn.nodemanager.auxservices.mapreduce.shuffle.class&lt;&#x2F;name&gt;</span><br><span class="line"> &lt;value&gt;org.apache.hadoop.mapred.ShuffleHandler&lt;&#x2F;value&gt;</span><br><span class="line"> &lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -421,7 +421,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp mapred-site.xml.template mapred-site.xml &amp;&amp; vim mapred-site.xml</span><br></pre></td></tr></table></figure>
 
 <p>在<configuration></configuration>中加入以下代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">&lt;!--指定Mapreduce运行在yarn上[[U5\]](#_msocom_5) --&gt;</span><br><span class="line">  &lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">  &lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line"> &lt;/property&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">&lt;!--指定Mapreduce运行在yarn上[[U5\]](#_msocom_5) --&gt;</span><br><span class="line">  &lt;name&gt;mapreduce.framework.name&lt;&#x2F;name&gt;</span><br><span class="line">  &lt;value&gt;yarn&lt;&#x2F;value&gt;</span><br><span class="line"> &lt;&#x2F;property&gt;</span><br></pre></td></tr></table></figure>
 
 <p>注意保存退出。 </p>
 <h4 id="7-编写slaves和master文件"><a href="#7-编写slaves和master文件" class="headerlink" title="7. 编写slaves和master文件"></a>7. 编写slaves和master文件</h4><p>编写slaves文件，添加子节点slave1和slave2；</p>
@@ -455,13 +455,13 @@
 <p>3.登陆MySQL</p>
 <p>安装完毕后，MySQL会在/var/log/mysqld.log这个文件中会自动生成一个随机的密码，获取得这个随机密码，以用于登录MySQL数据库：</p>
 <p>获取初密码： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep &quot;temporary password&quot; /var/log/mysqld.log</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep &quot;temporary password&quot; &#x2F;var&#x2F;log&#x2F;mysqld.log</span><br></pre></td></tr></table></figure>
 
 <p>登陆MySQL：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p（注意中英文）</span><br></pre></td></tr></table></figure>
 
 <p>4.MySQL密码安全策略设置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">设置密码强度为低级：set global validate_password_policy=0;</span><br><span class="line"></span><br><span class="line">设置密码长度：set global validate_password_length=4;</span><br><span class="line"></span><br><span class="line">修改本地密码：alter user &apos;root&apos;@&apos;localhost&apos; identified by &apos;123456&apos;;</span><br><span class="line"></span><br><span class="line">退出：\q</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">设置密码强度为低级：set global validate_password_policy&#x3D;0;</span><br><span class="line"></span><br><span class="line">设置密码长度：set global validate_password_length&#x3D;4;</span><br><span class="line"></span><br><span class="line">修改本地密码：alter user &#39;root&#39;@&#39;localhost&#39; identified by &#39;123456&#39;;</span><br><span class="line"></span><br><span class="line">退出：\q</span><br></pre></td></tr></table></figure>
 
 <p>密码强度分级如下：</p>
 <p>0为low级别，只检查长度；</p>
@@ -471,52 +471,52 @@
 <ol start="5">
 <li>设置远程登录</li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#以新密码登陆MySQL：</span><br><span class="line">mysql -uroot -p123456</span><br><span class="line">#创建用户：</span><br><span class="line">create user &apos;root&apos;@&apos;%&apos; identified by &apos;123456&apos;; </span><br><span class="line">#允许远程连接：</span><br><span class="line">grant all privileges on *.* to &apos;root&apos;@&apos;%&apos; with grant option;</span><br><span class="line">#刷新权限：</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#以新密码登陆MySQL：</span><br><span class="line">mysql -uroot -p123456</span><br><span class="line">#创建用户：</span><br><span class="line">create user &#39;root&#39;@&#39;%&#39; identified by &#39;123456&#39;; </span><br><span class="line">#允许远程连接：</span><br><span class="line">grant all privileges on *.* to &#39;root&#39;@&#39;%&#39; with grant option;</span><br><span class="line">#刷新权限：</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
 
 <p>6.创建数据库hongyaa；</p>
 <h3 id="5-2数据仓库下载安装"><a href="#5-2数据仓库下载安装" class="headerlink" title="5.2数据仓库下载安装"></a>5.2数据仓库下载安装</h3><h4 id="1-下载解压"><a href="#1-下载解压" class="headerlink" title="1. 下载解压"></a>1. 下载解压</h4><p>同样slave1上建立文件夹/usr/hive，然后master中将安装包远程复制到slave1。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /usr/hive &amp;&amp; cd /usr/hive</span><br><span class="line">wget [http://172.31.10.254:8000/bigdata/bigdata_tar/apache-hive-2.1.1-bin.tar.gz</span><br><span class="line">tar -zxvf /usr/hive/apache-hive-2.1.1-bin.tar.gz -C /usr/hive/</span><br><span class="line">rm -rf /usr/hive/apache-hive-2.1.1-bin.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p &#x2F;usr&#x2F;hive &amp;&amp; cd &#x2F;usr&#x2F;hive</span><br><span class="line">wget [http:&#x2F;&#x2F;172.31.10.254:8000&#x2F;bigdata&#x2F;bigdata_tar&#x2F;apache-hive-2.1.1-bin.tar.gz</span><br><span class="line">tar -zxvf &#x2F;usr&#x2F;hive&#x2F;apache-hive-2.1.1-bin.tar.gz -C &#x2F;usr&#x2F;hive&#x2F;</span><br><span class="line">rm -rf &#x2F;usr&#x2F;hive&#x2F;apache-hive-2.1.1-bin.tar.gz</span><br></pre></td></tr></table></figure>
 
 <p>也可以使用如下命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /usr/hive &amp;&amp; cd /usr/hive/ &amp;&amp; wget [http://172.31.10.254:8000/bigdata/bigdata_tar/apache-hive-2.1.1-bin.tar.gz](http://172.16.43.250/bigdata/bigdata_tar/apache-hive-2.1.1-bin.tar.gz) &amp;&amp; tar -zxvf /usr/hive/apache-hive-2.1.1-bin.tar.gz -C /usr/hive/ &amp;&amp; rm -rf /usr/hive/apache-hive-2.1.1-bin.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p &#x2F;usr&#x2F;hive &amp;&amp; cd &#x2F;usr&#x2F;hive&#x2F; &amp;&amp; wget [http:&#x2F;&#x2F;172.31.10.254:8000&#x2F;bigdata&#x2F;bigdata_tar&#x2F;apache-hive-2.1.1-bin.tar.gz](http:&#x2F;&#x2F;172.16.43.250&#x2F;bigdata&#x2F;bigdata_tar&#x2F;apache-hive-2.1.1-bin.tar.gz) &amp;&amp; tar -zxvf &#x2F;usr&#x2F;hive&#x2F;apache-hive-2.1.1-bin.tar.gz -C &#x2F;usr&#x2F;hive&#x2F; &amp;&amp; rm -rf &#x2F;usr&#x2F;hive&#x2F;apache-hive-2.1.1-bin.tar.gz</span><br></pre></td></tr></table></figure>
 
 
 
 <h4 id="2-设置系统变量"><a href="#2-设置系统变量" class="headerlink" title="2. 设置系统变量"></a>2. 设置系统变量</h4><p>修改/etc/profile文件设置hive环境变量。（master和slave1都执行）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/profile</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
 
 <p>#hive</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export HIVE_HOME=/usr/hive/apache-hive-2.1.1-bin</span><br><span class="line"></span><br><span class="line">export PATH=$PATH:$HIVE_HOME/bin</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export HIVE_HOME&#x3D;&#x2F;usr&#x2F;hive&#x2F;apache-hive-2.1.1-bin</span><br><span class="line"></span><br><span class="line">export PATH&#x3D;$PATH:$HIVE_HOME&#x2F;bin</span><br></pre></td></tr></table></figure>
 
 <p>生效环境变量：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
 
 
 
-<h4 id="3-设置HIVE运行环境"><a href="#3-设置HIVE运行环境" class="headerlink" title="3. 设置HIVE运行环境"></a>3. 设置HIVE运行环境</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd $HIVE_HOME/conf &amp;&amp; vim hive-env.sh</span><br></pre></td></tr></table></figure>
+<h4 id="3-设置HIVE运行环境"><a href="#3-设置HIVE运行环境" class="headerlink" title="3. 设置HIVE运行环境"></a>3. 设置HIVE运行环境</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd $HIVE_HOME&#x2F;conf &amp;&amp; vim hive-env.sh</span><br></pre></td></tr></table></figure>
 
 <p>对应设置如下：</p>
 <p># 配置Hadoop安装路径</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export HADOOP_HOME=/usr/hadoop/hadoop-2.7.3</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export HADOOP_HOME&#x3D;&#x2F;usr&#x2F;hadoop&#x2F;hadoop-2.7.3</span><br></pre></td></tr></table></figure>
 
 <p># 配置Hive配置文件存放路径</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export HIVE_CONF_DIR=/usr/hive/apache-hive-2.1.1-bin/conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export HIVE_CONF_DIR&#x3D;&#x2F;usr&#x2F;hive&#x2F;apache-hive-2.1.1-bin&#x2F;conf</span><br></pre></td></tr></table></figure>
 
 <p># 配置Hive运行资源库路径</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export HIVE_AUX_JARS_PATH=/usr/hive/apache-hive-2.1.1-bin/lib</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export HIVE_AUX_JARS_PATH&#x3D;&#x2F;usr&#x2F;hive&#x2F;apache-hive-2.1.1-bin&#x2F;lib</span><br></pre></td></tr></table></figure>
 
 <h4 id="4-jline版本冲突问题"><a href="#4-jline版本冲突问题" class="headerlink" title="4. jline版本冲突问题"></a>4. jline版本冲突问题</h4><p>由于客户端需要和hadoop通信，所以需要更改Hadoop中jline的版本，即保留一个高版本的jline-jar包。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp $HIVE_HOME/lib/jline-2.12.jar $HADOOP_HOME/share/hadoop/yarn/lib/</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp $HIVE_HOME&#x2F;lib&#x2F;jline-2.12.jar $HADOOP_HOME&#x2F;share&#x2F;hadoop&#x2F;yarn&#x2F;lib&#x2F;</span><br></pre></td></tr></table></figure>
 
 <h3 id="5-3-hive元数据配置到MySQL-服务器端slave1）"><a href="#5-3-hive元数据配置到MySQL-服务器端slave1）" class="headerlink" title="5.3 hive元数据配置到MySQL(服务器端slave1）"></a>5.3 hive元数据配置到MySQL(服务器端slave1）</h3><h4 id="1-驱动拷贝"><a href="#1-驱动拷贝" class="headerlink" title="1. 驱动拷贝"></a>1. 驱动拷贝</h4><p>因为服务端需要和Mysql通信，所以服务端需要将Mysql的依赖包放在Hive的lib目录下。</p>
 <p>mysql-connector-java是MySQL的JDBC驱动包，用JDBC连接MySQL数据库时必须使用该jar包。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd $HIVE_HOME/lib &amp;&amp; wget http://172.31.10.254:8000/bigdata/bigdata_tar/mysql-connector-java-5.1.47-bin.jar</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd $HIVE_HOME&#x2F;lib &amp;&amp; wget http:&#x2F;&#x2F;172.31.10.254:8000&#x2F;bigdata&#x2F;bigdata_tar&#x2F;mysql-connector-java-5.1.47-bin.jar</span><br></pre></td></tr></table></figure>
 
-<h4 id="2-Slave1作为服务器端配置hive"><a href="#2-Slave1作为服务器端配置hive" class="headerlink" title="2. Slave1作为服务器端配置hive"></a>2. Slave1作为服务器端配置hive</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd $HIVE_HOME/conf</span><br></pre></td></tr></table></figure>
+<h4 id="2-Slave1作为服务器端配置hive"><a href="#2-Slave1作为服务器端配置hive" class="headerlink" title="2. Slave1作为服务器端配置hive"></a>2. Slave1作为服务器端配置hive</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd $HIVE_HOME&#x2F;conf</span><br></pre></td></tr></table></figure>
 
 <p>hive配置可以参考官方文档：<a href="https://cwiki.apache.org/confluence/display/Hive/AdminManual+Metastore+Administration" target="_blank" rel="noopener">https://cwiki.apache.org/confluence/display/Hive/AdminManual+Metastore+Administration</a></p>
 <p>修改hive-site.xml文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- Hive产生的元数据存放位置--&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;hive.metastore.warehouse.dir&lt;/name&gt;</span><br><span class="line">&lt;value&gt;/user/hive_remote/warehouse&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;!-- 数据库连接driver，即MySQL驱动--&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;javax.jdo.option.ConnectionDriverName&lt;/name&gt;</span><br><span class="line">&lt;value&gt;com.mysql.jdbc.Driver&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;!-- 数据库连接JDBC的URL地址--&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;javax.jdo.option.ConnectionURL&lt;/name&gt;</span><br><span class="line">&lt;value&gt;jdbc:mysql://slave2:3306/hive?createDatabaseIfNotExist=true&amp;amp;useSSL=false&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;!-- MySQL数据库用户名--&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;javax.jdo.option.ConnectionUserName&lt;/name&gt;</span><br><span class="line">&lt;value&gt;root&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;!-- MySQL数据库密码--&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;javax.jdo.option.ConnectionPassword&lt;/name&gt;</span><br><span class="line">&lt;value&gt;123456&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- Hive产生的元数据存放位置--&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;hive.metastore.warehouse.dir&lt;&#x2F;name&gt;</span><br><span class="line">&lt;value&gt;&#x2F;user&#x2F;hive_remote&#x2F;warehouse&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;!-- 数据库连接driver，即MySQL驱动--&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;javax.jdo.option.ConnectionDriverName&lt;&#x2F;name&gt;</span><br><span class="line">&lt;value&gt;com.mysql.jdbc.Driver&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;!-- 数据库连接JDBC的URL地址--&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;javax.jdo.option.ConnectionURL&lt;&#x2F;name&gt;</span><br><span class="line">&lt;value&gt;jdbc:mysql:&#x2F;&#x2F;slave2:3306&#x2F;hive?createDatabaseIfNotExist&#x3D;true&amp;useSSL&#x3D;false&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;!-- MySQL数据库用户名--&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;javax.jdo.option.ConnectionUserName&lt;&#x2F;name&gt;</span><br><span class="line">&lt;value&gt;root&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;!-- MySQL数据库密码--&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;javax.jdo.option.ConnectionPassword&lt;&#x2F;name&gt;</span><br><span class="line">&lt;value&gt;123456&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -524,7 +524,7 @@
 <p>Hive服务和metastore在不同的进程内，可能是不同的机器，该模式需要将hive.metastore.local设置为false。</p>
 <p>将hive.metastore.uris设置metastore服务器URL，端口设定为9083。</p>
 <p>hive-site.xml配置如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;!-- Hive产生的元数据存放位置--&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;hive.metastore.warehouse.dir&lt;/name&gt;</span><br><span class="line">&lt;value&gt;/user/hive_remote/warehouse&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;!--- 使用本地服务连接Hive,默认为true--&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;hive.metastore.local&lt;/name&gt;</span><br><span class="line">&lt;value&gt;false&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;!-- 连接服务器--&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;hive.metastore.uris&lt;/name&gt;</span><br><span class="line">&lt;value&gt;thrift://slave1:9083&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;!-- Hive产生的元数据存放位置--&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;hive.metastore.warehouse.dir&lt;&#x2F;name&gt;</span><br><span class="line">&lt;value&gt;&#x2F;user&#x2F;hive_remote&#x2F;warehouse&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;!--- 使用本地服务连接Hive,默认为true--&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;hive.metastore.local&lt;&#x2F;name&gt;</span><br><span class="line">&lt;value&gt;false&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;!-- 连接服务器--&gt;</span><br><span class="line">&lt;property&gt;</span><br><span class="line">&lt;name&gt;hive.metastore.uris&lt;&#x2F;name&gt;</span><br><span class="line">&lt;value&gt;thrift:&#x2F;&#x2F;slave1:9083&lt;&#x2F;value&gt;</span><br><span class="line">&lt;&#x2F;property&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure>
 
 <h3 id="5-7成功启动Hive"><a href="#5-7成功启动Hive" class="headerlink" title="5.7成功启动Hive"></a>5.7成功启动Hive</h3><h4 id="1-初始化数据库"><a href="#1-初始化数据库" class="headerlink" title="1.初始化数据库"></a>1.初始化数据库</h4><p>slave1上：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">schematool -dbType mysql -initSchema</span><br></pre></td></tr></table></figure>
@@ -1033,15 +1033,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">LeetCode刷题之旅</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Git 操作</a>
+                <a href="javascript:void(0)" class="js-tag color3">LeetCode刷题之旅</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Python 基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1049,11 +1049,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Numpy</a>
+                <a href="javascript:void(0)" class="js-tag color2">Git 操作</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Python 基础</a>
+                <a href="javascript:void(0)" class="js-tag color1">Numpy</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1077,7 +1077,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据分析</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据挖掘</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1085,7 +1085,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据挖掘</a>
+                <a href="javascript:void(0)" class="js-tag color1">大数据分析</a>
               </li>
             
             <div class="clearfix"></div>

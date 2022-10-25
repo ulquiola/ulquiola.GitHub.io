@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="http://ulquiola.github.io">
   <title>hadoop分布式集群搭建 | ulquiola的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="准备工作1.四台服务器，centos7 配置：1G内存，20G硬盘2.服务器ip  192.168.220.91&#x2F;92&#x2F;93&#x2F;94 虚拟机-&gt;编辑-&gt;虚拟网络编辑器    NAT设置    服务器静态ip设置（四台都要配置ip变一下） 1234567891011121314151617181920212223$vi &#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcf">
+  <meta name="description" content="准备工作1.四台服务器，centos7 配置：1G内存，20G硬盘2.服务器ip  192.168.220.91&#x2F;92&#x2F;93&#x2F;94 虚拟机-&gt;编辑-&gt;虚拟网络编辑器    NAT设置    服务器静态ip设置（四台都要配置ip变一下） 1234567891011121314151617181920212223$vi &#x2F;etc&#x2F;sysconfig&#x2F;netwo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hadoop分布式集群搭建">
 <meta property="og:url" content="http://ulquiola.github.io/2019/10/30/hadoop%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="ulquiola的博客">
-<meta property="og:description" content="准备工作1.四台服务器，centos7 配置：1G内存，20G硬盘2.服务器ip  192.168.220.91&#x2F;92&#x2F;93&#x2F;94 虚拟机-&gt;编辑-&gt;虚拟网络编辑器    NAT设置    服务器静态ip设置（四台都要配置ip变一下） 1234567891011121314151617181920212223$vi &#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcf">
+<meta property="og:description" content="准备工作1.四台服务器，centos7 配置：1G内存，20G硬盘2.服务器ip  192.168.220.91&#x2F;92&#x2F;93&#x2F;94 虚拟机-&gt;编辑-&gt;虚拟网络编辑器    NAT设置    服务器静态ip设置（四台都要配置ip变一下） 1234567891011121314151617181920212223$vi &#x2F;etc&#x2F;sysconfig&#x2F;netwo">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://ulquiola.github.io/2019/10/30/hadoop%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/bianji.png">
 <meta property="og:image" content="http://ulquiola.github.io/2019/10/30/hadoop%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/nat.png">
@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://ulquiola.github.io/2019/10/30/hadoop%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/3.png">
 <meta property="og:image" content="http://ulquiola.github.io/2019/10/30/hadoop%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/4.png">
 <meta property="article:published_time" content="2019-10-30T11:17:54.000Z">
-<meta property="article:modified_time" content="2021-07-14T09:52:35.964Z">
+<meta property="article:modified_time" content="2022-06-16T16:03:56.487Z">
 <meta property="article:author" content="ulquiola">
 <meta property="article:tag" content="CentOS7">
 <meta name="twitter:card" content="summary">
@@ -180,7 +180,7 @@
 <li><p>NAT设置<br><img src="/2019/10/30/hadoop%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/nat.png" alt>  </p>
 </li>
 <li><p>服务器静态ip设置（四台都要配置ip变一下）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$vi /etc/sysconfig/network-scripts/ifcfg-ens33</span><br><span class="line"></span><br><span class="line">TYPE=Ethernet</span><br><span class="line">PROXY_METHOD=none</span><br><span class="line">BROWSER_ONLY=no</span><br><span class="line">BOOTPROTO=static</span><br><span class="line">DEFROUTE=yes</span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line">IPV6INIT=yes</span><br><span class="line">IPV6_AUTOCONF=yes</span><br><span class="line">IPV6_DEFROUTE=yes</span><br><span class="line">IPV6_FAILURE_FATAL=no</span><br><span class="line">IPV6_ADDR_GEN_MODE=stable-privacy</span><br><span class="line">NAME=ens33</span><br><span class="line">UUID=4248d227-dfd6-4577-8b7a-4aec32bfc14b</span><br><span class="line">DEVICE=ens33</span><br><span class="line">ONBOOT=yes</span><br><span class="line"></span><br><span class="line">GATEWAY=192.168.220.2</span><br><span class="line">IPADDR=192.168.220.91</span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line">DNS1=202.102.224.68</span><br><span class="line">DNS2=114.114.114.114</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$vi &#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcfg-ens33</span><br><span class="line"></span><br><span class="line">TYPE&#x3D;Ethernet</span><br><span class="line">PROXY_METHOD&#x3D;none</span><br><span class="line">BROWSER_ONLY&#x3D;no</span><br><span class="line">BOOTPROTO&#x3D;static</span><br><span class="line">DEFROUTE&#x3D;yes</span><br><span class="line">IPV4_FAILURE_FATAL&#x3D;no</span><br><span class="line">IPV6INIT&#x3D;yes</span><br><span class="line">IPV6_AUTOCONF&#x3D;yes</span><br><span class="line">IPV6_DEFROUTE&#x3D;yes</span><br><span class="line">IPV6_FAILURE_FATAL&#x3D;no</span><br><span class="line">IPV6_ADDR_GEN_MODE&#x3D;stable-privacy</span><br><span class="line">NAME&#x3D;ens33</span><br><span class="line">UUID&#x3D;4248d227-dfd6-4577-8b7a-4aec32bfc14b</span><br><span class="line">DEVICE&#x3D;ens33</span><br><span class="line">ONBOOT&#x3D;yes</span><br><span class="line"></span><br><span class="line">GATEWAY&#x3D;192.168.220.2</span><br><span class="line">IPADDR&#x3D;192.168.220.91</span><br><span class="line">NETMASK&#x3D;255.255.255.0</span><br><span class="line">DNS1&#x3D;202.102.224.68</span><br><span class="line">DNS2&#x3D;114.114.114.114</span><br></pre></td></tr></table></figure></li>
 <li><p>本机电脑设置<br><img src="/2019/10/30/hadoop%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/shipeiqi.png" alt></p>
 </li>
 <li><p>可能会有主机ping不通服务器，服务器ping得通主机的情况出现，所以配置本机适配器<br><img src="/2019/10/30/hadoop%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/dns.png" alt></p>
@@ -188,18 +188,18 @@
 </ul>
 <h2 id="3-安装java-1-8-0-openjdk（四台）"><a href="#3-安装java-1-8-0-openjdk（四台）" class="headerlink" title="3.安装java-1.8.0-openjdk（四台）"></a>3.安装java-1.8.0-openjdk（四台）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install java-1.8.0-openjdk*</span><br></pre></td></tr></table></figure>
 <ul>
-<li>配置java环境变量<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$vi /etc/profile</span><br><span class="line"></span><br><span class="line">export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk</span><br><span class="line">export PATH=$JAVA_HOME/bin:$PATH</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br></pre></td></tr></table></figure></li>
-<li>使用souce命令让立刻生效<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure>
+<li>配置java环境变量<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$vi &#x2F;etc&#x2F;profile</span><br><span class="line"></span><br><span class="line">export JAVA_HOME&#x3D;&#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;java-1.8.0-openjdk</span><br><span class="line">export PATH&#x3D;$JAVA_HOME&#x2F;bin:$PATH</span><br><span class="line">export CLASSPATH&#x3D;.:$JAVA_HOME&#x2F;lib&#x2F;dt.jar:$JAVA_HOME&#x2F;lib&#x2F;tools.jar</span><br></pre></td></tr></table></figure></li>
+<li>使用souce命令让立刻生效<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<h2 id="4-下载hadoop-2-9-4"><a href="#4-下载hadoop-2-9-4" class="headerlink" title="4.下载hadoop 2.9.4"></a>4.下载hadoop 2.9.4</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://mirror.bit.edu.cn/apache/hadoop/common/hadoop-2.9.2/hadoop-2.9.2.tar.gz</span><br></pre></td></tr></table></figure>
+<h2 id="4-下载hadoop-2-9-4"><a href="#4-下载hadoop-2-9-4" class="headerlink" title="4.下载hadoop 2.9.4"></a>4.下载hadoop 2.9.4</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http:&#x2F;&#x2F;mirror.bit.edu.cn&#x2F;apache&#x2F;hadoop&#x2F;common&#x2F;hadoop-2.9.2&#x2F;hadoop-2.9.2.tar.gz</span><br></pre></td></tr></table></figure>
 <h2 id="5、host配置和主机名（四台）"><a href="#5、host配置和主机名（四台）" class="headerlink" title="5、host配置和主机名（四台）"></a>5、host配置和主机名（四台）</h2><ul>
-<li>修改四台服务器的hosts文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$vim /etc/hosts</span><br><span class="line"></span><br><span class="line">192.168.220.91 hadoop-master </span><br><span class="line">192.168.220.92 hadoop-slave1 </span><br><span class="line">192.168.220.93 hadoop-slave2</span><br><span class="line">192.168.220.94 hadoop-slave3</span><br></pre></td></tr></table></figure></li>
-<li>分别修改服务器的主机名:HOSTNAME，master为例说明<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$vi /etc/sysconfig/network</span><br><span class="line"></span><br><span class="line">HOSTNAME=hadoop-master</span><br></pre></td></tr></table></figure></li>
+<li>修改四台服务器的hosts文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$vim &#x2F;etc&#x2F;hosts</span><br><span class="line"></span><br><span class="line">192.168.220.91 hadoop-master </span><br><span class="line">192.168.220.92 hadoop-slave1 </span><br><span class="line">192.168.220.93 hadoop-slave2</span><br><span class="line">192.168.220.94 hadoop-slave3</span><br></pre></td></tr></table></figure></li>
+<li>分别修改服务器的主机名:HOSTNAME，master为例说明<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$vi &#x2F;etc&#x2F;sysconfig&#x2F;network</span><br><span class="line"></span><br><span class="line">HOSTNAME&#x3D;hadoop-master</span><br></pre></td></tr></table></figure></li>
 <li>执行reboot后生效，完成之后依次修改其它salve服务器为： hadoop-slave1~3。</li>
 </ul>
-<h2 id="6-关闭SELINUX-四台"><a href="#6-关闭SELINUX-四台" class="headerlink" title="6.关闭SELINUX(四台)"></a>6.关闭SELINUX(四台)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$vim /etc/selinux/config</span><br></pre></td></tr></table></figure>
+<h2 id="6-关闭SELINUX-四台"><a href="#6-关闭SELINUX-四台" class="headerlink" title="6.关闭SELINUX(四台)"></a>6.关闭SELINUX(四台)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$vim &#x2F;etc&#x2F;selinux&#x2F;config</span><br></pre></td></tr></table></figure>
 <ul>
 <li>将SELINUX=enforcing改为SELINUX=disabled</li>
 </ul>
@@ -209,9 +209,9 @@
 <p> 1.生成秘钥</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
 <p> 2.将公钥追加到”authorized_keys”文件</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$cat ~&#x2F;.ssh&#x2F;id_rsa.pub &gt;&gt; ~&#x2F;.ssh&#x2F;authorized_keys</span><br></pre></td></tr></table></figure>
 <p> 3.赋予权限</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$chmod 600 .ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$chmod 600 .ssh&#x2F;authorized_keys</span><br></pre></td></tr></table></figure>
 <p> 4.验证本机能无密码访问</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ssh hadoop-master</span><br></pre></td></tr></table></figure>
 <p> 最后，依次配置h-salve1~3无密码访问</p>
@@ -220,9 +220,9 @@
 <ul>
 <li><p>hadoop-master本机无密码登录hadoop-slave1、hadoop-slave2、hadoop-slave3，以hadoop-master无密码登录hadoop-slave1为例进行讲解：</p>
 <p>  1.登录hadoop-slave1 ，复制hadoop-master服务器的公钥”<br>  id_rsa.pub”到hadoop-slave1服务器的”root”目录下。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$scp root@hadoop-master:/root/.ssh/id_rsa.pub /root/</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$scp root@hadoop-master:&#x2F;root&#x2F;.ssh&#x2F;id_rsa.pub &#x2F;root&#x2F;</span><br></pre></td></tr></table></figure>
 <p>  2.将hadoop-master的公钥（id_rsa.pub）追加到hadoop-slave1的authorized_keys中</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$cat id_rsa.pub &gt;&gt; .ssh/authorized_keys</span><br><span class="line">$rm -rf  id_rsa.pub</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$cat id_rsa.pub &gt;&gt; .ssh&#x2F;authorized_keys</span><br><span class="line">$rm -rf  id_rsa.pub</span><br></pre></td></tr></table></figure>
 <p>  3.在 hadoop-master上面测试</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ssh  hadoop-slave1</span><br></pre></td></tr></table></figure></li>
 <li><p>配置hadoop-slave1~hadoop-slave3本机无密码登录hadoop-master</p>
@@ -230,9 +230,9 @@
 <li>下面以hadoop-slave1无密码登录hadoop-master为例进行讲解，用户需参照下面步骤完成hadoop-slave2~hadoop-slave3无密码登录hadoop-master。</li>
 </ul>
 <p>  1.登录hadoop-master，复制hadoop-slave1服务器的公钥”id_rsa.pub”到hadoop-master服务器的”/root/”目录下。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$scp root@hadoop-slave1:/root/.ssh/id_rsa.pub /root/</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$scp root@hadoop-slave1:&#x2F;root&#x2F;.ssh&#x2F;id_rsa.pub &#x2F;root&#x2F;</span><br></pre></td></tr></table></figure>
 <p>  2.将hadoop-slave1的公钥（id_rsa.pub）追加到hadoop-master的authorized_keys中。</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$cat id_rsa.pub &gt;&gt; .ssh/authorized_keys</span><br><span class="line">$rm -rf  id_rsa.pub //删除id_rsa.pub</span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$cat id_rsa.pub &gt;&gt; .ssh&#x2F;authorized_keys</span><br><span class="line">$rm -rf  id_rsa.pub &#x2F;&#x2F;删除id_rsa.pub</span><br></pre></td></tr></table></figure>
 <p>  3.在 hadoop-slave1上面测试</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ssh  hadoop-master</span><br></pre></td></tr></table></figure>
 <ul>
@@ -244,70 +244,70 @@
 </ul>
 <h1 id="hadoop环境搭建"><a href="#hadoop环境搭建" class="headerlink" title="hadoop环境搭建"></a>hadoop环境搭建</h1><h2 id="配置hadoop-master的hadoop环境"><a href="#配置hadoop-master的hadoop环境" class="headerlink" title="配置hadoop-master的hadoop环境"></a>配置hadoop-master的hadoop环境</h2><ol>
 <li><p>hadoop-master上 解压缩安装包及创建基本目录</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$wget http://mirror.bit.edu.cn/apache/hadoop/common/hadoop-2.9.2/hadoop-2.9.2.tar.gz #下载 </span><br><span class="line"> </span><br><span class="line">$tar -xzvf  hadoop-2.9.2.tar.gz    -C /usr/local #解压 </span><br><span class="line"></span><br><span class="line">sudo chown -R hadoop:hadoop ./hadoop #授予权限</span><br><span class="line"></span><br><span class="line">$mv  hadoop-2.9.2  hadoop #重命名</span><br></pre></td></tr></table></figure></li>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$wget http:&#x2F;&#x2F;mirror.bit.edu.cn&#x2F;apache&#x2F;hadoop&#x2F;common&#x2F;hadoop-2.9.2&#x2F;hadoop-2.9.2.tar.gz #下载 </span><br><span class="line"> </span><br><span class="line">$tar -xzvf  hadoop-2.9.2.tar.gz    -C &#x2F;usr&#x2F;local #解压 </span><br><span class="line"></span><br><span class="line">sudo chown -R hadoop:hadoop .&#x2F;hadoop #授予权限</span><br><span class="line"></span><br><span class="line">$mv  hadoop-2.9.2  hadoop #重命名</span><br></pre></td></tr></table></figure></li>
 <li><p>配置hadoop-master的hadoop环境变量</p>
 <ul>
-<li>配置环境变量，修改配置文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$vi /etc/profile</span><br><span class="line"></span><br><span class="line">export HADOOP_HOME=/usr/local/hadoop</span><br><span class="line">export PATH=$PATH:$HADOOP_HOME/bin</span><br></pre></td></tr></table></figure>
-使得hadoop命令在当前终端立即生效<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$source /etc/profile</span><br></pre></td></tr></table></figure>
+<li>配置环境变量，修改配置文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$vi &#x2F;etc&#x2F;profile</span><br><span class="line"></span><br><span class="line">export HADOOP_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;hadoop</span><br><span class="line">export PATH&#x3D;$PATH:$HADOOP_HOME&#x2F;bin</span><br></pre></td></tr></table></figure>
+使得hadoop命令在当前终端立即生效<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$source &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
 下面配置，文件都在：/usr/local/hadoop/etc/hadoop路径下</li>
 </ul>
 </li>
 </ol>
 <h2 id="配置core-site-xml"><a href="#配置core-site-xml" class="headerlink" title="配置core-site.xml"></a>配置core-site.xml</h2><ul>
-<li>修改Hadoop核心配置文件/usr/local/hadoop/etc/hadoop/core-site.xml，通过fs.default.name指定NameNode的IP地址和端口号，通过hadoop.tmp.dir指定hadoop数据存储的临时文件夹。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;file:/usr/local/hadoop/tmp&lt;/value&gt;</span><br><span class="line">        &lt;description&gt;Abase for other temporary directories.&lt;/description&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;fs.defaultFS&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;hdfs://hadoop-master:9000&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure></li>
+<li>修改Hadoop核心配置文件/usr/local/hadoop/etc/hadoop/core-site.xml，通过fs.default.name指定NameNode的IP地址和端口号，通过hadoop.tmp.dir指定hadoop数据存储的临时文件夹。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;hadoop.tmp.dir&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;file:&#x2F;usr&#x2F;local&#x2F;hadoop&#x2F;tmp&lt;&#x2F;value&gt;</span><br><span class="line">        &lt;description&gt;Abase for other temporary directories.&lt;&#x2F;description&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;fs.defaultFS&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;hdfs:&#x2F;&#x2F;hadoop-master:9000&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure></li>
 <li>特别注意：如没有配置hadoop.tmp.dir参数，此时系统默认的临时目录为：/tmp/hadoo-hadoop。而这个目录在每次重启后都会被删除，必须重新执行format才行，否则会出错。</li>
 </ul>
 <h2 id="配置hdfs-site-xml："><a href="#配置hdfs-site-xml：" class="headerlink" title="配置hdfs-site.xml："></a>配置hdfs-site.xml：</h2><ul>
 <li><p>修改HDFS核心配置文件/usr/local/hadoop/etc/hadoop/hdfs-site.xml，通过dfs.replication指定HDFS的备份因子为3，通过dfs.name.dir指定namenode节点的文件存储目录，通过dfs.data.dir指定datanode节点的文件存储目录。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;3&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.name.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/usr/local/hadoop/hdfs/name&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.data.dir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/usr/local/hadoop/hdfs/data&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.replication&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;3&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.name.dir&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;&#x2F;usr&#x2F;local&#x2F;hadoop&#x2F;hdfs&#x2F;name&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;dfs.data.dir&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;&#x2F;usr&#x2F;local&#x2F;hadoop&#x2F;hdfs&#x2F;data&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure>
 <h2 id="配置mapred-site-xml"><a href="#配置mapred-site-xml" class="headerlink" title="配置mapred-site.xml"></a>配置mapred-site.xml</h2></li>
 <li><p>拷贝mapred-site.xml.template为mapred-site.xml，在进行修改</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$cp /usr/local/hadoop/etc/hadoop/mapred-site.xml.template /usr/local/hadoop/etc/hadoop/mapred-site.xml </span><br><span class="line"></span><br><span class="line">$vim /usr/local/hadoop/etc/hadoop/mapred-site.xml</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">      &lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">   &lt;property&gt;</span><br><span class="line">      &lt;name&gt;mapred.job.tracker&lt;/name&gt;</span><br><span class="line">      &lt;value&gt;http://hadoop-master:9001&lt;/value&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
-<h2 id="配置yarn-site-xml"><a href="#配置yarn-site-xml" class="headerlink" title="配置yarn-site.xml"></a>配置yarn-site.xml</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;!-- Site specific YARN configuration properties --&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;hadoop-master&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$cp &#x2F;usr&#x2F;local&#x2F;hadoop&#x2F;etc&#x2F;hadoop&#x2F;mapred-site.xml.template &#x2F;usr&#x2F;local&#x2F;hadoop&#x2F;etc&#x2F;hadoop&#x2F;mapred-site.xml </span><br><span class="line"></span><br><span class="line">$vim &#x2F;usr&#x2F;local&#x2F;hadoop&#x2F;etc&#x2F;hadoop&#x2F;mapred-site.xml</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">  &lt;property&gt;</span><br><span class="line">      &lt;name&gt;mapreduce.framework.name&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;yarn&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;&#x2F;property&gt;</span><br><span class="line">   &lt;property&gt;</span><br><span class="line">      &lt;name&gt;mapred.job.tracker&lt;&#x2F;name&gt;</span><br><span class="line">      &lt;value&gt;http:&#x2F;&#x2F;hadoop-master:9001&lt;&#x2F;value&gt;</span><br><span class="line">  &lt;&#x2F;property&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="配置yarn-site-xml"><a href="#配置yarn-site-xml" class="headerlink" title="配置yarn-site.xml"></a>配置yarn-site.xml</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;!-- Site specific YARN configuration properties --&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.nodemanager.aux-services&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;mapreduce_shuffle&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;yarn.resourcemanager.hostname&lt;&#x2F;name&gt;</span><br><span class="line">        &lt;value&gt;hadoop-master&lt;&#x2F;value&gt;</span><br><span class="line">    &lt;&#x2F;property&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure>
 <h2 id="配置masters文件"><a href="#配置masters文件" class="headerlink" title="配置masters文件"></a>配置masters文件</h2></li>
 <li><p>修改/usr/local/hadoop/etc/hadoop/masters文件，该文件指定namenode节点所在的服务器机器。删除localhost，添加namenode节点的主机名hadoop-master；不建议使用IP地址，因为IP地址可能会变化，但是主机名一般不会变化。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$vi /usr/local/hadoop/etc/hadoop/masters</span><br><span class="line">## 内容</span><br><span class="line">hadoop-master</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$vi &#x2F;usr&#x2F;local&#x2F;hadoop&#x2F;etc&#x2F;hadoop&#x2F;masters</span><br><span class="line">## 内容</span><br><span class="line">hadoop-master</span><br></pre></td></tr></table></figure>
 <h2 id="配置slaves文件（Master主机特有）"><a href="#配置slaves文件（Master主机特有）" class="headerlink" title="配置slaves文件（Master主机特有）"></a>配置slaves文件（Master主机特有）</h2></li>
 <li><p>修改/usr/local/hadoop/etc/hadoop/slaves文件，该文件指定哪些服务器节点是datanode节点。删除locahost，添加所有datanode节点的主机名，如下所示。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$vi /usr/local/hadoop/etc/hadoop/slaves</span><br><span class="line">## 内容</span><br><span class="line">hadoop-slave1</span><br><span class="line">hadoop-slave2</span><br><span class="line">hadoop-slave3</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$vi &#x2F;usr&#x2F;local&#x2F;hadoop&#x2F;etc&#x2F;hadoop&#x2F;slaves</span><br><span class="line">## 内容</span><br><span class="line">hadoop-slave1</span><br><span class="line">hadoop-slave2</span><br><span class="line">hadoop-slave3</span><br></pre></td></tr></table></figure>
 <h2 id="配置hadoop-slave的hadoop环境"><a href="#配置hadoop-slave的hadoop环境" class="headerlink" title="配置hadoop-slave的hadoop环境"></a>配置hadoop-slave的hadoop环境</h2></li>
 <li><p>下面以配置hadoop-slave1的hadoop为例进行演示，用户需参照以下步骤完成其他hadoop-slave2~3服务器的配置。</p>
 </li>
 </ul>
 <ol>
-<li>复制hadoop到hadoop-slave1节点<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$scp -r /usr/local/hadoop hadoop-slave1:/usr/local/</span><br></pre></td></tr></table></figure>
-登录hadoop-slave1服务器，删除slaves内容<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$rm -rf /usr/local/hadoop/etc/hadoop/slaves</span><br></pre></td></tr></table></figure></li>
-<li>配置环境变量<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$vi /etc/profile</span><br><span class="line">## 内容</span><br><span class="line">export HADOOP_HOME=/usr/local/hadoop</span><br><span class="line">export PATH=$PATH:$HADOOP_HOME/bin</span><br></pre></td></tr></table></figure></li>
-<li>使得hadoop命令在当前终端立即生效；<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source /etc/profile</span><br></pre></td></tr></table></figure></li>
+<li>复制hadoop到hadoop-slave1节点<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$scp -r &#x2F;usr&#x2F;local&#x2F;hadoop hadoop-slave1:&#x2F;usr&#x2F;local&#x2F;</span><br></pre></td></tr></table></figure>
+登录hadoop-slave1服务器，删除slaves内容<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$rm -rf &#x2F;usr&#x2F;local&#x2F;hadoop&#x2F;etc&#x2F;hadoop&#x2F;slaves</span><br></pre></td></tr></table></figure></li>
+<li>配置环境变量<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$vi &#x2F;etc&#x2F;profile</span><br><span class="line">## 内容</span><br><span class="line">export HADOOP_HOME&#x3D;&#x2F;usr&#x2F;local&#x2F;hadoop</span><br><span class="line">export PATH&#x3D;$PATH:$HADOOP_HOME&#x2F;bin</span><br></pre></td></tr></table></figure></li>
+<li>使得hadoop命令在当前终端立即生效；<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure></li>
 </ol>
 <ul>
 <li>依次配置其它slave服务</li>
 </ul>
 <h1 id="启动集群"><a href="#启动集群" class="headerlink" title="启动集群"></a>启动集群</h1><h2 id="格式化HDFS文件系统"><a href="#格式化HDFS文件系统" class="headerlink" title="格式化HDFS文件系统"></a>格式化HDFS文件系统</h2><p>进入master的~/usr/local/hadoop目录，执行以下操作</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$bin/hadoop namenode -format</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$bin&#x2F;hadoop namenode -format</span><br></pre></td></tr></table></figure>
 <ul>
 <li>格式化namenode，第一次启动服务前执行的操作，以后不需要执行。</li>
 </ul>
-<h2 id="然后启动hadoop："><a href="#然后启动hadoop：" class="headerlink" title="然后启动hadoop："></a>然后启动hadoop：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sbin/start-all.sh</span><br></pre></td></tr></table></figure>
+<h2 id="然后启动hadoop："><a href="#然后启动hadoop：" class="headerlink" title="然后启动hadoop："></a>然后启动hadoop：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sbin&#x2F;start-all.sh</span><br></pre></td></tr></table></figure>
 <h2 id="使用jps命令查看运行情况"><a href="#使用jps命令查看运行情况" class="headerlink" title="使用jps命令查看运行情况"></a>使用jps命令查看运行情况</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#master 执行 jps查看运行情况</span><br><span class="line">25928 SecondaryNameNode</span><br><span class="line">25742 NameNode</span><br><span class="line">26387 Jps</span><br><span class="line">26078 ResourceManager</span><br><span class="line">#slave 执行 jps查看运行情况</span><br><span class="line">24002 NodeManager</span><br><span class="line">23899 DataNode</span><br><span class="line">24179 Jps</span><br></pre></td></tr></table></figure>
 <h2 id="命令查看Hadoop集群的状态"><a href="#命令查看Hadoop集群的状态" class="headerlink" title="命令查看Hadoop集群的状态"></a>命令查看Hadoop集群的状态</h2><ul>
 <li>通过简单的jps命令虽然可以查看HDFS文件管理系统、MapReduce服务是否启动成功，但是无法查看到Hadoop整个集群的运行状态。我们可以通过hadoop dfsadmin -report进行查看。用该命令可以快速定位出哪些节点挂掉了，HDFS的容量以及使用了多少，以及每个节点的硬盘使用情况。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$hadoop dfsadmin -report</span><br></pre></td></tr></table></figure>
 输出结果：</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Configured Capacity: 50108030976 (46.67 GB)</span><br><span class="line">Present Capacity: 41877471232 (39.00 GB)</span><br><span class="line">DFS Remaining: 41877385216 (39.00 GB)</span><br><span class="line">DFS Used: 86016 (84 KB)</span><br><span class="line">DFS Used%: 0.00%</span><br><span class="line">Under replicated blocks: 0</span><br><span class="line">Blocks with corrupt replicas: 0</span><br><span class="line">Missing blocks: 0</span><br><span class="line">Missing blocks (with replication factor 1): 0</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
-<h2 id="hadoop-重启"><a href="#hadoop-重启" class="headerlink" title="hadoop 重启"></a>hadoop 重启</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$sbin/stop-all.sh</span><br><span class="line">$sbin/start-all.sh</span><br></pre></td></tr></table></figure>
+<h2 id="hadoop-重启"><a href="#hadoop-重启" class="headerlink" title="hadoop 重启"></a>hadoop 重启</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$sbin&#x2F;stop-all.sh</span><br><span class="line">$sbin&#x2F;start-all.sh</span><br></pre></td></tr></table></figure>
 
 
 
 <h1 id="安装Hbase"><a href="#安装Hbase" class="headerlink" title="安装Hbase"></a>安装Hbase</h1><p>下载hbase</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.tuna.tsinghua.edu.cn/apache/hbase/hbase-1.3.6/hbase-1.3.6-bin.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;apache&#x2F;hbase&#x2F;hbase-1.3.6&#x2F;hbase-1.3.6-bin.tar.gz</span><br></pre></td></tr></table></figure>
 
 <p>解压至安装目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -zxf ./hbase-1.3.6-bin.tar.gz -C /usr/local</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -zxf .&#x2F;hbase-1.3.6-bin.tar.gz -C &#x2F;usr&#x2F;local</span><br></pre></td></tr></table></figure>
 
 <p>改名</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv /usr/local/hbase-1.3.6/usr/local/hbase</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mv &#x2F;usr&#x2F;local&#x2F;hbase-1.3.6&#x2F;usr&#x2F;local&#x2F;hbase</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>之后启动可能会显示 JAVA_HOME not set</li>
@@ -319,7 +319,7 @@
 <p>显示</p>
 <p><img src="/2019/10/30/hadoop%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/3.png" alt></p>
 <p>修改</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi /usr/local/hbase/conf/hbase-env.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi &#x2F;usr&#x2F;local&#x2F;hbase&#x2F;conf&#x2F;hbase-env.sh</span><br></pre></td></tr></table></figure>
 
 <p>修改为如图即可</p>
 <p><img src="/2019/10/30/hadoop%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/4.png" alt></p>
@@ -556,15 +556,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">LeetCode刷题之旅</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Git 操作</a>
+                <a href="javascript:void(0)" class="js-tag color3">LeetCode刷题之旅</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Python 基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -572,11 +572,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Numpy</a>
+                <a href="javascript:void(0)" class="js-tag color2">Git 操作</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Python 基础</a>
+                <a href="javascript:void(0)" class="js-tag color1">Numpy</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -600,7 +600,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据分析</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据挖掘</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -608,7 +608,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据挖掘</a>
+                <a href="javascript:void(0)" class="js-tag color1">大数据分析</a>
               </li>
             
             <div class="clearfix"></div>

@@ -35,7 +35,7 @@
 <meta property="og:image" content="http://ulquiola.github.io/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/18.png">
 <meta property="og:image" content="http://ulquiola.github.io/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/19.png">
 <meta property="article:published_time" content="2021-07-15T12:52:42.000Z">
-<meta property="article:modified_time" content="2021-07-18T10:30:08.462Z">
+<meta property="article:modified_time" content="2022-06-16T16:03:56.477Z">
 <meta property="article:author" content="ulquiola">
 <meta property="article:tag" content="动手学数据分析">
 <meta name="twitter:card" content="summary">
@@ -198,32 +198,32 @@
 <h4 id="3、特征观察与处理"><a href="#3、特征观察与处理" class="headerlink" title="3、特征观察与处理"></a>3、特征观察与处理</h4><p>数值型特征一般可以直接用于模型的训练，但有时候为了模型的稳定性及鲁棒性会对连续变量进行离散化。文本型特征往往需要转换成数值型特征才能用于建模分析</p>
 <ul>
 <li><p>cut</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 添加AgeBand特征，将连续变量Age平均分箱成5个年龄段，并分别用类别变量12345表示</span><br><span class="line">df[&apos;AgeBand&apos;] = pd.cut(df[&apos;Age&apos;], 5,labels = [1,2,3,4,5])</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 添加AgeBand特征，将连续变量Age平均分箱成5个年龄段，并分别用类别变量12345表示</span><br><span class="line">df[&#39;AgeBand&#39;] &#x3D; pd.cut(df[&#39;Age&#39;], 5,labels &#x3D; [1,2,3,4,5])</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>qcut</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#添加AgeBand特征,将连续变量Age按10% 30% 50 70% 90%五个年龄段，并用分类变量12345表示</span><br><span class="line">df[&apos;AgeBand&apos;] = pd.qcut(df[&apos;Age&apos;],[0,0.1,0.3,0.5,0.7,0.9],labels = [1,2,3,4,5])</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#添加AgeBand特征,将连续变量Age按10% 30% 50 70% 90%五个年龄段，并用分类变量12345表示</span><br><span class="line">df[&#39;AgeBand&#39;] &#x3D; pd.qcut(df[&#39;Age&#39;],[0,0.1,0.3,0.5,0.7,0.9],labels &#x3D; [1,2,3,4,5])</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>对文本变量进行转换</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># replace</span><br><span class="line">df[&apos;Sex&apos;].replace([&apos;male&apos;,&apos;female&apos;],[1,2])</span><br><span class="line"># map</span><br><span class="line">df[&apos;Sex&apos;].map(&#123;&apos;male&apos;: 1, &apos;female&apos;: 2&#125;)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># replace</span><br><span class="line">df[&#39;Sex&#39;].replace([&#39;male&#39;,&#39;female&#39;],[1,2])</span><br><span class="line"># map</span><br><span class="line">df[&#39;Sex&#39;].map(&#123;&#39;male&#39;: 1, &#39;female&#39;: 2&#125;)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<h2 id="二、数据重构"><a href="#二、数据重构" class="headerlink" title="二、数据重构"></a>二、数据重构</h2><h4 id="1、观察数据"><a href="#1、观察数据" class="headerlink" title="1、观察数据"></a>1、观察数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df1 = pd.read_csv(&apos;data/train-left-down.csv&apos;)</span><br><span class="line">df1.head(3)</span><br></pre></td></tr></table></figure>
+<h2 id="二、数据重构"><a href="#二、数据重构" class="headerlink" title="二、数据重构"></a>二、数据重构</h2><h4 id="1、观察数据"><a href="#1、观察数据" class="headerlink" title="1、观察数据"></a>1、观察数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df1 &#x3D; pd.read_csv(&#39;data&#x2F;train-left-down.csv&#39;)</span><br><span class="line">df1.head(3)</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/2.png" alt></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df2 = pd.read_csv(&apos;data/train-left-up.csv&apos;)</span><br><span class="line">df2.head(3)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df2 &#x3D; pd.read_csv(&#39;data&#x2F;train-left-up.csv&#39;)</span><br><span class="line">df2.head(3)</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/3.png" alt></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df3 = pd.read_csv(&apos;data/train-right-down.csv&apos;)</span><br><span class="line">df3.head(3)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df3 &#x3D; pd.read_csv(&#39;data&#x2F;train-right-down.csv&#39;)</span><br><span class="line">df3.head(3)</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/4.png" alt></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df4 = pd.read_csv(&apos;data/train-right-up.csv&apos;)</span><br><span class="line">df4.head(3)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df4 &#x3D; pd.read_csv(&#39;data&#x2F;train-right-up.csv&#39;)</span><br><span class="line">df4.head(3)</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/5.png" alt></p>
 <h4 id="2、pd-concat"><a href="#2、pd-concat" class="headerlink" title="2、pd.concat()"></a>2、pd.concat()</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.concat([df1,df2]).head()</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/6.png" alt></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.concat((df1,df2),axis = 1).head()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.concat((df1,df2),axis &#x3D; 1).head()</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/7.png" alt></p>
 <ul>
@@ -235,16 +235,16 @@
 
 <p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/8.png" alt></p>
 <p>需要先对df2的列索引名进行修改</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df2.columns =[&apos;PassengerId_2&apos;, &apos;Survived_2&apos;, &apos;Pclass_2&apos;, &apos;Name_2&apos;]</span><br><span class="line">df1.join(df2,how=&apos;inner&apos;) # how 默认为内连接</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df2.columns &#x3D;[&#39;PassengerId_2&#39;, &#39;Survived_2&#39;, &#39;Pclass_2&#39;, &#39;Name_2&#39;]</span><br><span class="line">df1.join(df2,how&#x3D;&#39;inner&#39;) # how 默认为内连接</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/9.png" alt></p>
 <h5 id="方法二：pd-merge"><a href="#方法二：pd-merge" class="headerlink" title="方法二：pd.merge()"></a>方法二：pd.merge()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 同样直接merge()是不行的</span><br><span class="line">pd.merge(df1,df2)</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/10.png" alt></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># merge会将重名的列明自动加上_x,_y加以区分</span><br><span class="line">pd.merge(df1,df2,how = &apos;inner&apos;,left_index = True,right_index= True)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># merge会将重名的列明自动加上_x,_y加以区分</span><br><span class="line">pd.merge(df1,df2,how &#x3D; &#39;inner&#39;,left_index &#x3D; True,right_index&#x3D; True)</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/11.png" alt></p>
-<h4 id="pd-merge-参数详解"><a href="#pd-merge-参数详解" class="headerlink" title="pd.merge()参数详解"></a>pd.merge()参数详解</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.merge( left, right, how=&apos;inner&apos;, on=None, left_on=None, right_on=None, left_index=False, right_index=False, sort=False, suffixes=(&apos;_x&apos;, &apos;_y&apos;), copy=True, indicator=False, validate=None)</span><br></pre></td></tr></table></figure>
+<h4 id="pd-merge-参数详解"><a href="#pd-merge-参数详解" class="headerlink" title="pd.merge()参数详解"></a>pd.merge()参数详解</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.merge( left, right, how&#x3D;&#39;inner&#39;, on&#x3D;None, left_on&#x3D;None, right_on&#x3D;None, left_index&#x3D;False, right_index&#x3D;False, sort&#x3D;False, suffixes&#x3D;(&#39;_x&#39;, &#39;_y&#39;), copy&#x3D;True, indicator&#x3D;False, validate&#x3D;None)</span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>left: 拼接的左侧DataFrame对象</li>
@@ -258,21 +258,21 @@
 <li>sort: 按字典顺序通过连接键对结果DataFrame进行排序。 默认为True，设置为False将在很多情况下显着提高性能。</li>
 <li>suffixes: 用于重叠列的字符串后缀元组。 默认为（‘x’，’ y’）。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.merge(df1,df2,how = &apos;inner&apos;,on = &apos;Pclass&apos;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.merge(df1,df2,how &#x3D; &#39;inner&#39;,on &#x3D; &#39;Pclass&#39;)</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/12.png" alt></p>
 <h4 id="4、其中实现上下拼接的其他方法"><a href="#4、其中实现上下拼接的其他方法" class="headerlink" title="4、其中实现上下拼接的其他方法"></a>4、其中实现上下拼接的其他方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1.append(df2)</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/13.png" alt></p>
-<h4 id="5、分组聚合"><a href="#5、分组聚合" class="headerlink" title="5、分组聚合"></a>5、分组聚合</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 分组</span><br><span class="line">df1 = df.groupby(&apos;Sex&apos;)</span><br></pre></td></tr></table></figure>
+<h4 id="5、分组聚合"><a href="#5、分组聚合" class="headerlink" title="5、分组聚合"></a>5、分组聚合</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 分组</span><br><span class="line">df1 &#x3D; df.groupby(&#39;Sex&#39;)</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 聚合计算泰坦尼克号男性与女性的平均票价</span><br><span class="line">df1[&apos;Fare&apos;].mean()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 聚合计算泰坦尼克号男性与女性的平均票价</span><br><span class="line">df1[&#39;Fare&#39;].mean()</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/14.png" alt></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 聚合统计泰坦尼克号中男女的存活人数</span><br><span class="line">df1[&apos;Survived&apos;].sum()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 聚合统计泰坦尼克号中男女的存活人数</span><br><span class="line">df1[&#39;Survived&#39;].sum()</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/15.png" alt></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Sex分组同时统计平均票价和存活人数,</span><br><span class="line">df.groupby(&apos;Sex&apos;).agg(&#123;&apos;Fare&apos;:&apos;mean&apos;,&apos;Survived&apos;:&apos;sum&apos;&#125;).rename(columns = &#123;&apos;Fare&apos;:&apos;Fare.mean&apos;,&apos;Survived&apos;:&apos;Survived.count&apos;&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Sex分组同时统计平均票价和存活人数,</span><br><span class="line">df.groupby(&#39;Sex&#39;).agg(&#123;&#39;Fare&#39;:&#39;mean&#39;,&#39;Survived&#39;:&#39;sum&#39;&#125;).rename(columns &#x3D; &#123;&#39;Fare&#39;:&#39;Fare.mean&#39;,&#39;Survived&#39;:&#39;Survived.count&#39;&#125;)</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/16.png" alt></p>
 <ul>
@@ -280,13 +280,13 @@
 <li>然后找出存活人数的最高的年龄</li>
 <li>最后计算存活人数最高的存活率（存活人数/总人数)</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 1</span><br><span class="line">df2 = df.groupby(&apos;Age&apos;).agg(&#123;&apos;Survived&apos;:&apos;sum&apos;&#125;).rename(columns=&#123;&apos;Survived&apos;:&apos;num&apos;&#125;)</span><br><span class="line">df2.head()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 1</span><br><span class="line">df2 &#x3D; df.groupby(&#39;Age&#39;).agg(&#123;&#39;Survived&#39;:&#39;sum&#39;&#125;).rename(columns&#x3D;&#123;&#39;Survived&#39;:&#39;num&#39;&#125;)</span><br><span class="line">df2.head()</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/17.png" alt></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 2</span><br><span class="line">max_age=df2[df2[&apos;num&apos;]==df2[&apos;num&apos;].max()]</span><br><span class="line">max_age</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 2</span><br><span class="line">max_age&#x3D;df2[df2[&#39;num&#39;]&#x3D;&#x3D;df2[&#39;num&#39;].max()]</span><br><span class="line">max_age</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/18.png" alt></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 3</span><br><span class="line">int(max_age[&apos;num&apos;])/df[&apos;Survived&apos;].sum()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 3</span><br><span class="line">int(max_age[&#39;num&#39;])&#x2F;df[&#39;Survived&#39;].sum()</span><br></pre></td></tr></table></figure>
 
 <p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/19.png" alt></p>
 
@@ -522,15 +522,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">LeetCode刷题之旅</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Git 操作</a>
+                <a href="javascript:void(0)" class="js-tag color3">LeetCode刷题之旅</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Python 基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -538,11 +538,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Numpy</a>
+                <a href="javascript:void(0)" class="js-tag color2">Git 操作</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Python 基础</a>
+                <a href="javascript:void(0)" class="js-tag color1">Numpy</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -566,7 +566,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据分析</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据挖掘</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -574,7 +574,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据挖掘</a>
+                <a href="javascript:void(0)" class="js-tag color1">大数据分析</a>
               </li>
             
             <div class="clearfix"></div>
