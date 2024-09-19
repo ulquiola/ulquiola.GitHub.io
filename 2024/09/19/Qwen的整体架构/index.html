@@ -8,14 +8,14 @@
   <link rel="dns-prefetch" href="http://ulquiola.github.io">
   <title>Qwen的整体架构 | ulquiola的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Qwen整体介绍Qwen模型架构讲解直播：直播链接 Qwen的整体架构与Llama2类似，如下图所示:   其中:     tokenizer将文本转为词表里面的数值。 数值经过embedding得到一一对应的向量。 attention_mask是用来看见左边、右边，双向等等来设定。 各类下游任务，Casual,seqcls等，基本都是基础模型model后面接对应的Linear层，还有损失函数不一">
+  <meta name="description" content="Qwen的整体架构与Llama2类似，如下图所示:   其中:     tokenizer将文本转为词表里面的数值。 数值经过embedding得到一一对应的向量。 attention_mask是用来看见左边、右边，双向等等来设定。 各类下游任务，Casual,seqcls等，基本都是基础模型model后面接对应的Linear层，还有损失函数不一样。  1 Qwen2ConfigQwen2Conf">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Qwen的整体架构">
 <meta property="og:url" content="http://ulquiola.github.io/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/index.html">
 <meta property="og:site_name" content="ulquiola的博客">
-<meta property="og:description" content="Qwen整体介绍Qwen模型架构讲解直播：直播链接 Qwen的整体架构与Llama2类似，如下图所示:   其中:     tokenizer将文本转为词表里面的数值。 数值经过embedding得到一一对应的向量。 attention_mask是用来看见左边、右边，双向等等来设定。 各类下游任务，Casual,seqcls等，基本都是基础模型model后面接对应的Linear层，还有损失函数不一">
+<meta property="og:description" content="Qwen的整体架构与Llama2类似，如下图所示:   其中:     tokenizer将文本转为词表里面的数值。 数值经过embedding得到一一对应的向量。 attention_mask是用来看见左边、右边，双向等等来设定。 各类下游任务，Casual,seqcls等，基本都是基础模型model后面接对应的Linear层，还有损失函数不一样。  1 Qwen2ConfigQwen2Conf">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://ulquiola.github.io/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/framework.JPEG">
+<meta property="og:image" content="http://ulquiola.github.io/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/framework.jpg">
 <meta property="og:image" content="http://ulquiola.github.io/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/decoderlayer.png">
 <meta property="og:image" content="http://ulquiola.github.io/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/Qwen2Attention.png">
 <meta property="og:image" content="http://ulquiola.github.io/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/GQA.png">
@@ -33,11 +33,11 @@
 <meta property="og:image" content="http://ulquiola.github.io/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/MLP1.png">
 <meta property="og:image" content="http://ulquiola.github.io/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/RMSNorm_formulation.jpg">
 <meta property="article:published_time" content="2024-09-19T12:33:49.000Z">
-<meta property="article:modified_time" content="2024-09-19T13:39:54.649Z">
+<meta property="article:modified_time" content="2024-09-19T13:55:00.019Z">
 <meta property="article:author" content="ulquiola">
 <meta property="article:tag" content="C#、.netframework、.net core、Java、Python、算法、数据结构">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://ulquiola.github.io/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/framework.JPEG">
+<meta name="twitter:image" content="http://ulquiola.github.io/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/framework.jpg">
   
     <link rel="alternative" href="/atom.xml" title="ulquiola的博客" type="application/atom+xml">
   
@@ -185,8 +185,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Qwen整体介绍"><a href="#Qwen整体介绍" class="headerlink" title="Qwen整体介绍"></a>Qwen整体介绍</h1><p>Qwen模型架构讲解直播：<a href="https://meeting.tencent.com/v2/cloud-record/share?id=0be29bb2-0648-4aeb-9baa-c9dc91dfc7a6&from=3&is-single=false&record_type=2" target="_blank" rel="noopener">直播链接</a></p>
-<p>Qwen的整体架构与Llama2类似，如下图所示:<br><img src="/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/framework.JPEG" alt="框架图">  </p>
+        <p>Qwen的整体架构与Llama2类似，如下图所示:<br><img src="/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/framework.jpg" alt="框架图">  </p>
 <p>其中:   </p>
 <ul>
 <li><code>tokenizer</code>将文本转为词表里面的数值。</li>
@@ -593,11 +592,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">LeetCode刷题之旅</a>
+                <a href="javascript:void(0)" class="js-tag color3">算法</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">算法</a>
+                <a href="javascript:void(0)" class="js-tag color3">LeetCode刷题之旅</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -605,15 +604,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Numpy</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Sql</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -621,7 +612,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Numpy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Sql</a>
               </li>
              
               <li class="article-tag-list-item">
