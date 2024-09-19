@@ -147,6 +147,100 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-从零开始pretrain-Llama3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2024/09/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8Bpretrain-Llama3/">从零开始pretrain Llama3</a>
+    </h1>
+  
+
+        
+        <a href="/2024/09/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8Bpretrain-Llama3/" class="archive-article-date">
+  	<time datetime="2024-09-19T12:33:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-09-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h3><h4 id="1、创建环境"><a href="#1、创建环境" class="headerlink" title="1、创建环境"></a>1、创建环境</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n llm python&#x3D;&#x3D;3.10</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、安装cuda"><a href="#2、安装cuda" class="headerlink" title="2、安装cuda"></a>2、安装cuda</h4><ul>
+<li>查看cuda 版本<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># windows terminal</span><br><span class="line">nvidia-smi</span><br></pre></td></tr></table></figure></li>
+<li>安装cuda<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install torch torchvision torchaudio -i https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="3、测试代码"><a href="#3、测试代码" class="headerlink" title="3、测试代码"></a>3、测试代码</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> contextlib <span class="keyword">import</span> nullcontext</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> partial</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> LLama_content.llama_model <span class="keyword">import</span> Transformer, ModelArgs</span><br><span class="line"><span class="keyword">from</span> LLama_content.llama_model <span class="keyword">import</span> Task</span><br><span class="line"></span><br><span class="line"><span class="comment"># -----------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment"># I/O 配置，用于定义输出目录和训练时的日志记录与评估设置</span></span><br><span class="line">out_dir = <span class="string">"output"</span>  <span class="comment"># 模型输出保存路径</span></span><br><span class="line">eval_interval = <span class="number">2000</span>  <span class="comment"># 评估间隔步数</span></span><br><span class="line">log_interval = <span class="number">1</span>  <span class="comment"># 日志记录间隔步数</span></span><br><span class="line">eval_iters = <span class="number">100</span>  <span class="comment"># 每次评估时迭代的步数</span></span><br><span class="line">eval_only = <span class="literal">False</span>  <span class="comment"># 如果为True，脚本在第一次评估后立即退出</span></span><br><span class="line">always_save_checkpoint = <span class="literal">False</span>  <span class="comment"># 如果为True，在每次评估后总是保存检查点</span></span><br><span class="line">init_from = <span class="string">"scratch"</span>  <span class="comment"># 可以选择从头开始训练（'scratch'）或从已有的检查点恢复（'resume'）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据配置</span></span><br><span class="line">batch_size = <span class="number">128</span>  <span class="comment"># 每个微批次的样本数量，如果使用梯度累积，实际批次大小将更大</span></span><br><span class="line">max_seq_len = <span class="number">256</span>  <span class="comment"># 最大序列长度</span></span><br><span class="line">vocab_size = <span class="number">4096</span>  <span class="comment"># 自定义词汇表大小</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 模型配置</span></span><br><span class="line">dim = <span class="number">288</span>  <span class="comment"># 模型的隐藏层维度</span></span><br><span class="line">n_layers = <span class="number">8</span>  <span class="comment"># Transformer的层数</span></span><br><span class="line">n_heads = <span class="number">8</span>  <span class="comment"># 注意力头的数量</span></span><br><span class="line">n_group = <span class="number">4</span>  <span class="comment"># 模型分组</span></span><br><span class="line">multiple_of = <span class="number">32</span>  <span class="comment"># 在某些层的维度必须是该数的倍数</span></span><br><span class="line">dropout = <span class="number">0.0</span>  <span class="comment"># Dropout概率</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># AdamW优化器配置</span></span><br><span class="line">gradient_accumulation_steps = <span class="number">4</span>  <span class="comment"># 梯度累积步数，用于模拟更大的批次</span></span><br><span class="line">learning_rate = <span class="number">5e-4</span>  <span class="comment"># 最大学习率</span></span><br><span class="line">max_iters = <span class="number">100000</span>  <span class="comment"># 总的训练迭代次数</span></span><br><span class="line">weight_decay = <span class="number">1e-1</span>  <span class="comment"># 权重衰减系数</span></span><br><span class="line">beta1 = <span class="number">0.9</span>  <span class="comment"># AdamW优化器的β1参数</span></span><br><span class="line">beta2 = <span class="number">0.95</span>  <span class="comment"># AdamW优化器的β2参数</span></span><br><span class="line">grad_clip = <span class="number">1.0</span>  <span class="comment"># 梯度裁剪阈值，0表示不裁剪</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 学习率衰减配置</span></span><br><span class="line">decay_lr = <span class="literal">True</span>  <span class="comment"># 是否启用学习率衰减</span></span><br><span class="line">warmup_iters = <span class="number">1000</span>  <span class="comment"># 学习率预热的步数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 系统设置</span></span><br><span class="line">device = <span class="string">"cuda:0"</span>  <span class="comment"># 设备选择：'cpu'，'cuda'，'cuda:0'等</span></span><br><span class="line">dtype = <span class="string">"bfloat16"</span>  <span class="comment"># 数据类型：'float32'，'bfloat16'，'float16'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># -----------------------------------------------------------------------------</span></span><br><span class="line"><span class="comment"># 获取配置参数的键值对，便于后续的日志记录</span></span><br><span class="line">config_keys = [</span><br><span class="line">    k</span><br><span class="line">    <span class="keyword">for</span> k, v <span class="keyword">in</span> globals().items()</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> k.startswith(<span class="string">"_"</span>) <span class="keyword">and</span> isinstance(v, (int, float, bool, str))</span><br><span class="line">]</span><br><span class="line">config = &#123;k: globals()[k] <span class="keyword">for</span> k <span class="keyword">in</span> config_keys&#125;  <span class="comment"># 保存配置到字典中，便于日志记录</span></span><br><span class="line"><span class="comment"># -----------------------------------------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 固定一些超参数的默认值</span></span><br><span class="line">lr_decay_iters = max_iters  <span class="comment"># 学习率衰减步数，设置为等于最大迭代步数</span></span><br><span class="line">min_lr = <span class="number">0.0</span>  <span class="comment"># 最小学习率，建议为学习率的十分之一</span></span><br><span class="line">vocab_source = <span class="string">'custom'</span>  <span class="comment"># 词汇表来源</span></span><br><span class="line">master_process = <span class="literal">True</span>  <span class="comment"># 用于区分主进程</span></span><br><span class="line">seed_offset = <span class="number">0</span>  <span class="comment"># 随机种子偏移量</span></span><br><span class="line">ddp_world_size = <span class="number">1</span>  <span class="comment"># 分布式数据并行的世界大小</span></span><br><span class="line">tokens_per_iter = batch_size * max_seq_len  <span class="comment"># 每次迭代处理的token数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置随机种子，确保可重复性</span></span><br><span class="line">torch.manual_seed(<span class="number">1337</span> + seed_offset)</span><br><span class="line">torch.backends.cuda.matmul.allow_tf32 = <span class="literal">True</span>  <span class="comment"># 允许在matmul上使用tf32</span></span><br><span class="line">torch.backends.cudnn.allow_tf32 = <span class="literal">True</span>  <span class="comment"># 允许在cudnn上使用tf32</span></span><br><span class="line">device_type = <span class="string">"cuda"</span> <span class="keyword">if</span> <span class="string">"cuda"</span> <span class="keyword">in</span> device <span class="keyword">else</span> <span class="string">"cpu"</span>  <span class="comment"># 用于自动选择设备类型</span></span><br><span class="line">ptdtype = torch.float16  <span class="comment"># 设置训练时使用的数据类型</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 混合精度训练相关</span></span><br><span class="line">ctx = (</span><br><span class="line">    nullcontext()</span><br><span class="line">    <span class="keyword">if</span> device_type == <span class="string">"cpu"</span></span><br><span class="line">    <span class="keyword">else</span> torch.amp.autocast(device_type=device_type, dtype=ptdtype)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># task-specific setup</span></span><br><span class="line">iter_batches = partial(</span><br><span class="line">    Task.iter_batches,</span><br><span class="line">    batch_size=batch_size,</span><br><span class="line">    max_seq_len=max_seq_len,</span><br><span class="line">    vocab_size=vocab_size,</span><br><span class="line">    vocab_source=vocab_source,</span><br><span class="line">    device=device,</span><br><span class="line">    num_workers=<span class="number">0</span>,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">iter_num = <span class="number">0</span></span><br><span class="line">best_val_loss = <span class="number">1e9</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># model init</span></span><br><span class="line">model_args = dict(</span><br><span class="line">    dim=dim,</span><br><span class="line">    n_layers=n_layers,</span><br><span class="line">    n_heads=n_heads,</span><br><span class="line">    n_group=n_group,</span><br><span class="line">    vocab_size=vocab_size,</span><br><span class="line">    multiple_of=multiple_of,</span><br><span class="line">    max_seq_len=max_seq_len,</span><br><span class="line">    dropout=dropout,</span><br><span class="line">)  <span class="comment"># 模型参数初始化</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ===========================================================</span></span><br><span class="line"><span class="comment"># 模型初始化</span></span><br><span class="line">gptconf = ModelArgs(**model_args)</span><br><span class="line">model = Transformer(gptconf)</span><br><span class="line"></span><br><span class="line">model.to(device)</span><br><span class="line"></span><br><span class="line"><span class="comment"># initialize a GradScaler. If enabled=False scaler is a no-op</span></span><br><span class="line">scaler = torch.cuda.amp.GradScaler(enabled=(dtype == <span class="string">"float16"</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># optimizer</span></span><br><span class="line">optimizer = model.configure_optimizers(weight_decay, learning_rate, (beta1, beta2), device_type)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义eval流程</span></span><br><span class="line"><span class="meta">@torch.no_grad()</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">estimate_loss</span><span class="params">()</span>:</span></span><br><span class="line">    out = &#123;&#125;</span><br><span class="line">    model.eval()</span><br><span class="line">    <span class="keyword">for</span> split <span class="keyword">in</span> [<span class="string">"train"</span>, <span class="string">"val"</span>]:</span><br><span class="line">        batch_iter = iter_batches(split=split)</span><br><span class="line">        losses = torch.zeros(eval_iters)  <span class="comment"># keep on CPU</span></span><br><span class="line">        <span class="keyword">for</span> k <span class="keyword">in</span> range(eval_iters):</span><br><span class="line">            X, Y = next(batch_iter)</span><br><span class="line">            <span class="keyword">with</span> ctx:</span><br><span class="line">                logits = model(X, Y)</span><br><span class="line">                loss = raw_model.last_loss</span><br><span class="line">            losses[k] = loss.item()</span><br><span class="line">        out[split] = losses.mean()</span><br><span class="line">    model.train()</span><br><span class="line">    <span class="keyword">return</span> out</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义学习率</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_lr</span><span class="params">(it)</span>:</span></span><br><span class="line">    <span class="comment"># 1) linear warmup for warmup_iters steps</span></span><br><span class="line">    <span class="keyword">if</span> it &lt; warmup_iters:</span><br><span class="line">        <span class="keyword">return</span> learning_rate * it / warmup_iters</span><br><span class="line">    <span class="comment"># 2) if it &gt; lr_decay_iters, return min learning rate</span></span><br><span class="line">    <span class="keyword">if</span> it &gt; lr_decay_iters:</span><br><span class="line">        <span class="keyword">return</span> min_lr</span><br><span class="line">    <span class="comment"># 3) in between, use cosine decay down to min learning rate</span></span><br><span class="line">    decay_ratio = (it - warmup_iters) / (lr_decay_iters - warmup_iters)</span><br><span class="line">    <span class="keyword">assert</span> <span class="number">0</span> &lt;= decay_ratio &lt;= <span class="number">1</span></span><br><span class="line">    coeff = <span class="number">0.5</span> * (<span class="number">1.0</span> + math.cos(math.pi * decay_ratio))  <span class="comment"># coeff ranges 0..1</span></span><br><span class="line">    <span class="keyword">return</span> min_lr + coeff * (learning_rate - min_lr)</span><br><span class="line"></span><br><span class="line"><span class="comment"># training loop</span></span><br><span class="line">train_batch_iter = iter_batches(split=<span class="string">"train"</span>)</span><br><span class="line">X, Y = next(train_batch_iter)  <span class="comment"># fetch the very first batch</span></span><br><span class="line">t0 = time.time()</span><br><span class="line">local_iter_num = <span class="number">0</span>  <span class="comment"># number of iterations in the lifetime of this process</span></span><br><span class="line">raw_model = model  <span class="comment"># unwrap DDP container if needed</span></span><br><span class="line">running_mfu = <span class="number">-1.0</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="comment"># 或许当前step的学习率</span></span><br><span class="line">    lr = get_lr(iter_num) <span class="keyword">if</span> decay_lr <span class="keyword">else</span> learning_rate</span><br><span class="line">    <span class="keyword">for</span> param_group <span class="keyword">in</span> optimizer.param_groups:</span><br><span class="line">        param_group[<span class="string">"lr"</span>] = lr</span><br><span class="line"></span><br><span class="line">    <span class="comment"># evaluate the loss on train/val sets and write checkpoints</span></span><br><span class="line">    <span class="keyword">if</span> iter_num % eval_interval == <span class="number">0</span> <span class="keyword">and</span> master_process:</span><br><span class="line">        losses = estimate_loss()</span><br><span class="line">        print(<span class="string">f"step <span class="subst">&#123;iter_num&#125;</span>: train loss <span class="subst">&#123;losses[<span class="string">'train'</span>]:<span class="number">.4</span>f&#125;</span>, val loss <span class="subst">&#123;losses[<span class="string">'val'</span>]:<span class="number">.4</span>f&#125;</span>"</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> losses[<span class="string">"val"</span>] &lt; best_val_loss <span class="keyword">or</span> always_save_checkpoint:</span><br><span class="line">            best_val_loss = losses[<span class="string">"val"</span>]</span><br><span class="line">            <span class="keyword">if</span> iter_num &gt; <span class="number">0</span>:</span><br><span class="line">                checkpoint = &#123;</span><br><span class="line">                    <span class="string">"model"</span>: raw_model.state_dict(),</span><br><span class="line">                    <span class="string">"optimizer"</span>: optimizer.state_dict(),</span><br><span class="line">                    <span class="string">"model_args"</span>: model_args,</span><br><span class="line">                    <span class="string">"iter_num"</span>: iter_num,</span><br><span class="line">                    <span class="string">"best_val_loss"</span>: best_val_loss,</span><br><span class="line">                    <span class="string">"config"</span>: config,</span><br><span class="line">                &#125;</span><br><span class="line">                print(<span class="string">f"saving checkpoint to <span class="subst">&#123;out_dir&#125;</span>"</span>)</span><br><span class="line">                torch.save(checkpoint, os.path.join(out_dir, <span class="string">"ckpt.pt"</span>))</span><br><span class="line">    <span class="keyword">if</span> iter_num == <span class="number">0</span> <span class="keyword">and</span> eval_only:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 前向更新过程，使用了梯度累积(检查点)</span></span><br><span class="line">    <span class="keyword">for</span> micro_step <span class="keyword">in</span> range(gradient_accumulation_steps):</span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> ctx:  <span class="comment"># 混合精度相关</span></span><br><span class="line">            logits = model(X, Y)</span><br><span class="line">            loss = raw_model.last_loss</span><br><span class="line">            loss = loss / gradient_accumulation_steps</span><br><span class="line"></span><br><span class="line">        X, Y = next(train_batch_iter)</span><br><span class="line">        <span class="comment"># 反向传播</span></span><br><span class="line">        scaler.scale(loss).backward()</span><br><span class="line">    <span class="comment"># 梯度阶段</span></span><br><span class="line">    <span class="keyword">if</span> grad_clip != <span class="number">0.0</span>:</span><br><span class="line">        scaler.unscale_(optimizer)</span><br><span class="line">        torch.nn.utils.clip_grad_norm_(model.parameters(), grad_clip)</span><br><span class="line">    <span class="comment"># step the optimizer and scaler if training in fp16</span></span><br><span class="line">    scaler.step(optimizer)</span><br><span class="line">    scaler.update()</span><br><span class="line">    <span class="comment"># flush the gradients as soon as we can, no need for this memory anymore</span></span><br><span class="line">    optimizer.zero_grad(set_to_none=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># timing and logging</span></span><br><span class="line">    t1 = time.time()</span><br><span class="line">    dt = t1 - t0</span><br><span class="line">    t0 = t1</span><br><span class="line">    <span class="keyword">if</span> iter_num % log_interval == <span class="number">0</span> <span class="keyword">and</span> master_process:</span><br><span class="line">        <span class="comment"># get loss as float, scale up due to the divide above. note: this is a CPU-GPU sync point</span></span><br><span class="line">        lossf = loss.item() * gradient_accumulation_steps</span><br><span class="line">        <span class="keyword">if</span> local_iter_num &gt;= <span class="number">5</span>:  <span class="comment"># let the training loop settle a bit</span></span><br><span class="line">            mfu = raw_model.estimate_mfu(batch_size * gradient_accumulation_steps, dt)</span><br><span class="line">            running_mfu = mfu <span class="keyword">if</span> running_mfu == <span class="number">-1.0</span> <span class="keyword">else</span> <span class="number">0.9</span> * running_mfu + <span class="number">0.1</span> * mfu</span><br><span class="line">        print(</span><br><span class="line">            <span class="string">f"<span class="subst">&#123;iter_num&#125;</span> | loss <span class="subst">&#123;lossf:<span class="number">.4</span>f&#125;</span> | lr <span class="subst">&#123;lr:e&#125;</span> | <span class="subst">&#123;dt*<span class="number">1000</span>:<span class="number">.2</span>f&#125;</span>ms | mfu <span class="subst">&#123;running_mfu*<span class="number">100</span>:<span class="number">.2</span>f&#125;</span>%"</span>   <span class="comment"># mfu表示模型浮点运算利用率</span></span><br><span class="line">        )</span><br><span class="line">    iter_num += <span class="number">1</span></span><br><span class="line">    local_iter_num += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># termination conditions</span></span><br><span class="line">    <span class="keyword">if</span> iter_num &gt; max_iters:</span><br><span class="line">        <span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+<pre><code>num decayed parameter tensors: 57, with 8,146,944 parameters
+num non-decayed parameter tensors: 17, with 4,896 parameters
+using fused AdamW: True
+Created a PretokDataset with rng seed 42
+Created a PretokDataset with rng seed 42
+Created a PretokDataset with rng seed 42
+step 0: train loss 8.3752, val loss 8.3753
+0 | loss 8.3757 | lr 0.000000e+00 | 11944.26ms | mfu -100.00%
+1 | loss 8.3732 | lr 5.000000e-07 | 582.89ms | mfu -100.00%
+2 | loss 8.3785 | lr 1.000000e-06 | 676.33ms | mfu -100.00%
+3 | loss 8.3699 | lr 1.500000e-06 | 661.00ms | mfu -100.00%
+.....
+1238 | loss 10.8579 | lr 4.999929e-04 | 662.64ms | mfu 3.55%</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LLM</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2024/09/19/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8Bpretrain-Llama3/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Sql-exercise" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1983,92 +2077,6 @@
 
 
   
-    <article id="post-ubuntu-server-install-jupyter" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/11/ubuntu-server-install-jupyter/">服务器安装Anaconda配置jupyter允许远程访问</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/11/ubuntu-server-install-jupyter/" class="archive-article-date">
-  	<time datetime="2019-11-11T07:11:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-11</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="下载和安装Anaconda"><a href="#下载和安装Anaconda" class="headerlink" title="下载和安装Anaconda"></a>下载和安装Anaconda</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$wget https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;archive&#x2F;Anaconda3-5.2.0-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
-<h3 id="赋予权限并执行"><a href="#赋予权限并执行" class="headerlink" title="赋予权限并执行"></a>赋予权限并执行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$chmod +x Anaconda3-5.2.0-Linux-x86_64.sh</span><br><span class="line">$.&#x2F;Anaconda3-5.2.0-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
-
-<h2 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook --generate-config</span><br></pre></td></tr></table></figure>
-<h2 id="生成密码sha1值"><a href="#生成密码sha1值" class="headerlink" title="生成密码sha1值"></a>生成密码sha1值</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$python3</span><br><span class="line"></span><br><span class="line">from notebook.auth import passwd</span><br><span class="line">passwd()</span><br><span class="line">Enter password:</span><br><span class="line">Verify password:</span><br><span class="line"></span><br><span class="line">&#39;sha1:ce23d945972f:34769685a7ccd3d08c84a18c63968a41f1140274&#39;</span><br></pre></td></tr></table></figure>
-
-<h2 id="将hash值放入配置文件"><a href="#将hash值放入配置文件" class="headerlink" title="将hash值放入配置文件"></a>将hash值放入配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$vi ~&#x2F;.jupyter&#x2F;jupyter_notebook_config.py</span><br><span class="line"></span><br><span class="line">c.NotebookApp.ip&#x3D;&#39;*&#39;</span><br><span class="line">c.NotebookApp.password &#x3D; u&#39;上面的hash值&#39;</span><br><span class="line">c.NotebookApp.open_browser &#x3D; False</span><br><span class="line">c.NotebookApp.port &#x3D;8888</span><br></pre></td></tr></table></figure>
-<h2 id="用screen启动jupyter-notebook"><a href="#用screen启动jupyter-notebook" class="headerlink" title="用screen启动jupyter notebook"></a>用screen启动jupyter notebook</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 新建一个 screen 窗口，若报错则可能需先安装 screen</span><br><span class="line">screen -S jupyter</span><br><span class="line"></span><br><span class="line"># 启动 jupyter notebook 服务</span><br><span class="line">jupyter notebook</span><br></pre></td></tr></table></figure>
-<ul>
-<li>screen命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">screen -S 会话名称        &#x2F;&#x2F;创建会话</span><br><span class="line">screen -R 会话名称或编号        &#x2F;&#x2F;进入会话 detached变成attached</span><br><span class="line">screen -ls                       &#x2F;&#x2F;会话列表</span><br><span class="line">ctrl+a+d                         &#x2F;&#x2F;离开，但后台还开着</span><br><span class="line">ctrl+c                             &#x2F;&#x2F;返回</span><br><span class="line">screen -s 绘画名称 -X quit   &#x2F;&#x2F;杀掉会话</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h2 id="修改阿里云安全组策略-把入方向的端口8888开放-完成！"><a href="#修改阿里云安全组策略-把入方向的端口8888开放-完成！" class="headerlink" title="修改阿里云安全组策略 把入方向的端口8888开放,完成！"></a>修改阿里云安全组策略 把入方向的端口8888开放,完成！</h2>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Ubuntu 18.04</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/11/ubuntu-server-install-jupyter/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -2083,7 +2091,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2022 ulquiola
+    		&copy; 2024 ulquiola
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -2232,6 +2240,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">自我介绍</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">LLM</a>
               </li>
             
             <div class="clearfix"></div>
