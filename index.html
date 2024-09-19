@@ -263,7 +263,7 @@ step 0: train loss 8.3752, val loss 8.3753
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Qwen的整体架构与Llama2类似，如下图所示:<br><img src="/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/framework.jpg" alt="框架图">  </p>
+        <p>Qwen的整体架构与Llama2类似，如下图所示:<br><img src="Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/framework.jpg" alt="框架图">  </p>
 <p>其中:   </p>
 <ul>
 <li><code>tokenizer</code>将文本转为词表里面的数值。</li>
@@ -291,8 +291,8 @@ step 0: train loss 8.3752, val loss 8.3753
 <li>如果保存<code>output_hidden_states</code>的话，就是第一个为<code>input_ids</code>进行<code>emb</code>，然后保存到<code>n-1</code>层的<code>decoder_layer</code>的输出<code>hs</code>，再加上最后一层<code>layer</code>的输出<code>hs</code>进行过<code>norm</code>后的<code>hs</code>.</li>
 <li>最后是以<code>BaseModelOutputWithPast</code>的形式输出。</li>
 </ul>
-<h2 id="1-2-Qwen2DecoderLayer"><a href="#1-2-Qwen2DecoderLayer" class="headerlink" title="1.2 Qwen2DecoderLayer"></a>1.2 Qwen2DecoderLayer</h2><div align="center">
-    <img src="/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/decoderlayer.png">
+<h2 id="1-2-Qwen2DecoderLayer"><a href="#1-2-Qwen2DecoderLayer" class="headerlink" title="1.2 Qwen2DecoderLayer"></a>1.2 Qwen2DecoderLayer</h2><div align=center>
+    <img src='Qwen的整体架构/decoderlayer.png'>
 </div>
 
 <h3 id="1-2-1-初始化"><a href="#1-2-1-初始化" class="headerlink" title="1.2.1 初始化"></a>1.2.1 初始化</h3><p><code>layer</code>三件套:<code>attn</code>+<code>MLP</code>+<code>norm</code></p>
@@ -305,8 +305,8 @@ step 0: train loss 8.3752, val loss 8.3753
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">residual = hidden_states</span><br><span class="line"><span class="comment">#  标准化后送入attn</span></span><br><span class="line">hidden_states = self.input_layernorm(hidden_states)  <span class="comment"># RMSNorm标准化</span></span><br><span class="line"><span class="comment"># Self Attention</span></span><br><span class="line">hidden_states, self_attn_weights, present_key_value = self.self_attn(  </span><br><span class="line">    hidden_states=hidden_states,</span><br><span class="line">    attention_mask=attention_mask,</span><br><span class="line">    position_ids=position_ids,</span><br><span class="line">    past_key_value=past_key_value,</span><br><span class="line">    output_attentions=output_attentions,</span><br><span class="line">    use_cache=use_cache,</span><br><span class="line">    **kwargs,</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 残差与新的hidden_states相加</span></span><br><span class="line">hidden_states = residual + hidden_states</span><br><span class="line"></span><br><span class="line"><span class="comment"># Fully Connected</span></span><br><span class="line">residual = hidden_states</span><br><span class="line"><span class="comment"># 同样的RMSNorm标准化</span></span><br><span class="line">hidden_states = self.post_attention_layernorm(hidden_states)</span><br><span class="line">hidden_states = self.mlp(hidden_states)</span><br><span class="line">hidden_states = residual + hidden_states</span><br><span class="line"></span><br><span class="line">outputs = (hidden_states,)</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> outputs</span><br></pre></td></tr></table></figure>
 
-<h2 id="1-3-Qwen2Attention"><a href="#1-3-Qwen2Attention" class="headerlink" title="1.3 Qwen2Attention"></a>1.3 Qwen2Attention</h2><div align="center">
-    <img src="/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/Qwen2Attention.png">
+<h2 id="1-3-Qwen2Attention"><a href="#1-3-Qwen2Attention" class="headerlink" title="1.3 Qwen2Attention"></a>1.3 Qwen2Attention</h2><div align=center>
+    <img src='Qwen的整体架构/Qwen2Attention.png'>
 </div>
 
 <h3 id="1-3-1-初始化"><a href="#1-3-1-初始化" class="headerlink" title="1.3.1 初始化"></a>1.3.1 初始化</h3><p>核心参数解析:</p>
@@ -329,8 +329,8 @@ step 0: train loss 8.3752, val loss 8.3753
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取形状信息,hidden_states输入的为(bs,T,hd)</span></span><br><span class="line">bsz, q_len, _ = hidden_states.size()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对hidden_states进行Linear生成query、key、value</span></span><br><span class="line">query_states = self.q_proj(hidden_states)</span><br><span class="line">key_states = self.k_proj(hidden_states)</span><br><span class="line">value_states = self.v_proj(hidden_states)</span><br><span class="line"></span><br><span class="line"> <span class="comment"># reshape多头处理--分块--(bs,T,heads,hd_d)</span></span><br><span class="line">query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将旋转位置嵌入应用于查询和键张量。使用了旋转位置嵌入的余弦和正弦部分，将它们与查询和键张量相乘，并将结果相加，从而实现旋转位置嵌入的效果</span></span><br><span class="line">cos, sin = self.rotary_emb(value_states, seq_len=kv_seq_len)</span><br><span class="line">query_states, key_states = apply_rotary_pos_emb(query_states, key_states, cos, sin, position_ids)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 先将key_states和value_states重复了num_key_value_groups次</span></span><br><span class="line">key_states = repeat_kv(key_states, self.num_key_value_groups)</span><br><span class="line">value_states = repeat_kv(value_states, self.num_key_value_groups)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用dot attn实现q*kT/hd_d^0.5</span></span><br><span class="line">attn_weights = torch.matmul(query_states, key_states.transpose(<span class="number">2</span>, <span class="number">3</span>)) / math.sqrt(self.head_dim)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 然后 attn_weights 加上 attention_mask，实现读取顺序</span></span><br><span class="line">attn_weights = attn_weights + attention_mask</span><br><span class="line"></span><br><span class="line"><span class="comment"># softmax + dropout + values_states相乘</span></span><br><span class="line">attn_weights = nn.functional.softmax(attn_weights, dim=<span class="number">-1</span>, dtype=torch.float32).to(query_states.dtype)</span><br><span class="line">attn_weights = nn.functional.dropout(attn_weights, p=self.attention_dropout, training=self.training)</span><br><span class="line">attn_output = torch.matmul(attn_weights, value_states)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 转置，修改形状等reshape操作</span></span><br><span class="line">attn_output = attn_output.transpose(<span class="number">1</span>, <span class="number">2</span>).contiguous()</span><br><span class="line">attn_output = attn_output.reshape(bsz, q_len, self.hidden_size)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 最后在进行一次o_proj</span></span><br><span class="line">attn_output = self.o_proj(attn_output)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 返回结果</span></span><br><span class="line"><span class="keyword">return</span> attn_output, attn_weights, past_key_value</span><br></pre></td></tr></table></figure>
 
-<h3 id="1-3-3-细节Debug"><a href="#1-3-3-细节Debug" class="headerlink" title="1.3.3 细节Debug"></a>1.3.3 细节Debug</h3><h4 id="1-3-3-1-GQA"><a href="#1-3-3-1-GQA" class="headerlink" title="1.3.3.1 GQA"></a>1.3.3.1 GQA</h4><div align="center">
-    <img src="/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/GQA.png">
+<h3 id="1-3-3-细节Debug"><a href="#1-3-3-细节Debug" class="headerlink" title="1.3.3 细节Debug"></a>1.3.3 细节Debug</h3><h4 id="1-3-3-1-GQA"><a href="#1-3-3-1-GQA" class="headerlink" title="1.3.3.1 GQA"></a>1.3.3.1 GQA</h4><div align=center>
+    <img src='Qwen的整体架构/GQA.png'>
 </div>
 
 <blockquote>
@@ -350,23 +350,23 @@ step 0: train loss 8.3752, val loss 8.3753
 <li><code>repeat</code> 方法通过实际复制数据来扩展张量。它返回的新张量不与原始张量共享数据，扩展后的张量占用了更多的内存。</li>
 </ul>
 <h4 id="1-3-3-2-apply-rotary-pos-emb"><a href="#1-3-3-2-apply-rotary-pos-emb" class="headerlink" title="1.3.3.2 apply_rotary_pos_emb"></a>1.3.3.2 apply_rotary_pos_emb</h4><p>位置编码的含义是对每一个token的每一个dim赋予不同的位置信息。<br>公式定义:  </p>
-<div align="center">
-    <img src="/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/ROPE1.png">
+<div align=center>
+    <img src='Qwen的整体架构/ROPE1.png'>
 </div> 
 
 <p>概念：通过旋转编码，使得每个token既有相对位置信息，又有绝对位置信息。</p>
 <ul>
 <li>既能以自注意力矩阵偏置的形式作用于 $A_{t,s}$,直接反映两个token的相对位置信息，又能拆解到向量 $q_{t}$ 和 $k_{s}$ 上，通过直接编码token的绝对位置实现。</li>
-<li>RoPE本质是实现对特征向量的旋转操作，如果以二维特征向量举例，对于相邻两个token来说，其对应同一个 $\theta$,其定义为:  <div align="center">
-  <img src="/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/ROPE2.png">
+<li>RoPE本质是实现对特征向量的旋转操作，如果以二维特征向量举例，对于相邻两个token来说，其对应同一个 $\theta$,其定义为:  <div align=center>
+  <img src='Qwen的整体架构/ROPE2.png'>
 </div> 
 
 </li>
 </ul>
 <p>可得，其本质就是: $q_{t}$, $k_{s}$ 旋转后的结果，就是 $q_{t}$, $k_{s}$乘上cos再加上 $q_{t}$, $k_{s}$翻转维度并取反一维后乘上sin。</p>
 <ul>
-<li>对于高纬向量，由于奇、复数维度两两交错实现较为复杂，则现在可简化为将特征维度一切二，如下图所示，在实现过程中对前后各半进行的操作即为rotate_half操作： <div align="center">
-  <img src="/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/ROPE3.png">
+<li>对于高纬向量，由于奇、复数维度两两交错实现较为复杂，则现在可简化为将特征维度一切二，如下图所示，在实现过程中对前后各半进行的操作即为rotate_half操作： <div align=center>
+  <img src='Qwen的整体架构/ROPE3.png'>
 </div> 
 
 
@@ -376,41 +376,41 @@ step 0: train loss 8.3752, val loss 8.3753
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Qwen2RotaryEmbedding</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, dim, max_position_embeddings=<span class="number">2048</span>, base=<span class="number">10000</span>, device=None)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        <span class="comment"># 定义初始值</span></span><br><span class="line">        self.dim = dim</span><br><span class="line">        self.max_position_embeddings = max_position_embeddings</span><br><span class="line">        self.base = base</span><br><span class="line">        <span class="comment"># 定义旋转角</span></span><br><span class="line">        inv_freq = <span class="number">1.0</span> / (self.base ** (torch.arange(<span class="number">0</span>, self.dim, <span class="number">2</span>, dtype=torch.int64).float().to(device) / self.dim))</span><br><span class="line">        self.register_buffer(<span class="string">"inv_freq"</span>, inv_freq, persistent=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Build here to make `torch.jit.trace` work.</span></span><br><span class="line">        self._set_cos_sin_cache(</span><br><span class="line">            seq_len=max_position_embeddings, device=self.inv_freq.device, dtype=torch.get_default_dtype()</span><br><span class="line">        )</span><br><span class="line">    <span class="comment"># 为seq里面的每个token形成独一无二的旋转角嵌入(外积)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_set_cos_sin_cache</span><span class="params">(self, seq_len, device, dtype)</span>:</span></span><br><span class="line">        self.max_seq_len_cached = seq_len</span><br><span class="line">        t = torch.arange(self.max_seq_len_cached, device=device, dtype=torch.int64).type_as(self.inv_freq)</span><br><span class="line"></span><br><span class="line">        freqs = torch.outer(t, self.inv_freq)</span><br><span class="line">        <span class="comment"># 生成角度信息(利用注册机制生成self.cos_cached与sin_cached</span></span><br><span class="line">        emb = torch.cat((freqs, freqs), dim=<span class="number">-1</span>)</span><br><span class="line">        self.register_buffer(<span class="string">"cos_cached"</span>, emb.cos().to(dtype), persistent=<span class="literal">False</span>)</span><br><span class="line">        self.register_buffer(<span class="string">"sin_cached"</span>, emb.sin().to(dtype), persistent=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x, seq_len=None)</span>:</span></span><br><span class="line">        <span class="comment"># x: [bs, num_attention_heads, seq_len, head_size]</span></span><br><span class="line">        <span class="keyword">if</span> seq_len &gt; self.max_seq_len_cached:</span><br><span class="line">            self._set_cos_sin_cache(seq_len=seq_len, device=x.device, dtype=x.dtype)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">            self.cos_cached[:seq_len].to(dtype=x.dtype),</span><br><span class="line">            self.sin_cached[:seq_len].to(dtype=x.dtype),</span><br><span class="line">        )</span><br></pre></td></tr></table></figure>
 <p>首先要先生成角度:<br>$$<br>\theta = \left(\frac{1}{10000^{2n/d}}\right)<br>$$</p>
 <p>其中，n表示维度数，其取值范围为[0, 1, …, d/2-1]  </p>
-<div align="center">
-    <img src="/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/ROPE4.png">
+<div align=center>
+    <img src='Qwen的整体架构/ROPE4.png'>
 </div> 
 
 <p>然后将上述生成角度与每一个位置乘积，区分一个seq中各个词：其实等价于:<br>$$\theta = \left(\frac{i}{10000^{2n/d}}\right)$$<br>其中: <code>i</code>为行数。  </p>
-<div align="center">
-    <img src="/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/ROPE5.png">
+<div align=center>
+    <img src='Qwen的整体架构/ROPE5.png'>
 </div> 
 
 <p>emb将二者cat起来，得到dim维度，每dim/2一循环：  </p>
-<div align="center">
-    <img src="/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/ROPE6.png">
+<div align=center>
+    <img src='Qwen的整体架构/ROPE6.png'>
 </div> 
 
 <p>然后，在取出位置编码信息<code>cos</code>与<code>sin</code>的时候，就是将<code>seq</code>的部分切出来，原先设置的1024是最大<code>pos</code>编码，每次用的时候只取当下<code>seq_len</code>的即可.之前求得外积，是为了保证<code>seq</code>里面得每一个词都能有不同的1024个位置编码。</p>
-<div align="center">
-    <img src="/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/ROPE7.png">
+<div align=center>
+    <img src='Qwen的整体架构/ROPE7.png'>
 </div> 
 
 <p>进行旋转嵌入:  </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 后半部分和前半部分进行了交换，并且将后半部分的符号取反。</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">rotate_half</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="string">"""Rotates half the hidden dims of the input."""</span></span><br><span class="line">    x1 = x[..., : x.shape[<span class="number">-1</span>] // <span class="number">2</span>]</span><br><span class="line">    x2 = x[..., x.shape[<span class="number">-1</span>] // <span class="number">2</span> :]</span><br><span class="line">    <span class="keyword">return</span> torch.cat((-x2, x1), dim=<span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">apply_rotary_pos_emb</span><span class="params">(q, k, cos, sin, position_ids, unsqueeze_dim=<span class="number">1</span>)</span>:</span></span><br><span class="line">    <span class="string">"""Applies Rotary Position Embedding to the query and key tensors.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    query and key tensors rotated using the Rotary Position Embedding.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    cos = cos[position_ids].unsqueeze(unsqueeze_dim)</span><br><span class="line">    sin = sin[position_ids].unsqueeze(unsqueeze_dim)</span><br><span class="line">    q_embed = (q * cos) + (rotate_half(q) * sin)</span><br><span class="line">    k_embed = (k * cos) + (rotate_half(k) * sin)</span><br><span class="line">    <span class="keyword">return</span> q_embed, k_embed</span><br></pre></td></tr></table></figure>
 <p>对应公式：  </p>
-<div align="center">
-    <img src="/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/ROPE8.png">
+<div align=center>
+    <img src='Qwen的整体架构/ROPE8.png'>
 </div> 
 
 <p>其中，下标t则表示位于同一行，也就是同一<code>seq_len</code>，对于相邻的两个元素，</p>
 <h4 id="1-3-3-3-读取顺序attention-mask"><a href="#1-3-3-3-读取顺序attention-mask" class="headerlink" title="1.3.3.3 读取顺序attention_mask"></a>1.3.3.3 读取顺序attention_mask</h4><p>第一步的时候只能看到自己，第二步只能看到0、1…其余的都是负无穷。 </p>
-<div align="center">
-    <img src="/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/Mask1.png">
+<div align=center>
+    <img src='Qwen的整体架构/Mask1.png'>
 </div> 
 
 <p>经过softmax，对应负无穷的位置权重为0，从而实现只能从左往右。</p>
-<div align="center">
-    <img src="/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/Mask2.png">
+<div align=center>
+    <img src='Qwen的整体架构/Mask2.png'>
 </div> 
 
 <ul>
@@ -421,20 +421,20 @@ step 0: train loss 8.3752, val loss 8.3753
 </ul>
 </li>
 <li>第n步则对应有n个权重，用来描述从1到n个步之间的各个关系，进而计算出各个维度。</li>
-<li>每一个矩阵乘法的结果相当于是下一个词的dim，那么score则是根据mask来判断，能通过前几个词对应dim的值从而进行加权，进而得到下一个词的该dim上的值。<div align="center">
-  <img src="/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/Mask3.png">
+<li>每一个矩阵乘法的结果相当于是下一个词的dim，那么score则是根据mask来判断，能通过前几个词对应dim的值从而进行加权，进而得到下一个词的该dim上的值。<div align=center>
+  <img src='Qwen的整体架构/Mask3.png'>
 </div></li>
 <li>对于推理的过程，问询不一样长没关系，因为所有的权重都是dim-dim，得到的attention_score是一个seq,seq的，权重跟seq的大小没关系。其都是后面的dim维度的参数。</li>
 <li>推理过程的attention_mask可有可无，是一个一个吐，循环cat到下一个，每一次都取最后一个，代表着预测的是下一个token。</li>
 </ul>
-<h2 id="1-4-Qwen2-MLP"><a href="#1-4-Qwen2-MLP" class="headerlink" title="1.4 Qwen2 MLP"></a>1.4 Qwen2 MLP</h2><div align="center">
-    <img src="/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/MLP1.png">
+<h2 id="1-4-Qwen2-MLP"><a href="#1-4-Qwen2-MLP" class="headerlink" title="1.4 Qwen2 MLP"></a>1.4 Qwen2 MLP</h2><div align=center>
+    <img src='Qwen的整体架构/MLP1.png'>
 </div>
 
 <p>输入<code>hidden_state</code>并行送入两个<code>Linear</code>层，其中一个激活一下，再与另一个相乘，最终再经过一个<code>Linear</code>，输出最终结果。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Qwen2MLP</span><span class="params">(nn.Module)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, config)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        <span class="comment"># 这俩不必多说</span></span><br><span class="line">        self.config = config</span><br><span class="line">        self.hidden_size = config.hidden_size</span><br><span class="line">        self.intermediate_size = config.intermediate_size</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 三个全连接层</span></span><br><span class="line">        self.gate_proj = nn.Linear(self.hidden_size, self.intermediate_size, bias=<span class="literal">False</span>)</span><br><span class="line">        self.up_proj = nn.Linear(self.hidden_size, self.intermediate_size, bias=<span class="literal">False</span>)</span><br><span class="line">        self.down_proj = nn.Linear(self.intermediate_size, self.hidden_size, bias=<span class="literal">False</span>)</span><br><span class="line">        self.act_fn = ACT2FN[config.hidden_act]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">forward</span><span class="params">(self, x)</span>:</span></span><br><span class="line">        down_proj = self.down_proj(self.act_fn(self.gate_proj(x)) * self.up_proj(x))</span><br><span class="line">        <span class="keyword">return</span> down_proj</span><br></pre></td></tr></table></figure>
 <h2 id="1-5-Qwen2RMSNorm"><a href="#1-5-Qwen2RMSNorm" class="headerlink" title="1.5 Qwen2RMSNorm"></a>1.5 Qwen2RMSNorm</h2><p>计算公式:</p>
-<img src="/2024/09/19/Qwen%E7%9A%84%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84/RMSNorm_formulation.jpg" width="400" height="auto">
+<img src="Qwen的整体架构/RMSNorm_formulation.jpg" width="400" height="auto">
 
 <p>其中:</p>
 <ul>
@@ -510,30 +510,30 @@ step 0: train loss 8.3752, val loss 8.3753
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="练习一-各部门工资最高的员工（难度：中等）"><a href="#练习一-各部门工资最高的员工（难度：中等）" class="headerlink" title="练习一: 各部门工资最高的员工（难度：中等）"></a>练习一: 各部门工资最高的员工（难度：中等）</h2><h3 id="创建Employee-表，包含所有员工信息，每个员工有其对应的-Id-salary-和-department-Id"><a href="#创建Employee-表，包含所有员工信息，每个员工有其对应的-Id-salary-和-department-Id" class="headerlink" title="创建Employee 表，包含所有员工信息，每个员工有其对应的 Id, salary 和 department Id"></a>创建Employee 表，包含所有员工信息，每个员工有其对应的 Id, salary 和 department Id</h3><p><img src="/2022/10/25/Sql-exercise/1.png" alt="1"></p>
+        <h2 id="练习一-各部门工资最高的员工（难度：中等）"><a href="#练习一-各部门工资最高的员工（难度：中等）" class="headerlink" title="练习一: 各部门工资最高的员工（难度：中等）"></a>练习一: 各部门工资最高的员工（难度：中等）</h2><h3 id="创建Employee-表，包含所有员工信息，每个员工有其对应的-Id-salary-和-department-Id"><a href="#创建Employee-表，包含所有员工信息，每个员工有其对应的-Id-salary-和-department-Id" class="headerlink" title="创建Employee 表，包含所有员工信息，每个员工有其对应的 Id, salary 和 department Id"></a>创建Employee 表，包含所有员工信息，每个员工有其对应的 Id, salary 和 department Id</h3><p><img src="Sql-exercise/1.png" alt="1"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">drop table shop.employee;</span><br><span class="line">create table shop.employee(</span><br><span class="line">id int,</span><br><span class="line">name varchar(50),</span><br><span class="line">salary decimal,</span><br><span class="line">departmentid int);</span><br><span class="line">insert into shop.employee values(1,&#39;Joe&#39;,70000,1);</span><br><span class="line">insert into shop.employee values(2,&#39;Henry&#39;,80000,2);</span><br><span class="line">insert into shop.employee values(3,&#39;Sam&#39;,60000,2);</span><br><span class="line">insert into shop.employee values(4,&#39;Max&#39;,90000,1);</span><br></pre></td></tr></table></figure>
 
-<h3 id="创建Department-表，包含公司所有部门的信息。"><a href="#创建Department-表，包含公司所有部门的信息。" class="headerlink" title="创建Department 表，包含公司所有部门的信息。"></a>创建Department 表，包含公司所有部门的信息。</h3><p><img src="/2022/10/25/Sql-exercise/1.png" alt="2"></p>
+<h3 id="创建Department-表，包含公司所有部门的信息。"><a href="#创建Department-表，包含公司所有部门的信息。" class="headerlink" title="创建Department 表，包含公司所有部门的信息。"></a>创建Department 表，包含公司所有部门的信息。</h3><p><img src="Sql-exercise/1.png" alt="2"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table shop.department(</span><br><span class="line">id int,</span><br><span class="line">name varchar(50));</span><br><span class="line">insert into shop.department values(1,&#39;IT&#39;);</span><br><span class="line">insert into shop.department values(2,&#39;Sales&#39;);</span><br></pre></td></tr></table></figure>
 
-<h3 id="编写一个-SQL-查询，找出每个部门工资最高的员工。例如，根据上述给定的表格，"><a href="#编写一个-SQL-查询，找出每个部门工资最高的员工。例如，根据上述给定的表格，" class="headerlink" title="编写一个 SQL 查询，找出每个部门工资最高的员工。例如，根据上述给定的表格，"></a>编写一个 SQL 查询，找出每个部门工资最高的员工。例如，根据上述给定的表格，</h3><h3 id="Max-在-IT-部门有最高工资，Henry-在-Sales-部门有最高工资"><a href="#Max-在-IT-部门有最高工资，Henry-在-Sales-部门有最高工资" class="headerlink" title="Max 在 IT 部门有最高工资，Henry 在 Sales 部门有最高工资"></a>Max 在 IT 部门有最高工资，Henry 在 Sales 部门有最高工资</h3><p><img src="/2022/10/25/Sql-exercise/3.png" alt="3"></p>
+<h3 id="编写一个-SQL-查询，找出每个部门工资最高的员工。例如，根据上述给定的表格，"><a href="#编写一个-SQL-查询，找出每个部门工资最高的员工。例如，根据上述给定的表格，" class="headerlink" title="编写一个 SQL 查询，找出每个部门工资最高的员工。例如，根据上述给定的表格，"></a>编写一个 SQL 查询，找出每个部门工资最高的员工。例如，根据上述给定的表格，</h3><h3 id="Max-在-IT-部门有最高工资，Henry-在-Sales-部门有最高工资"><a href="#Max-在-IT-部门有最高工资，Henry-在-Sales-部门有最高工资" class="headerlink" title="Max 在 IT 部门有最高工资，Henry 在 Sales 部门有最高工资"></a>Max 在 IT 部门有最高工资，Henry 在 Sales 部门有最高工资</h3><p><img src="Sql-exercise/3.png" alt="3"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">select Department,Employee,Salary</span><br><span class="line">from(</span><br><span class="line">	select b.Name Department,a.Name Employee,a.Salary</span><br><span class="line">	,row_number()over(partition by b.Name order by a.salary desc)rr</span><br><span class="line">	from shop.employee a ,shop.department b </span><br><span class="line">	where a.departmentid &#x3D; b.id)x </span><br><span class="line">where rr &#x3D; 1;</span><br></pre></td></tr></table></figure>
 
 <h2 id="练习二-换座位（难度：中等）"><a href="#练习二-换座位（难度：中等）" class="headerlink" title="练习二: 换座位（难度：中等）"></a>练习二: 换座位（难度：中等）</h2><h3 id="小美是一所中学的信息科技老师，她有一张-seat-座位表，平时用来储存学生名字和与他们相对应的座位-id。"><a href="#小美是一所中学的信息科技老师，她有一张-seat-座位表，平时用来储存学生名字和与他们相对应的座位-id。" class="headerlink" title="小美是一所中学的信息科技老师，她有一张 seat 座位表，平时用来储存学生名字和与他们相对应的座位 id。"></a>小美是一所中学的信息科技老师，她有一张 seat 座位表，平时用来储存学生名字和与他们相对应的座位 id。</h3><ul>
 <li>其中纵列的id是连续递增的,小美想改变相邻俩学生的座位。你能不能帮她写一个 SQL query 来输出小美想要的结果呢？</li>
 </ul>
-<h3 id="请创建如下所示seat表："><a href="#请创建如下所示seat表：" class="headerlink" title="请创建如下所示seat表："></a>请创建如下所示seat表：</h3><p><img src="/2022/10/25/Sql-exercise/4.png" alt="4"></p>
+<h3 id="请创建如下所示seat表："><a href="#请创建如下所示seat表：" class="headerlink" title="请创建如下所示seat表："></a>请创建如下所示seat表：</h3><p><img src="Sql-exercise/4.png" alt="4"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">drop table shop.seat;</span><br><span class="line">create table shop.seat(</span><br><span class="line">id int ,student varchar(50)</span><br><span class="line">);</span><br><span class="line">insert into shop.seat values(1,&#39;Abbot&#39;),(2,&#39;Doris&#39;),(3,&#39;Emerson&#39;),(4,&#39;Green&#39;),(5,&#39;Jeames&#39;);</span><br><span class="line">select * from shop.seat;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>注意： 如果学生人数是奇数，则不需要改变最后一个同学的座位</li>
 </ul>
-<h3 id="假如数据输入的是上表，则输出结果如下："><a href="#假如数据输入的是上表，则输出结果如下：" class="headerlink" title="假如数据输入的是上表，则输出结果如下："></a>假如数据输入的是上表，则输出结果如下：</h3><p><img src="/2022/10/25/Sql-exercise/5.png" alt="5"></p>
+<h3 id="假如数据输入的是上表，则输出结果如下："><a href="#假如数据输入的是上表，则输出结果如下：" class="headerlink" title="假如数据输入的是上表，则输出结果如下："></a>假如数据输入的是上表，则输出结果如下：</h3><p><img src="Sql-exercise/5.png" alt="5"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">select id-1 id,student </span><br><span class="line">from shop.seat </span><br><span class="line">where id % 2 &#x3D; 0</span><br><span class="line">union all </span><br><span class="line">select id+1 id ,student </span><br><span class="line">from shop.seat </span><br><span class="line">where id % 2 !&#x3D; 0 and id &lt; (select count(1) from shop.seat)</span><br><span class="line">union all </span><br><span class="line">select id ,student </span><br><span class="line">from shop.seat </span><br><span class="line">where id &#x3D; (select count(1) from shop.seat)</span><br><span class="line">and id % 2 !&#x3D; 0;</span><br></pre></td></tr></table></figure>
 
-<h2 id="练习三-分数排名（难度：中等）"><a href="#练习三-分数排名（难度：中等）" class="headerlink" title="练习三: 分数排名（难度：中等）"></a>练习三: 分数排名（难度：中等）</h2><h3 id="假设在某次期末考试中，二年级四个班的平均成绩分别是-93、93、93、91"><a href="#假设在某次期末考试中，二年级四个班的平均成绩分别是-93、93、93、91" class="headerlink" title="假设在某次期末考试中，二年级四个班的平均成绩分别是 93、93、93、91"></a>假设在某次期末考试中，二年级四个班的平均成绩分别是 93、93、93、91</h3><p><img src="/2022/10/25/Sql-exercise/6.png" alt="6"></p>
+<h2 id="练习三-分数排名（难度：中等）"><a href="#练习三-分数排名（难度：中等）" class="headerlink" title="练习三: 分数排名（难度：中等）"></a>练习三: 分数排名（难度：中等）</h2><h3 id="假设在某次期末考试中，二年级四个班的平均成绩分别是-93、93、93、91"><a href="#假设在某次期末考试中，二年级四个班的平均成绩分别是-93、93、93、91" class="headerlink" title="假设在某次期末考试中，二年级四个班的平均成绩分别是 93、93、93、91"></a>假设在某次期末考试中，二年级四个班的平均成绩分别是 93、93、93、91</h3><p><img src="Sql-exercise/6.png" alt="6"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table shop.class(</span><br><span class="line">id int,score_avg int</span><br><span class="line">);</span><br><span class="line">insert into shop.class values(1,93),(2,93),(3,93),(4,91);</span><br><span class="line">select * from shop.class;</span><br></pre></td></tr></table></figure>
 
-<h3 id="目前有如下三种排序结果，请根据查询结果书写出查询用-sql"><a href="#目前有如下三种排序结果，请根据查询结果书写出查询用-sql" class="headerlink" title="目前有如下三种排序结果，请根据查询结果书写出查询用 sql"></a>目前有如下三种排序结果，请根据查询结果书写出查询用 sql</h3><p><img src="/2022/10/25/Sql-exercise/7.png" alt="7"></p>
+<h3 id="目前有如下三种排序结果，请根据查询结果书写出查询用-sql"><a href="#目前有如下三种排序结果，请根据查询结果书写出查询用-sql" class="headerlink" title="目前有如下三种排序结果，请根据查询结果书写出查询用 sql"></a>目前有如下三种排序结果，请根据查询结果书写出查询用 sql</h3><p><img src="Sql-exercise/7.png" alt="7"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">select id class,score_avg</span><br><span class="line">,rank()over(order by score_avg desc)rank1</span><br><span class="line">,dense_rank()over(order by score_avg desc)rank2</span><br><span class="line">,row_number()over(order by id,score_avg desc)rank3</span><br><span class="line">from shop.class</span><br><span class="line">order by id,rank1,rank2,rank3;</span><br></pre></td></tr></table></figure>
 
       
@@ -614,7 +614,7 @@ step 0: train loss 8.3752, val loss 8.3753
 
 <h3 id="3、构建模型"><a href="#3、构建模型" class="headerlink" title="3、构建模型"></a>3、构建模型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line">def cv_model(clf, train_x, train_y, test_x, clf_name):</span><br><span class="line">    folds &#x3D; 5</span><br><span class="line">    seed &#x3D; 2022</span><br><span class="line">    kf &#x3D; KFold(n_splits&#x3D;folds, shuffle&#x3D;True, random_state&#x3D;seed)</span><br><span class="line"></span><br><span class="line">    train &#x3D; np.zeros(train_x.shape[0])</span><br><span class="line">    test &#x3D; np.zeros(test_x.shape[0])</span><br><span class="line"></span><br><span class="line">    cv_scores &#x3D; []</span><br><span class="line"></span><br><span class="line">    for i, (train_index, valid_index) in enumerate(kf.split(train_x, train_y)):</span><br><span class="line">        print(&#39;************************************ &#123;&#125; ************************************&#39;.format(str(i+1)))</span><br><span class="line">        trn_x, trn_y, val_x, val_y &#x3D; train_x.iloc[train_index], train_y[train_index], train_x.iloc[valid_index], train_y[valid_index]</span><br><span class="line"></span><br><span class="line">        if clf_name &#x3D;&#x3D; &quot;lgb&quot;:</span><br><span class="line">            train_matrix &#x3D; clf.Dataset(trn_x, label&#x3D;trn_y)</span><br><span class="line">            valid_matrix &#x3D; clf.Dataset(val_x, label&#x3D;val_y)</span><br><span class="line"></span><br><span class="line">            params &#x3D; &#123;</span><br><span class="line">                &#39;boosting_type&#39;: &#39;gbdt&#39;,</span><br><span class="line">                &#39;objective&#39;: &#39;binary&#39;,</span><br><span class="line">                &#39;metric&#39;: &#39;auc&#39;,</span><br><span class="line">                &#39;min_child_weight&#39;: 5,</span><br><span class="line">                &#39;num_leaves&#39;: 2 ** 5,</span><br><span class="line">                &#39;lambda_l2&#39;: 10,</span><br><span class="line">                &#39;feature_fraction&#39;: 0.7,</span><br><span class="line">                &#39;bagging_fraction&#39;: 0.7,</span><br><span class="line">                &#39;bagging_freq&#39;: 10,</span><br><span class="line">                &#39;learning_rate&#39;: 0.2,</span><br><span class="line">                &#39;seed&#39;: 2022,</span><br><span class="line">                &#39;n_jobs&#39;:-1</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            model &#x3D; clf.train(params, train_matrix, 50000, valid_sets&#x3D;[train_matrix, valid_matrix], </span><br><span class="line">                              categorical_feature&#x3D;[], verbose_eval&#x3D;3000, early_stopping_rounds&#x3D;200)</span><br><span class="line">            val_pred &#x3D; model.predict(val_x, num_iteration&#x3D;model.best_iteration)</span><br><span class="line">            test_pred &#x3D; model.predict(test_x, num_iteration&#x3D;model.best_iteration)</span><br><span class="line">            </span><br><span class="line">            print(list(sorted(zip(features, model.feature_importance(&quot;gain&quot;)), key&#x3D;lambda x: x[1], reverse&#x3D;True))[:20])</span><br><span class="line">                </span><br><span class="line">        if clf_name &#x3D;&#x3D; &quot;xgb&quot;:</span><br><span class="line">            train_matrix &#x3D; clf.DMatrix(trn_x , label&#x3D;trn_y)</span><br><span class="line">            valid_matrix &#x3D; clf.DMatrix(val_x , label&#x3D;val_y)</span><br><span class="line">            test_matrix &#x3D; clf.DMatrix(test_x)</span><br><span class="line">            </span><br><span class="line">            params &#x3D; &#123;&#39;booster&#39;: &#39;gbtree&#39;,</span><br><span class="line">                      &#39;objective&#39;: &#39;binary:logistic&#39;,</span><br><span class="line">                      &#39;eval_metric&#39;: &#39;auc&#39;,</span><br><span class="line">                      &#39;gamma&#39;: 1,</span><br><span class="line">                      &#39;min_child_weight&#39;: 1.5,</span><br><span class="line">                      &#39;max_depth&#39;: 5,</span><br><span class="line">                      &#39;lambda&#39;: 10,</span><br><span class="line">                      &#39;subsample&#39;: 0.7,</span><br><span class="line">                      &#39;colsample_bytree&#39;: 0.7,</span><br><span class="line">                      &#39;colsample_bylevel&#39;: 0.7,</span><br><span class="line">                      &#39;eta&#39;: 0.2,</span><br><span class="line">                      &#39;tree_method&#39;: &#39;exact&#39;,</span><br><span class="line">                      &#39;seed&#39;: 2020,</span><br><span class="line">                      &#39;nthread&#39;: 36,</span><br><span class="line">                      &quot;silent&quot;: True,</span><br><span class="line">                      &#125;</span><br><span class="line">            </span><br><span class="line">            watchlist &#x3D; [(train_matrix, &#39;train&#39;),(valid_matrix, &#39;eval&#39;)]</span><br><span class="line">            </span><br><span class="line">            model &#x3D; clf.train(params, train_matrix, num_boost_round&#x3D;50000, evals&#x3D;watchlist, verbose_eval&#x3D;3000, early_stopping_rounds&#x3D;200)</span><br><span class="line">            val_pred  &#x3D; model.predict(valid_matrix, ntree_limit&#x3D;model.best_ntree_limit)</span><br><span class="line">            test_pred &#x3D; model.predict(test_matrix , ntree_limit&#x3D;model.best_ntree_limit)</span><br><span class="line">                 </span><br><span class="line">        if clf_name &#x3D;&#x3D; &quot;cat&quot;:</span><br><span class="line">            params &#x3D; &#123;&#39;learning_rate&#39;: 0.2, &#39;depth&#39;: 5, &#39;l2_leaf_reg&#39;: 10, &#39;bootstrap_type&#39;: &#39;Bernoulli&#39;,</span><br><span class="line">                      &#39;od_type&#39;: &#39;Iter&#39;, &#39;od_wait&#39;: 50, &#39;random_seed&#39;: 11, &#39;allow_writing_files&#39;: False&#125;</span><br><span class="line">            </span><br><span class="line">            model &#x3D; clf(iterations&#x3D;20000, **params)</span><br><span class="line">            model.fit(trn_x, trn_y, eval_set&#x3D;(val_x, val_y),</span><br><span class="line">                      cat_features&#x3D;[], use_best_model&#x3D;True, verbose&#x3D;3000)</span><br><span class="line">            </span><br><span class="line">            val_pred  &#x3D; model.predict(val_x)</span><br><span class="line">            test_pred &#x3D; model.predict(test_x)</span><br><span class="line">            </span><br><span class="line">        train[valid_index] &#x3D; val_pred</span><br><span class="line">        test &#x3D; test_pred &#x2F; kf.n_splits</span><br><span class="line">        cv_scores.append(roc_auc_score(val_y, val_pred))</span><br><span class="line">        </span><br><span class="line">        print(cv_scores)</span><br><span class="line">       </span><br><span class="line">    print(&quot;%s_scotrainre_list:&quot; % clf_name, cv_scores)</span><br><span class="line">    print(&quot;%s_score_mean:&quot; % clf_name, np.mean(cv_scores))</span><br><span class="line">    print(&quot;%s_score_std:&quot; % clf_name, np.std(cv_scores))</span><br><span class="line">    return train, test</span><br><span class="line">    </span><br><span class="line">def lgb_model(x_train, y_train, x_test):</span><br><span class="line">    lgb_train, lgb_test &#x3D; cv_model(lgb, x_train, y_train, x_test, &quot;lgb&quot;)</span><br><span class="line">    return lgb_train, lgb_test</span><br><span class="line"></span><br><span class="line">def xgb_model(x_train, y_train, x_test):</span><br><span class="line">    xgb_train, xgb_test &#x3D; cv_model(xgb, x_train, y_train, x_test, &quot;xgb&quot;)</span><br><span class="line">    return xgb_train, xgb_test</span><br><span class="line"></span><br><span class="line">def cat_model(x_train, y_train, x_test):</span><br><span class="line">    cat_train, cat_test &#x3D; cv_model(CatBoostRegressor, x_train, y_train, x_test, &quot;cat&quot;) </span><br><span class="line">    return cat_train, cat_test</span><br><span class="line">lgb_train, lgb_test &#x3D; lgb_model(x_train, y_train, x_test)</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2022/06/16/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E8%B5%9B%E4%BA%8B%E5%85%A5%E9%97%A8/result.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98%E8%B5%9B%E4%BA%8B%E5%85%A5%E9%97%A8/result.png" alt=""></p>
 
       
 
@@ -1396,13 +1396,13 @@ step 0: train loss 8.3752, val loss 8.3753
       
         <h2 id="一、特征工程"><a href="#一、特征工程" class="headerlink" title="一、特征工程"></a>一、特征工程</h2><h4 id="1、加载数据"><a href="#1、加载数据" class="headerlink" title="1、加载数据"></a>1、加载数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">train &#x3D; pd.read_csv(&#39;train.csv&#39;)</span><br><span class="line">train.info()</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/22/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E5%92%8C%E8%AF%84%E4%BC%B0/1.png" alt></p>
+<p><img src="/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E8%AF%84%E4%BC%B0/1.png" alt=""></p>
 <h4 id="2、缺失值填充"><a href="#2、缺失值填充" class="headerlink" title="2、缺失值填充"></a>2、缺失值填充</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 对分类变量进行填充</span><br><span class="line">train[&#39;Cabin&#39;] &#x3D; train[&#39;Cabin&#39;].fillna(&#39;NA&#39;)</span><br><span class="line">train[&#39;Embarked&#39;] &#x3D; train[&#39;Embarked&#39;].fillna(&#39;S&#39;)</span><br><span class="line"># 对连续变量进行填充</span><br><span class="line">train[&#39;Age&#39;] &#x3D; train[&#39;Age&#39;].fillna(train[&#39;Age&#39;].mean())</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/22/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E5%92%8C%E8%AF%84%E4%BC%B0/2.png" alt></p>
+<p><img src="/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E8%AF%84%E4%BC%B0/2.png" alt=""></p>
 <h4 id="3、编码分类变量"><a href="#3、编码分类变量" class="headerlink" title="3、编码分类变量"></a>3、编码分类变量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 取出所有的输入特征</span><br><span class="line">data &#x3D; train[[&#39;Pclass&#39;,&#39;Sex&#39;,&#39;Age&#39;,&#39;SibSp&#39;,&#39;Parch&#39;,&#39;Fare&#39;, &#39;Embarked&#39;]]</span><br><span class="line"># 进行虚拟变量转换</span><br><span class="line">data &#x3D; pd.get_dummies(data)</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/22/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E5%92%8C%E8%AF%84%E4%BC%B0/3.png" alt></p>
+<p><img src="/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E8%AF%84%E4%BC%B0/3.png" alt=""></p>
 <h2 id="二、建立模型"><a href="#二、建立模型" class="headerlink" title="二、建立模型"></a>二、建立模型</h2><h4 id="1、切割训练集与测试集"><a href="#1、切割训练集与测试集" class="headerlink" title="1、切割训练集与测试集"></a>1、切割训练集与测试集</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from sklearn.model_selection import train_test_split</span><br><span class="line"># 一般先取出X和y后再切割，有些情况会使用到未切割的，这时候X和y就可以用</span><br><span class="line">X &#x3D; data</span><br><span class="line">y &#x3D; train[&#39;Survived&#39;]</span><br><span class="line"># 对数据集进行切割</span><br><span class="line">X_train, X_test, y_train, y_test &#x3D; train_test_split(X, y, stratify&#x3D;y, random_state&#x3D;0)</span><br></pre></td></tr></table></figure>
 
 <h4 id="2、建立模型"><a href="#2、建立模型" class="headerlink" title="2、建立模型"></a>2、建立模型</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 导包</span><br><span class="line">from sklearn.linear_model import LogisticRegression</span><br><span class="line">from sklearn.ensemble import RandomForestClassifier</span><br></pre></td></tr></table></figure>
@@ -1412,51 +1412,51 @@ step 0: train loss 8.3752, val loss 8.3753
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lr &#x3D; LogisticRegression()</span><br><span class="line">lr.fit(X_train, y_train)</span><br><span class="line"># 查看训练集和测试集score值</span><br><span class="line">print(&quot;Training set score: &#123;:.2f&#125;&quot;.format(lr.score(X_train, y_train)))</span><br><span class="line">print(&quot;Testing set score: &#123;:.2f&#125;&quot;.format(lr.score(X_test, y_test)))</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/22/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E5%92%8C%E8%AF%84%E4%BC%B0/4.png" alt></p>
+<p><img src="/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E8%AF%84%E4%BC%B0/4.png" alt=""></p>
 <ul>
 <li>调整参数后的逻辑回归模型</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lr2 &#x3D; LogisticRegression(C&#x3D;100)</span><br><span class="line">lr2.fit(X_train, y_train)</span><br><span class="line">print(&quot;Training set score: &#123;:.2f&#125;&quot;.format(lr2.score(X_train, y_train)))</span><br><span class="line">print(&quot;Testing set score: &#123;:.2f&#125;&quot;.format(lr2.score(X_test, y_test)))</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/22/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E5%92%8C%E8%AF%84%E4%BC%B0/5.png" alt></p>
+<p><img src="/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E8%AF%84%E4%BC%B0/5.png" alt=""></p>
 <ul>
 <li>默认参数的随机森林分类模型</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rfc &#x3D; RandomForestClassifier()</span><br><span class="line">rfc.fit(X_train, y_train)</span><br><span class="line">print(&quot;Training set score: &#123;:.2f&#125;&quot;.format(rfc.score(X_train, y_train)))</span><br><span class="line">print(&quot;Testing set score: &#123;:.2f&#125;&quot;.format(rfc.score(X_test, y_test)))</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/22/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E5%92%8C%E8%AF%84%E4%BC%B0/6.png" alt></p>
+<p><img src="/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E8%AF%84%E4%BC%B0/6.png" alt=""></p>
 <ul>
 <li>调整参数后的随机森林分类模型</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rfc2 &#x3D; RandomForestClassifier(n_estimators&#x3D;100, max_depth&#x3D;5)</span><br><span class="line">rfc2.fit(X_train, y_train)</span><br><span class="line">print(&quot;Training set score: &#123;:.2f&#125;&quot;.format(rfc2.score(X_train, y_train)))</span><br><span class="line">print(&quot;Testing set score: &#123;:.2f&#125;&quot;.format(rfc2.score(X_test, y_test)))</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/22/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E5%92%8C%E8%AF%84%E4%BC%B0/7.png" alt></p>
+<p><img src="/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E8%AF%84%E4%BC%B0/7.png" alt=""></p>
 <h4 id="3、输出模型预测结果"><a href="#3、输出模型预测结果" class="headerlink" title="3、输出模型预测结果"></a>3、输出模型预测结果</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 预测标签</span><br><span class="line">pred &#x3D; lr.predict(X_train)</span><br><span class="line">pred</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/22/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E5%92%8C%E8%AF%84%E4%BC%B0/8.png" alt></p>
+<p><img src="/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E8%AF%84%E4%BC%B0/8.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 预测标签概率</span><br><span class="line">pred_proba &#x3D; lr.predict_proba(X_train)</span><br><span class="line">pred_proba</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/22/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E5%92%8C%E8%AF%84%E4%BC%B0/9.png" alt></p>
-<h2 id="三、模型评估"><a href="#三、模型评估" class="headerlink" title="三、模型评估"></a>三、模型评估</h2><h4 id="1、交叉验证"><a href="#1、交叉验证" class="headerlink" title="1、交叉验证"></a>1、交叉验证</h4><p><img src="/2021/07/22/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E5%92%8C%E8%AF%84%E4%BC%B0/%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81.png" alt></p>
+<p><img src="/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E8%AF%84%E4%BC%B0/9.png" alt=""></p>
+<h2 id="三、模型评估"><a href="#三、模型评估" class="headerlink" title="三、模型评估"></a>三、模型评估</h2><h4 id="1、交叉验证"><a href="#1、交叉验证" class="headerlink" title="1、交叉验证"></a>1、交叉验证</h4><p><img src="/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E8%AF%84%E4%BC%B0/%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">from sklearn.model_selection import cross_val_score</span><br><span class="line">lr &#x3D; LogisticRegression(C&#x3D;100)</span><br><span class="line"># k折交叉验证分数</span><br><span class="line">scores &#x3D; cross_val_score(lr, X_train, y_train, cv&#x3D;10)</span><br><span class="line">scores</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/22/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E5%92%8C%E8%AF%84%E4%BC%B0/10.png" alt></p>
+<p><img src="/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E8%AF%84%E4%BC%B0/10.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 平均交叉验证分数</span><br><span class="line">print(&quot;Average cross-validation score: &#123;:.2f&#125;&quot;.format(scores.mean()))</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/22/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E5%92%8C%E8%AF%84%E4%BC%B0/11.png" alt></p>
-<h4 id="2、混淆矩阵"><a href="#2、混淆矩阵" class="headerlink" title="2、混淆矩阵"></a>2、混淆矩阵</h4><p><img src="/2021/07/22/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E5%92%8C%E8%AF%84%E4%BC%B0/%E6%B7%B7%E6%B7%86%E7%9F%A9%E9%98%B5.png" alt></p>
-<p><img src="/2021/07/22/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E5%92%8C%E8%AF%84%E4%BC%B0/%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F.png" alt></p>
+<p><img src="/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E8%AF%84%E4%BC%B0/11.png" alt=""></p>
+<h4 id="2、混淆矩阵"><a href="#2、混淆矩阵" class="headerlink" title="2、混淆矩阵"></a>2、混淆矩阵</h4><p><img src="/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E8%AF%84%E4%BC%B0/%E6%B7%B7%E6%B7%86%E7%9F%A9%E9%98%B5.png" alt=""></p>
+<p><img src="/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E8%AF%84%E4%BC%B0/%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">from sklearn.metrics import confusion_matrix</span><br><span class="line"># 训练模型</span><br><span class="line">lr &#x3D; LogisticRegression(C&#x3D;100)</span><br><span class="line">lr.fit(X_train, y_train)</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 模型预测结果</span><br><span class="line">pred &#x3D; lr.predict(X_train)</span><br><span class="line">pred[:10]</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/22/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E5%92%8C%E8%AF%84%E4%BC%B0/12.png" alt></p>
+<p><img src="/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E8%AF%84%E4%BC%B0/12.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 混淆矩阵</span><br><span class="line">confusion_matrix(y_train, pred)</span><br><span class="line">from sklearn.metrics import classification_report</span><br><span class="line"># 精确率、召回率以及f1-score</span><br><span class="line">print(classification_report(y_train, pred))</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/22/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E5%92%8C%E8%AF%84%E4%BC%B0/13.png" alt></p>
+<p><img src="/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E8%AF%84%E4%BC%B0/13.png" alt=""></p>
 <h4 id="3、ROC曲线"><a href="#3、ROC曲线" class="headerlink" title="3、ROC曲线"></a>3、ROC曲线</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">from sklearn.metrics import roc_curve</span><br><span class="line">fpr, tpr, thresholds &#x3D; roc_curve(y_test, lr.decision_function(X_test))</span><br><span class="line">plt.plot(fpr, tpr, label&#x3D;&quot;ROC Curve&quot;)</span><br><span class="line">plt.xlabel(&quot;FPR&quot;)</span><br><span class="line">plt.ylabel(&quot;TPR (recall)&quot;)</span><br><span class="line"># 找到最接近于0的阈值</span><br><span class="line">close_zero &#x3D; np.argmin(np.abs(thresholds))</span><br><span class="line">plt.plot(fpr[close_zero], tpr[close_zero], &#39;o&#39;, markersize&#x3D;10, label&#x3D;&quot;threshold zero&quot;, fillstyle&#x3D;&quot;none&quot;, c&#x3D;&#39;k&#39;, mew&#x3D;2)</span><br><span class="line">plt.legend(loc&#x3D;4)</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/22/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E5%92%8C%E8%AF%84%E4%BC%B0/14.png" alt></p>
+<p><img src="/%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%BB%BA%E7%AB%8B%E4%B8%8E%E8%AF%84%E4%BC%B0/14.png" alt=""></p>
 
       
 
@@ -1532,16 +1532,16 @@ step 0: train loss 8.3752, val loss 8.3753
       
         <h4 id="1、可视化展示泰坦尼克号数据集中男女中生存人数分布情况（用柱状图试试）。"><a href="#1、可视化展示泰坦尼克号数据集中男女中生存人数分布情况（用柱状图试试）。" class="headerlink" title="1、可视化展示泰坦尼克号数据集中男女中生存人数分布情况（用柱状图试试）。"></a>1、可视化展示泰坦尼克号数据集中男女中生存人数分布情况（用柱状图试试）。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df1 &#x3D; df.groupby([&#39;Sex&#39;]).agg(&#123;&#39;Survived&#39;:&#39;sum&#39;&#125;).rename(columns&#x3D;&#123;&#39;Survived&#39;:&#39;Survived_count&#39;&#125;)</span><br><span class="line">df1 &#x3D; df1.reset_index() #reset_index()重新建立索引，就能变成DataFrame类型</span><br><span class="line">df1</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/19/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/1.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/1.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"># 1、准备数据</span><br><span class="line">sex &#x3D; list(df1[&#39;Sex&#39;])</span><br><span class="line">survived_count &#x3D; list(df1[&#39;Survived_count&#39;])</span><br><span class="line"></span><br><span class="line"># 2、创建画布</span><br><span class="line">plt.figure(figsize&#x3D;(20, 8), dpi&#x3D;80)</span><br><span class="line"></span><br><span class="line"># 3、绘制柱状图</span><br><span class="line">x_ticks &#x3D; range(len(survived_count))</span><br><span class="line">plt.bar(x_ticks, survived_count, color&#x3D;[&#39;b&#39;,&#39;r&#39;])</span><br><span class="line"></span><br><span class="line"># 修改x刻度</span><br><span class="line">plt.xticks(x_ticks, sex)</span><br><span class="line"></span><br><span class="line"># 添加标题</span><br><span class="line">plt.title(&quot;男女中生存人数分布&quot;)</span><br><span class="line"></span><br><span class="line"># 4、显示图像</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/19/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/2.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/2.png" alt=""></p>
 <h4 id="2、折线图的绘制"><a href="#2、折线图的绘制" class="headerlink" title="2、折线图的绘制"></a>2、折线图的绘制</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 展现上海一周的天气,比如从星期一到星期日的天气温度如下</span><br><span class="line"># 1、创建画布</span><br><span class="line">plt.figure(figsize&#x3D;(20, 8), dpi&#x3D;80)</span><br><span class="line"></span><br><span class="line"># 2、绘制图像</span><br><span class="line">plt.plot([1, 2, 3, 4, 5, 6, 7], [17, 17, 18, 15, 11, 11, 13])</span><br><span class="line"></span><br><span class="line"># 3、显示图像</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/19/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/3.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/3.png" alt=""></p>
 <h4 id="3、完善原始折线图1-辅助显示层"><a href="#3、完善原始折线图1-辅助显示层" class="headerlink" title="3、完善原始折线图1(辅助显示层)"></a>3、完善原始折线图1(辅助显示层)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># 画出某城市11点到12点1小时内每分钟的温度变化折线图，温度范围在15度~18度</span><br><span class="line">import random</span><br><span class="line"></span><br><span class="line"># 1、准备数据 x y</span><br><span class="line">x &#x3D; range(60)</span><br><span class="line">y_shanghai &#x3D; [random.uniform(15, 18) for i in x]</span><br><span class="line"></span><br><span class="line"># 2、创建画布</span><br><span class="line">plt.figure(figsize&#x3D;(20, 8), dpi&#x3D;80)</span><br><span class="line"></span><br><span class="line"># 3、绘制图像</span><br><span class="line">plt.plot(x, y_shanghai)</span><br><span class="line"></span><br><span class="line"># 修改x、y刻度</span><br><span class="line"># 准备x的刻度说明</span><br><span class="line">x_label &#x3D; [&quot;11点&#123;&#125;分&quot;.format(i) for i in x]</span><br><span class="line">plt.xticks(x[::5], x_label[::5])</span><br><span class="line">plt.yticks(range(0, 40, 5))</span><br><span class="line"></span><br><span class="line"># 添加描述信息</span><br><span class="line">plt.xlabel(&quot;时间变化&quot;)</span><br><span class="line">plt.ylabel(&quot;温度变化&quot;)</span><br><span class="line">plt.title(&quot;某城市11点到12点每分钟的温度变化状况&quot;)</span><br><span class="line"></span><br><span class="line"># 4、显示图</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/19/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/4.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/4.png" alt=""></p>
 
       
 
@@ -1617,7 +1617,7 @@ step 0: train loss 8.3752, val loss 8.3753
       
         <h2 id="一、数据清洗及特征处理"><a href="#一、数据清洗及特征处理" class="headerlink" title="一、数据清洗及特征处理"></a>一、数据清洗及特征处理</h2><h4 id="1、数据缺失值观察与空值处理"><a href="#1、数据缺失值观察与空值处理" class="headerlink" title="1、数据缺失值观察与空值处理"></a>1、数据缺失值观察与空值处理</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.info()</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/1.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/1.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 删除</span><br><span class="line">df.dropna()</span><br><span class="line"># 填充</span><br><span class="line">df.fillna()</span><br></pre></td></tr></table></figure>
 
 <p>其中Age、Cabin、Embarked都有缺失值，处理方法一般是删除缺失行和缺失值插补。简单的删除小部分样本，来实现目标预测是最有效的，但若是缺失行过大，这样会严重影响预测的准确性；缺失值的插补是人为干涉缺失值，无论采用什么方法都会改变原始数据，对预测都会造成影响，所以对缺失值的处理一定要慎重。</p>
@@ -1638,22 +1638,22 @@ step 0: train loss 8.3752, val loss 8.3753
 </ul>
 <h2 id="二、数据重构"><a href="#二、数据重构" class="headerlink" title="二、数据重构"></a>二、数据重构</h2><h4 id="1、观察数据"><a href="#1、观察数据" class="headerlink" title="1、观察数据"></a>1、观察数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df1 &#x3D; pd.read_csv(&#39;data&#x2F;train-left-down.csv&#39;)</span><br><span class="line">df1.head(3)</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/2.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/2.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df2 &#x3D; pd.read_csv(&#39;data&#x2F;train-left-up.csv&#39;)</span><br><span class="line">df2.head(3)</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/3.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/3.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df3 &#x3D; pd.read_csv(&#39;data&#x2F;train-right-down.csv&#39;)</span><br><span class="line">df3.head(3)</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/4.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/4.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df4 &#x3D; pd.read_csv(&#39;data&#x2F;train-right-up.csv&#39;)</span><br><span class="line">df4.head(3)</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/5.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/5.png" alt=""></p>
 <h4 id="2、pd-concat"><a href="#2、pd-concat" class="headerlink" title="2、pd.concat()"></a>2、pd.concat()</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.concat([df1,df2]).head()</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/6.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/6.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.concat((df1,df2),axis &#x3D; 1).head()</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/7.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/7.png" alt=""></p>
 <ul>
 <li>可知 df.concat()方法接受两个参数，</li>
 <li>第一个参数为拼接的dataframes,可为列表或元组,</li>
@@ -1661,17 +1661,17 @@ step 0: train loss 8.3752, val loss 8.3753
 </ul>
 <h4 id="3、其中实现左右拼接的其他方法"><a href="#3、其中实现左右拼接的其他方法" class="headerlink" title="3、其中实现左右拼接的其他方法"></a>3、其中实现左右拼接的其他方法</h4><h5 id="方法1：dataframe的join"><a href="#方法1：dataframe的join" class="headerlink" title="方法1：dataframe的join()"></a>方法1：dataframe的join()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 若是直接join会出现下图列索引重复报错</span><br><span class="line">df1.join(df2)</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/8.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/8.png" alt=""></p>
 <p>需要先对df2的列索引名进行修改</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df2.columns &#x3D;[&#39;PassengerId_2&#39;, &#39;Survived_2&#39;, &#39;Pclass_2&#39;, &#39;Name_2&#39;]</span><br><span class="line">df1.join(df2,how&#x3D;&#39;inner&#39;) # how 默认为内连接</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/9.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/9.png" alt=""></p>
 <h5 id="方法二：pd-merge"><a href="#方法二：pd-merge" class="headerlink" title="方法二：pd.merge()"></a>方法二：pd.merge()</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 同样直接merge()是不行的</span><br><span class="line">pd.merge(df1,df2)</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/10.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/10.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># merge会将重名的列明自动加上_x,_y加以区分</span><br><span class="line">pd.merge(df1,df2,how &#x3D; &#39;inner&#39;,left_index &#x3D; True,right_index&#x3D; True)</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/11.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/11.png" alt=""></p>
 <h4 id="pd-merge-参数详解"><a href="#pd-merge-参数详解" class="headerlink" title="pd.merge()参数详解"></a>pd.merge()参数详解</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.merge( left, right, how&#x3D;&#39;inner&#39;, on&#x3D;None, left_on&#x3D;None, right_on&#x3D;None, left_index&#x3D;False, right_index&#x3D;False, sort&#x3D;False, suffixes&#x3D;(&#39;_x&#39;, &#39;_y&#39;), copy&#x3D;True, indicator&#x3D;False, validate&#x3D;None)</span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -1688,21 +1688,21 @@ step 0: train loss 8.3752, val loss 8.3753
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pd.merge(df1,df2,how &#x3D; &#39;inner&#39;,on &#x3D; &#39;Pclass&#39;)</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/12.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/12.png" alt=""></p>
 <h4 id="4、其中实现上下拼接的其他方法"><a href="#4、其中实现上下拼接的其他方法" class="headerlink" title="4、其中实现上下拼接的其他方法"></a>4、其中实现上下拼接的其他方法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df1.append(df2)</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/13.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/13.png" alt=""></p>
 <h4 id="5、分组聚合"><a href="#5、分组聚合" class="headerlink" title="5、分组聚合"></a>5、分组聚合</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 分组</span><br><span class="line">df1 &#x3D; df.groupby(&#39;Sex&#39;)</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 聚合计算泰坦尼克号男性与女性的平均票价</span><br><span class="line">df1[&#39;Fare&#39;].mean()</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/14.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/14.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 聚合统计泰坦尼克号中男女的存活人数</span><br><span class="line">df1[&#39;Survived&#39;].sum()</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/15.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/15.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Sex分组同时统计平均票价和存活人数,</span><br><span class="line">df.groupby(&#39;Sex&#39;).agg(&#123;&#39;Fare&#39;:&#39;mean&#39;,&#39;Survived&#39;:&#39;sum&#39;&#125;).rename(columns &#x3D; &#123;&#39;Fare&#39;:&#39;Fare.mean&#39;,&#39;Survived&#39;:&#39;Survived.count&#39;&#125;)</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/16.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/16.png" alt=""></p>
 <ul>
 <li>找出不同年龄的存活人数</li>
 <li>然后找出存活人数的最高的年龄</li>
@@ -1710,13 +1710,13 @@ step 0: train loss 8.3752, val loss 8.3753
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 1</span><br><span class="line">df2 &#x3D; df.groupby(&#39;Age&#39;).agg(&#123;&#39;Survived&#39;:&#39;sum&#39;&#125;).rename(columns&#x3D;&#123;&#39;Survived&#39;:&#39;num&#39;&#125;)</span><br><span class="line">df2.head()</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/17.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/17.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 2</span><br><span class="line">max_age&#x3D;df2[df2[&#39;num&#39;]&#x3D;&#x3D;df2[&#39;num&#39;].max()]</span><br><span class="line">max_age</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/18.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/18.png" alt=""></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 3</span><br><span class="line">int(max_age[&#39;num&#39;])&#x2F;df[&#39;Survived&#39;].sum()</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2021/07/15/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/19.png" alt></p>
+<p><img src="/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E3%80%81%E6%95%B0%E6%8D%AE%E9%87%8D%E6%9E%84/19.png" alt=""></p>
 
       
 
@@ -1794,7 +1794,7 @@ step 0: train loss 8.3752, val loss 8.3753
 
 <h4 id="2、安装jupyter及pandas"><a href="#2、安装jupyter及pandas" class="headerlink" title="2、安装jupyter及pandas"></a>2、安装jupyter及pandas</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda activate data_analysis</span><br><span class="line">conda install jupyter notebook</span><br><span class="line">conda install pandas</span><br></pre></td></tr></table></figure>
 
-<h4 id="3、导入数据集"><a href="#3、导入数据集" class="headerlink" title="3、导入数据集"></a>3、导入数据集</h4><p><img src="/2021/07/13/%E5%88%9D%E6%AD%A5%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E9%9B%86.png" alt></p>
+<h4 id="3、导入数据集"><a href="#3、导入数据集" class="headerlink" title="3、导入数据集"></a>3、导入数据集</h4><p><img src="%E5%88%9D%E6%AD%A5%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E9%9B%86.png" alt=""></p>
 <h4 id="4、载入数据"><a href="#4、载入数据" class="headerlink" title="4、载入数据"></a>4、载入数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import pandas as pd</span><br><span class="line"># 使用相对路径载入数据</span><br><span class="line">df1 &#x3D; pd.read_csv(&#39;dataset&#x2F;train.csv&#39;)</span><br><span class="line">df1.head()</span><br><span class="line"># 使用绝对路径载入数据</span><br><span class="line">df2 &#x3D; pd.read_csv(&#39;&#x2F;home&#x2F;ulquiola&#x2F;WorkSpace&#x2F;data_analysis&#x2F;hands-on-data-analysis&#x2F;dataset&#x2F;train.csv&#39;)</span><br><span class="line">df2.head()</span><br></pre></td></tr></table></figure>
 
 <h4 id="5、逐块读取"><a href="#5、逐块读取" class="headerlink" title="5、逐块读取"></a>5、逐块读取</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chunker &#x3D; pd.read_csv(&#39;dataset&#x2F;train.csv&#39;, chunksize&#x3D;1000)</span><br><span class="line">for i in chunker:</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
@@ -2116,7 +2116,7 @@ step 0: train loss 8.3752, val loss 8.3753
 <p>查询语句：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select ... from tableA</span><br><span class="line">??? join tableB </span><br><span class="line">on tableA.column1 &#x3D; tableB.column2;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2020/05/03/Sql%E5%9F%BA%E7%A1%80/join.png" alt="Join区别"></p>
+<p><img src="Sql%E5%9F%BA%E7%A1%80/join.png" alt="Join区别"></p>
 <h1 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h1><h2 id="Insert"><a href="#Insert" class="headerlink" title="Insert"></a>Insert</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insert to &lt;表名&gt;</span><br><span class="line">values(值1，值2...);</span><br></pre></td></tr></table></figure>
 
 <h3 id="示例-3"><a href="#示例-3" class="headerlink" title="示例"></a>示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insert to table1</span><br><span class="line">values(4,&#39;吴六&#39;);</span><br></pre></td></tr></table></figure>
@@ -2299,19 +2299,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Git 操作</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Python 基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">Git 操作</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Numpy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Python 基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2339,15 +2339,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据分析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据挖掘</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">自我介绍</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">大数据分析</a>
               </li>
             
             <div class="clearfix"></div>

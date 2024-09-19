@@ -172,83 +172,83 @@
 <li>jupyter环境</li>
 </ul>
 <h2 id="1-数据的读取"><a href="#1-数据的读取" class="headerlink" title="1. 数据的读取"></a>1. 数据的读取</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import pandas as pd</span><br><span class="line">data &#x3D; pd.read_csv(&#39;los_census.csv&#39;)</span><br><span class="line">data</span><br></pre></td></tr></table></figure>
-<p><img src="/2019/11/12/pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/1.png" alt>  </p>
+<p><img src="pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/1.png" alt="">  </p>
 <ul>
 <li><p>选择第几行作为列索引名称  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data &#x3D; pd.read_csv(&#39;los_census.csv&#39;,header &#x3D;1)</span><br><span class="line">data</span><br></pre></td></tr></table></figure>
-<p><img src="/2019/11/12/pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/2.png" alt> </p>
+<p><img src="pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/2.png" alt=""> </p>
 </li>
 <li><p>自定义列索引名称</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data &#x3D; pd.read_csv(&#39;los_census.csv&#39;,names&#x3D;[&#39;A&#39;,&#39;B&#39;,&quot;C&quot;,&#39;D&#39;,&#39;E&#39;, &#39;F&#39;, &#39;G&#39;])</span><br><span class="line">data</span><br></pre></td></tr></table></figure>
-<p><img src="/2019/11/12/pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/3.png" alt> </p>
+<p><img src="pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/3.png" alt=""> </p>
 </li>
 </ul>
 <h2 id="2-数据的存储"><a href="#2-数据的存储" class="headerlink" title="2. 数据的存储"></a>2. 数据的存储</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data &#x3D; pd.read_csv(&#39;los_census.csv&#39;)</span><br><span class="line">data.to_json(&#39;1.json&#39;)</span><br></pre></td></tr></table></figure>
 
-<h2 id="3-head-amp-tail"><a href="#3-head-amp-tail" class="headerlink" title="3.head &amp; tail"></a>3.head &amp; tail</h2><p><img src="/2019/11/12/pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/4.png" alt></p>
-<p><img src="/2019/11/12/pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/5.png" alt></p>
+<h2 id="3-head-amp-tail"><a href="#3-head-amp-tail" class="headerlink" title="3.head &amp; tail"></a>3.head &amp; tail</h2><p><img src="pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/4.png" alt=""></p>
+<p><img src="pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/5.png" alt=""></p>
 <h2 id="4-统计方法"><a href="#4-统计方法" class="headerlink" title="4.统计方法"></a>4.统计方法</h2><ul>
 <li>describe() 相当于对数据集进行概览，会输出该数据集的计数、最大值、最小值等  </li>
 </ul>
-<p><img src="/2019/11/12/pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/6.png" alt></p>
+<p><img src="pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/6.png" alt=""></p>
 <ul>
 <li>idxmin() 和 idxmax() 会计算最小、最大值对应的索引标签。</li>
 </ul>
-<p><img src="/2019/11/12/pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/7.png" alt></p>
+<p><img src="pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/7.png" alt=""></p>
 <ul>
 <li>count() 用于统计非空数据的数量。</li>
 </ul>
-<p><img src="/2019/11/12/pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/8.png" alt></p>
+<p><img src="pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/8.png" alt=""></p>
 <ul>
 <li>value_counts() 仅仅针对 Series，它会计算每一个值对应的数量统计。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import pandas as pd</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line">s &#x3D; pd.Series(np.random.randint(0, 9, size&#x3D;100)) # 生成一个 Series，并在 0-9 之间生成 100 个随机值。</span><br><span class="line">s.value_counts()</span><br></pre></td></tr></table></figure>
 
 </li>
 </ul>
-<p><img src="/2019/11/12/pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/9.png" alt></p>
+<p><img src="pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/9.png" alt=""></p>
 <h2 id="5-计算方法"><a href="#5-计算方法" class="headerlink" title="5.计算方法"></a>5.计算方法</h2><ul>
 <li>sum() 用于计算数值数据的总和  </li>
 </ul>
-<p><img src="/2019/11/12/pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/10.png" alt></p>
+<p><img src="pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/10.png" alt=""></p>
 <ul>
 <li>mean() 用于计算数值数据的平均值。  </li>
 </ul>
-<p><img src="/2019/11/12/pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/11.png" alt></p>
+<p><img src="pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/11.png" alt=""></p>
 <ul>
 <li>median() 用于计算数值数据的算术中值。  </li>
 </ul>
-<p><img src="/2019/11/12/pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/12.png" alt></p>
+<p><img src="pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/12.png" alt=""></p>
 <h2 id="6-标签对齐"><a href="#6-标签对齐" class="headerlink" title="6.标签对齐"></a>6.标签对齐</h2><ul>
 <li><p>索引标签是 Pandas 中非常重要的特性，有些时候，由于数据的缺失等各种因素导致标签错位的现象，或者想匹配新的标签。于是 Pandas 提供了索引标签对齐的方法 reindex()。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s &#x3D; pd.Series(data&#x3D;[1, 2, 3, 4, 5], index&#x3D;[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;])</span><br><span class="line">s</span><br></pre></td></tr></table></figure>
-<p><img src="/2019/11/12/pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/13.png" alt></p>
+<p><img src="pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/13.png" alt=""></p>
 </li>
 <li><p>reindex() 主要有三个作用：</p>
 <p>  1.重新排序现有数据以匹配新的一组标签。<br>  2.在没有标签对应数据的位置插入缺失值（NaN）标记。<br>  3.特殊情形下，使用逻辑填充缺少标签的数据（与时间序列数据高度相关）。</p>
 </li>
 </ul>
-<p><img src="/2019/11/12/pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/14.png" alt></p>
+<p><img src="pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/14.png" alt=""></p>
 <h2 id="7-排序"><a href="#7-排序" class="headerlink" title="7.排序"></a>7.排序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df &#x3D; pd.DataFrame(data&#x3D;&#123;&#39;one&#39;: [1, 2, 3], &#39;two&#39;: [4, 5, 6], &#39;three&#39;: [7, 8, 9], &#39;four&#39;: [10, 11, 12]&#125;, index&#x3D;[&#39;a&#39;, &#39;c&#39;, &#39;b&#39;])</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
-<p><img src="/2019/11/12/pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/15.png" alt></p>
+<p><img src="pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/15.png" alt=""></p>
 <ul>
 <li>按索引排序</li>
 </ul>
-<p><img src="/2019/11/12/pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/16.png" alt></p>
+<p><img src="pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/16.png" alt=""></p>
 <ul>
 <li>添加参数，进行倒序排列</li>
 </ul>
-<p><img src="/2019/11/12/pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/17.png" alt></p>
+<p><img src="pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/17.png" alt=""></p>
 <ul>
 <li><p>按数值排序,其方法为Series.sort_values()或者是DataFrame.sort_values()</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df &#x3D; pd.DataFrame(data&#x3D;&#123;&#39;one&#39;: [1, 2, 3, 7], &#39;two&#39;: [4, 5, 6, 9], &#39;three&#39;: [7, 8, 9, 2], &#39;four&#39;: [10, 11, 12, 5]&#125;, index&#x3D;[&#39;a&#39;, &#39;c&#39;, &#39;b&#39;,&#39;d&#39;])</span><br><span class="line">df</span><br></pre></td></tr></table></figure>
-<p><img src="/2019/11/12/pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/18.png" alt></p>
+<p><img src="pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/18.png" alt=""></p>
 </li>
 <li><p>第三列按照从小到大排序：</p>
 </li>
 </ul>
-<p><img src="/2019/11/12/pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/19.png" alt></p>
+<p><img src="pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/19.png" alt=""></p>
 <ul>
 <li>也可以同时按照两列：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df[[&#39;one&#39;, &#39;two&#39;, &#39;three&#39;, &#39;four&#39;]].sort_values(by&#x3D;[&#39;one&#39;,&#39;two&#39;])</span><br></pre></td></tr></table></figure>
-<img src="/2019/11/12/pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/20.png" alt></li>
+<img src="pandas%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/20.png" alt=""></li>
 </ul>
 
       
@@ -399,15 +399,15 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><h2 id="1-四台服务器，centos7-配置：1G内存，20G硬盘"><a href="#1-四台服务器，centos7-配置：1G内存，20G硬盘" class="headerlink" title="1.四台服务器，centos7 配置：1G内存，20G硬盘"></a>1.四台服务器，centos7 配置：1G内存，20G硬盘</h2><h2 id="2-服务器ip-192-168-220-91-92-93-94"><a href="#2-服务器ip-192-168-220-91-92-93-94" class="headerlink" title="2.服务器ip  192.168.220.91/92/93/94"></a>2.服务器ip  192.168.220.91/92/93/94</h2><ul>
-<li><p>虚拟机-&gt;编辑-&gt;虚拟网络编辑器<br><img src="/2019/10/30/hadoop%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/bianji.png" alt>  </p>
+<li><p>虚拟机-&gt;编辑-&gt;虚拟网络编辑器<br><img src="hadoop%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/bianji.png" alt="">  </p>
 </li>
-<li><p>NAT设置<br><img src="/2019/10/30/hadoop%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/nat.png" alt>  </p>
+<li><p>NAT设置<br><img src="hadoop%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/nat.png" alt="">  </p>
 </li>
 <li><p>服务器静态ip设置（四台都要配置ip变一下）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$vi &#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcfg-ens33</span><br><span class="line"></span><br><span class="line">TYPE&#x3D;Ethernet</span><br><span class="line">PROXY_METHOD&#x3D;none</span><br><span class="line">BROWSER_ONLY&#x3D;no</span><br><span class="line">BOOTPROTO&#x3D;static</span><br><span class="line">DEFROUTE&#x3D;yes</span><br><span class="line">IPV4_FAILURE_FATAL&#x3D;no</span><br><span class="line">IPV6INIT&#x3D;yes</span><br><span class="line">IPV6_AUTOCONF&#x3D;yes</span><br><span class="line">IPV6_DEFROUTE&#x3D;yes</span><br><span class="line">IPV6_FAILURE_FATAL&#x3D;no</span><br><span class="line">IPV6_ADDR_GEN_MODE&#x3D;stable-privacy</span><br><span class="line">NAME&#x3D;ens33</span><br><span class="line">UUID&#x3D;4248d227-dfd6-4577-8b7a-4aec32bfc14b</span><br><span class="line">DEVICE&#x3D;ens33</span><br><span class="line">ONBOOT&#x3D;yes</span><br><span class="line"></span><br><span class="line">GATEWAY&#x3D;192.168.220.2</span><br><span class="line">IPADDR&#x3D;192.168.220.91</span><br><span class="line">NETMASK&#x3D;255.255.255.0</span><br><span class="line">DNS1&#x3D;202.102.224.68</span><br><span class="line">DNS2&#x3D;114.114.114.114</span><br></pre></td></tr></table></figure></li>
-<li><p>本机电脑设置<br><img src="/2019/10/30/hadoop%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/shipeiqi.png" alt></p>
+<li><p>本机电脑设置<br><img src="hadoop%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/shipeiqi.png" alt=""></p>
 </li>
-<li><p>可能会有主机ping不通服务器，服务器ping得通主机的情况出现，所以配置本机适配器<br><img src="/2019/10/30/hadoop%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/dns.png" alt></p>
+<li><p>可能会有主机ping不通服务器，服务器ping得通主机的情况出现，所以配置本机适配器<br><img src="hadoop%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/dns.png" alt=""></p>
 </li>
 </ul>
 <h2 id="3-安装java-1-8-0-openjdk（四台）"><a href="#3-安装java-1-8-0-openjdk（四台）" class="headerlink" title="3.安装java-1.8.0-openjdk（四台）"></a>3.安装java-1.8.0-openjdk（四台）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install java-1.8.0-openjdk*</span><br></pre></td></tr></table></figure>
@@ -541,12 +541,12 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $JAVA_HOME</span><br></pre></td></tr></table></figure>
 
 <p>显示</p>
-<p><img src="/2019/10/30/hadoop%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/3.png" alt></p>
+<p><img src="install-hadoop/3.png" alt=""></p>
 <p>修改</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vi &#x2F;usr&#x2F;local&#x2F;hbase&#x2F;conf&#x2F;hbase-env.sh</span><br></pre></td></tr></table></figure>
 
 <p>修改为如图即可</p>
-<p><img src="/2019/10/30/hadoop%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/4.png" alt></p>
+<p><img src="install-hadoop/4.png" alt=""></p>
 
       
 
@@ -622,7 +622,7 @@
       
         <h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><h3 id="有两种类型的构造函数："><a href="#有两种类型的构造函数：" class="headerlink" title="有两种类型的构造函数："></a>有两种类型的构造函数：</h3><p>1.默认构造函数(无参数构造函数)</p>
 <p>2.参数化构造函数</p>
-<p><img src="/2019/10/29/Java-basic/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0.png" alt></p>
+<p><img src="Java-basic/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0.png" alt=""></p>
 <h2 id="Java默认构造函数-无参数构造函数"><a href="#Java默认构造函数-无参数构造函数" class="headerlink" title="Java默认构造函数(无参数构造函数)"></a>Java默认构造函数(无参数构造函数)</h2><p>没有参数的构造函数称为默认构造函数。默认构造函数的语法如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;class_name&gt;()&#123;&#125;</span><br></pre></td></tr></table></figure>
 
@@ -835,7 +835,7 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">print(a[0, 1:4]) # &gt;&gt;&gt;[12 13 14]</span><br><span class="line">print(a[1:4, 0]) # &gt;&gt;&gt;[16 21 26]</span><br><span class="line">print(a[::2,::2]) # &gt;&gt;&gt;[[11 13 15]</span><br><span class="line">                  #     [21 23 25]</span><br><span class="line">                  #     [31 33 35]]</span><br><span class="line">print(a[:, 1]) # &gt;&gt;&gt;[12 17 22 27 32]</span><br></pre></td></tr></table></figure>
 
-<p>如图所示：<br><img src="/2019/10/25/Numpy%E5%9F%BA%E7%A1%80/numpy_2D_slice.jpg" alt="二维数组切片"></p>
+<p>如图所示：<br><img src="Numpy%E5%9F%BA%E7%A1%80/numpy_2D_slice.jpg" alt="二维数组切片"></p>
 <h2 id="数组属性"><a href="#数组属性" class="headerlink" title="数组属性"></a>数组属性</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># Array properties</span><br><span class="line">a &#x3D; np.array([[11, 12, 13, 14, 15],</span><br><span class="line">              [16, 17, 18, 19, 20],</span><br><span class="line">              [21, 22, 23, 24, 25],</span><br><span class="line">              [26, 27, 28 ,29, 30],</span><br><span class="line">              [31, 32, 33, 34, 35]])</span><br><span class="line"></span><br><span class="line">print(type(a)) # &gt;&gt;&gt;&lt;class &#39;numpy.ndarray&#39;&gt;</span><br><span class="line">print(a.dtype) # &gt;&gt;&gt;int64</span><br><span class="line">print(a.size) # &gt;&gt;&gt;25</span><br><span class="line">print(a.shape) # &gt;&gt;&gt;(5, 5)</span><br><span class="line">print(a.itemsize) # &gt;&gt;&gt;8</span><br><span class="line">print(a.ndim) # &gt;&gt;&gt;2</span><br><span class="line">print(a.nbytes) # &gt;&gt;&gt;200</span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -1572,11 +1572,11 @@
 <p>因为 nums[0] + nums[1] = 2 + 7 = 9<br>所以返回 [0, 1]</p>
 <h2 id="解题方法"><a href="#解题方法" class="headerlink" title="解题方法"></a>解题方法</h2><p>1.暴力破解法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in range(len(nums)-1):           # 外循环，从第一个到倒数第二个</span><br><span class="line">       for j in range(i+1,len(nums)):  # 内循环，从i的后一个到最后一个</span><br><span class="line">           if nums[i]+nums[j]&#x3D;&#x3D;target: # 如果相加等于target</span><br><span class="line">               return[i,j]             # 就返回它们的索引</span><br></pre></td></tr></table></figure>
-<p>不过这种方法相当慢，下图是它的效率<br><img src="/2019/09/24/1-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/1.png" alt></p>
+<p>不过这种方法相当慢，下图是它的效率<br><img src="1-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/1.png" alt=""></p>
 <p>2.字典法</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">d,res&#x3D;&#123;&#125;,[]</span><br><span class="line">for i in range(len(nums)):</span><br><span class="line">    wana&#x3D;target-nums[i]</span><br><span class="line">    if wana in d:</span><br><span class="line">        res.append(d[wana])</span><br><span class="line">        res.append(i)</span><br><span class="line">    else:</span><br><span class="line">        d[nums[i]]&#x3D;i</span><br><span class="line">return res</span><br></pre></td></tr></table></figure>
-<h3 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h3><p><img src="/2019/09/24/1-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/dict.png" alt><br>下图是字典法的效率：</p>
-<p><img src="/2019/09/24/1-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/2.png" alt></p>
+<h3 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h3><p><img src="1-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/dict.png" alt=""><br>下图是字典法的效率：</p>
+<p><img src="1-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/2.png" alt=""></p>
 
       
 
@@ -1748,19 +1748,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Git 操作</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Python 基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">Git 操作</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Numpy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Python 基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1788,15 +1788,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据分析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据挖掘</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">自我介绍</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">大数据分析</a>
               </li>
             
             <div class="clearfix"></div>

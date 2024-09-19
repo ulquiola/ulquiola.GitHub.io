@@ -15,13 +15,13 @@
 <meta property="og:site_name" content="ulquiola的博客">
 <meta property="og:description" content="一、数据载入及初步观察1、创建虚环境1conda create -n data_analysis python&#x3D;3.8  2、安装jupyter及pandas123conda activate data_analysisconda install jupyter notebookconda install pandas  3、导入数据集 4、载入数据12345678import nump">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://ulquiola.github.io/2021/07/13/%E5%88%9D%E6%AD%A5%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E9%9B%86.png">
+<meta property="og:image" content="http://ulquiola.github.io/2021/07/13/%E5%88%9D%E6%AD%A5%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/%E5%88%9D%E6%AD%A5%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E9%9B%86.png">
 <meta property="article:published_time" content="2021-07-12T23:20:14.000Z">
 <meta property="article:modified_time" content="2022-06-16T16:03:56.000Z">
 <meta property="article:author" content="ulquiola">
 <meta property="article:tag" content="动手学数据分析">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://ulquiola.github.io/2021/07/13/%E5%88%9D%E6%AD%A5%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E9%9B%86.png">
+<meta name="twitter:image" content="http://ulquiola.github.io/2021/07/13/%E5%88%9D%E6%AD%A5%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/%E5%88%9D%E6%AD%A5%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E9%9B%86.png">
   
     <link rel="alternative" href="/atom.xml" title="ulquiola的博客" type="application/atom+xml">
   
@@ -173,7 +173,7 @@
 
 <h4 id="2、安装jupyter及pandas"><a href="#2、安装jupyter及pandas" class="headerlink" title="2、安装jupyter及pandas"></a>2、安装jupyter及pandas</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda activate data_analysis</span><br><span class="line">conda install jupyter notebook</span><br><span class="line">conda install pandas</span><br></pre></td></tr></table></figure>
 
-<h4 id="3、导入数据集"><a href="#3、导入数据集" class="headerlink" title="3、导入数据集"></a>3、导入数据集</h4><p><img src="/2021/07/13/%E5%88%9D%E6%AD%A5%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E9%9B%86.png" alt></p>
+<h4 id="3、导入数据集"><a href="#3、导入数据集" class="headerlink" title="3、导入数据集"></a>3、导入数据集</h4><p><img src="%E5%88%9D%E6%AD%A5%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E9%9B%86.png" alt=""></p>
 <h4 id="4、载入数据"><a href="#4、载入数据" class="headerlink" title="4、载入数据"></a>4、载入数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import pandas as pd</span><br><span class="line"># 使用相对路径载入数据</span><br><span class="line">df1 &#x3D; pd.read_csv(&#39;dataset&#x2F;train.csv&#39;)</span><br><span class="line">df1.head()</span><br><span class="line"># 使用绝对路径载入数据</span><br><span class="line">df2 &#x3D; pd.read_csv(&#39;&#x2F;home&#x2F;ulquiola&#x2F;WorkSpace&#x2F;data_analysis&#x2F;hands-on-data-analysis&#x2F;dataset&#x2F;train.csv&#39;)</span><br><span class="line">df2.head()</span><br></pre></td></tr></table></figure>
 
 <h4 id="5、逐块读取"><a href="#5、逐块读取" class="headerlink" title="5、逐块读取"></a>5、逐块读取</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chunker &#x3D; pd.read_csv(&#39;dataset&#x2F;train.csv&#39;, chunksize&#x3D;1000)</span><br><span class="line">for i in chunker:</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
@@ -455,19 +455,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Git 操作</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Java基础</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Python 基础</a>
+                <a href="javascript:void(0)" class="js-tag color2">Git 操作</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Numpy</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Python 基础</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -495,15 +495,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据分析</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据挖掘</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">自我介绍</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">大数据分析</a>
               </li>
             
             <div class="clearfix"></div>
