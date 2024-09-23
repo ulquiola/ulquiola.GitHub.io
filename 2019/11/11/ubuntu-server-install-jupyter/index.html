@@ -8,12 +8,10 @@
   <link rel="dns-prefetch" href="http://ulquiola.github.io">
   <title>服务器安装Anaconda配置jupyter允许远程访问 | ulquiola的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="下载和安装Anaconda1$wget https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;archive&#x2F;Anaconda3-5.2.0-Linux-x86_64.sh 赋予权限并执行12$chmod +x Anaconda3-5.2.0-Linux-x86_64.sh$.&#x2F;Anaconda3-5">
-<meta property="og:type" content="article">
+  <meta property="og:type" content="article">
 <meta property="og:title" content="服务器安装Anaconda配置jupyter允许远程访问">
 <meta property="og:url" content="http://ulquiola.github.io/2019/11/11/ubuntu-server-install-jupyter/index.html">
 <meta property="og:site_name" content="ulquiola的博客">
-<meta property="og:description" content="下载和安装Anaconda1$wget https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;archive&#x2F;Anaconda3-5.2.0-Linux-x86_64.sh 赋予权限并执行12$chmod +x Anaconda3-5.2.0-Linux-x86_64.sh$.&#x2F;Anaconda3-5">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-11-11T07:11:55.000Z">
 <meta property="article:modified_time" content="2022-06-16T16:03:56.000Z">
@@ -167,20 +165,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="下载和安装Anaconda"><a href="#下载和安装Anaconda" class="headerlink" title="下载和安装Anaconda"></a>下载和安装Anaconda</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$wget https:&#x2F;&#x2F;mirrors.tuna.tsinghua.edu.cn&#x2F;anaconda&#x2F;archive&#x2F;Anaconda3-5.2.0-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
-<h3 id="赋予权限并执行"><a href="#赋予权限并执行" class="headerlink" title="赋予权限并执行"></a>赋予权限并执行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$chmod +x Anaconda3-5.2.0-Linux-x86_64.sh</span><br><span class="line">$.&#x2F;Anaconda3-5.2.0-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+        <html><head></head><body><h2 id="下载和安装Anaconda"><a href="#下载和安装Anaconda" class="headerlink" title="下载和安装Anaconda"></a>下载和安装Anaconda</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-5.2.0-Linux-x86_64.sh</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="赋予权限并执行"><a href="#赋予权限并执行" class="headerlink" title="赋予权限并执行"></a>赋予权限并执行</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$chmod +x Anaconda3-5.2.0-Linux-x86_64.sh</span><br><span class="line">$./Anaconda3-5.2.0-Linux-x86_64.sh</span><br></pre></td></tr></tbody></table></figure>
 
-<h2 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook --generate-config</span><br></pre></td></tr></table></figure>
-<h2 id="生成密码sha1值"><a href="#生成密码sha1值" class="headerlink" title="生成密码sha1值"></a>生成密码sha1值</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$python3</span><br><span class="line"></span><br><span class="line">from notebook.auth import passwd</span><br><span class="line">passwd()</span><br><span class="line">Enter password:</span><br><span class="line">Verify password:</span><br><span class="line"></span><br><span class="line">&#39;sha1:ce23d945972f:34769685a7ccd3d08c84a18c63968a41f1140274&#39;</span><br></pre></td></tr></table></figure>
+<h2 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook --generate-config</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="生成密码sha1值"><a href="#生成密码sha1值" class="headerlink" title="生成密码sha1值"></a>生成密码sha1值</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$python3</span><br><span class="line"></span><br><span class="line">from notebook.auth import passwd</span><br><span class="line">passwd()</span><br><span class="line">Enter password:</span><br><span class="line">Verify password:</span><br><span class="line"></span><br><span class="line">'sha1:ce23d945972f:34769685a7ccd3d08c84a18c63968a41f1140274'</span><br></pre></td></tr></tbody></table></figure>
 
-<h2 id="将hash值放入配置文件"><a href="#将hash值放入配置文件" class="headerlink" title="将hash值放入配置文件"></a>将hash值放入配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$vi ~&#x2F;.jupyter&#x2F;jupyter_notebook_config.py</span><br><span class="line"></span><br><span class="line">c.NotebookApp.ip&#x3D;&#39;*&#39;</span><br><span class="line">c.NotebookApp.password &#x3D; u&#39;上面的hash值&#39;</span><br><span class="line">c.NotebookApp.open_browser &#x3D; False</span><br><span class="line">c.NotebookApp.port &#x3D;8888</span><br></pre></td></tr></table></figure>
-<h2 id="用screen启动jupyter-notebook"><a href="#用screen启动jupyter-notebook" class="headerlink" title="用screen启动jupyter notebook"></a>用screen启动jupyter notebook</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 新建一个 screen 窗口，若报错则可能需先安装 screen</span><br><span class="line">screen -S jupyter</span><br><span class="line"></span><br><span class="line"># 启动 jupyter notebook 服务</span><br><span class="line">jupyter notebook</span><br></pre></td></tr></table></figure>
+<h2 id="将hash值放入配置文件"><a href="#将hash值放入配置文件" class="headerlink" title="将hash值放入配置文件"></a>将hash值放入配置文件</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$vi ~/.jupyter/jupyter_notebook_config.py</span><br><span class="line"></span><br><span class="line">c.NotebookApp.ip='*'</span><br><span class="line">c.NotebookApp.password = u'上面的hash值'</span><br><span class="line">c.NotebookApp.open_browser = False</span><br><span class="line">c.NotebookApp.port =8888</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="用screen启动jupyter-notebook"><a href="#用screen启动jupyter-notebook" class="headerlink" title="用screen启动jupyter notebook"></a>用screen启动jupyter notebook</h2><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 新建一个 screen 窗口，若报错则可能需先安装 screen</span><br><span class="line">screen -S jupyter</span><br><span class="line"></span><br><span class="line"># 启动 jupyter notebook 服务</span><br><span class="line">jupyter notebook</span><br></pre></td></tr></tbody></table></figure>
 <ul>
-<li>screen命令<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">screen -S 会话名称        &#x2F;&#x2F;创建会话</span><br><span class="line">screen -R 会话名称或编号        &#x2F;&#x2F;进入会话 detached变成attached</span><br><span class="line">screen -ls                       &#x2F;&#x2F;会话列表</span><br><span class="line">ctrl+a+d                         &#x2F;&#x2F;离开，但后台还开着</span><br><span class="line">ctrl+c                             &#x2F;&#x2F;返回</span><br><span class="line">screen -s 绘画名称 -X quit   &#x2F;&#x2F;杀掉会话</span><br></pre></td></tr></table></figure>
+<li>screen命令<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">screen -S 会话名称 &nbsp; &nbsp; &nbsp;&nbsp; //创建会话</span><br><span class="line">screen -R 会话名称或编号 &nbsp; &nbsp; &nbsp;&nbsp; //进入会话 detached变成attached</span><br><span class="line">screen -ls &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //会话列表</span><br><span class="line">ctrl+a+d &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //离开，但后台还开着</span><br><span class="line">ctrl+c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; //返回</span><br><span class="line">screen -s 绘画名称 -X quit &nbsp; //杀掉会话</span><br></pre></td></tr></tbody></table></figure>
 
 </li>
 </ul>
-<h2 id="修改阿里云安全组策略-把入方向的端口8888开放-完成！"><a href="#修改阿里云安全组策略-把入方向的端口8888开放-完成！" class="headerlink" title="修改阿里云安全组策略 把入方向的端口8888开放,完成！"></a>修改阿里云安全组策略 把入方向的端口8888开放,完成！</h2>
+<h2 id="修改阿里云安全组策略-把入方向的端口8888开放-完成！"><a href="#修改阿里云安全组策略-把入方向的端口8888开放-完成！" class="headerlink" title="修改阿里云安全组策略 把入方向的端口8888开放,完成！"></a>修改阿里云安全组策略 把入方向的端口8888开放,完成！</h2></body></html>
       
 
       
@@ -417,7 +415,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">LeetCode刷题之旅</a>
+                <a href="javascript:void(0)" class="js-tag color2">Git 操作</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Numpy</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -425,11 +427,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Git 操作</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Numpy</a>
+                <a href="javascript:void(0)" class="js-tag color3">LeetCode刷题之旅</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -461,15 +459,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">大数据分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据挖掘</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">自我介绍</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据分析</a>
               </li>
             
             <div class="clearfix"></div>

@@ -8,20 +8,18 @@
   <link rel="dns-prefetch" href="http://ulquiola.github.io">
   <title>Java 基础 | ulquiola的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="构造方法有两种类型的构造函数：1.默认构造函数(无参数构造函数) 2.参数化构造函数  Java默认构造函数(无参数构造函数)没有参数的构造函数称为默认构造函数。默认构造函数的语法如下： 1&lt;class_name&gt;()&amp;#123;&amp;#125;  Java默认构造函数的示例：在这个例子中，在Bike类中创建了无参数(no-arg)构造函数。它将在对象创建时被调用。 123456789cl">
-<meta property="og:type" content="article">
+  <meta property="og:type" content="article">
 <meta property="og:title" content="Java 基础">
 <meta property="og:url" content="http://ulquiola.github.io/2019/10/29/Java-basic/index.html">
 <meta property="og:site_name" content="ulquiola的博客">
-<meta property="og:description" content="构造方法有两种类型的构造函数：1.默认构造函数(无参数构造函数) 2.参数化构造函数  Java默认构造函数(无参数构造函数)没有参数的构造函数称为默认构造函数。默认构造函数的语法如下： 1&lt;class_name&gt;()&amp;#123;&amp;#125;  Java默认构造函数的示例：在这个例子中，在Bike类中创建了无参数(no-arg)构造函数。它将在对象创建时被调用。 123456789cl">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://ulquiola.github.io/2019/10/29/Java-basic/Java-basic/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0.png">
+<meta property="og:image" content="http://ulquiola.github.io/2019/10/29/Java-basic/10/29/Java-basic/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0.png">
 <meta property="article:published_time" content="2019-10-29T01:12:36.000Z">
 <meta property="article:modified_time" content="2022-06-16T16:03:56.000Z">
 <meta property="article:author" content="ulquiola">
 <meta property="article:tag" content="Java基础">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://ulquiola.github.io/2019/10/29/Java-basic/Java-basic/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0.png">
+<meta name="twitter:image" content="http://ulquiola.github.io/2019/10/29/Java-basic/10/29/Java-basic/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0.png">
   
     <link rel="alternative" href="/atom.xml" title="ulquiola的博客" type="application/atom+xml">
   
@@ -169,17 +167,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><h3 id="有两种类型的构造函数："><a href="#有两种类型的构造函数：" class="headerlink" title="有两种类型的构造函数："></a>有两种类型的构造函数：</h3><p>1.默认构造函数(无参数构造函数)</p>
+        <html><head></head><body><h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><h3 id="有两种类型的构造函数："><a href="#有两种类型的构造函数：" class="headerlink" title="有两种类型的构造函数："></a>有两种类型的构造函数：</h3><p>1.默认构造函数(无参数构造函数)</p>
 <p>2.参数化构造函数</p>
-<p><img src="Java-basic/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0.png" alt=""></p>
+<img src="/2019/10/29/Java-basic/10/29/Java-basic/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0.png" class="">
+
 <h2 id="Java默认构造函数-无参数构造函数"><a href="#Java默认构造函数-无参数构造函数" class="headerlink" title="Java默认构造函数(无参数构造函数)"></a>Java默认构造函数(无参数构造函数)</h2><p>没有参数的构造函数称为默认构造函数。默认构造函数的语法如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;class_name&gt;()&#123;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;class_name&gt;(){}</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="Java默认构造函数的示例："><a href="#Java默认构造函数的示例：" class="headerlink" title="Java默认构造函数的示例："></a>Java默认构造函数的示例：</h2><p>在这个例子中，在Bike类中创建了无参数(no-arg)构造函数。它将在对象创建时被调用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Bike1 &#123;</span><br><span class="line">    Bike1() &#123;</span><br><span class="line">        System.out.println(&quot;Bike is created&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String args[]) &#123;</span><br><span class="line">        Bike1 b &#x3D; new Bike1();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Bike1 {</span><br><span class="line">    Bike1() {</span><br><span class="line">        System.out.println("Bike is created");</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static void main(String args[]) {</span><br><span class="line">        Bike1 b = new Bike1();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>上面的示例代码运行结果如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Bike is created</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Bike is created</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li>规则：如果类中没有构造函数，编译器会自动创建一个默认构造函数。</li>
@@ -188,9 +187,9 @@
 <ul>
 <li>显示默认值的默认构造函数示例</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Student3 &#123;</span><br><span class="line">    int id;</span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    void display() &#123;</span><br><span class="line">        System.out.println(id + &quot; &quot; + name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String args[]) &#123;</span><br><span class="line">        Student3 s1 &#x3D; new Student3();</span><br><span class="line">        Student3 s2 &#x3D; new Student3();</span><br><span class="line">        s1.display();</span><br><span class="line">        s2.display();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Student3 {</span><br><span class="line">    int id;</span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    void display() {</span><br><span class="line">        System.out.println(id + " " + name);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static void main(String args[]) {</span><br><span class="line">        Student3 s1 = new Student3();</span><br><span class="line">        Student3 s2 = new Student3();</span><br><span class="line">        s1.display();</span><br><span class="line">        s2.display();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>运行上面代码，得到如下结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0 null</span><br><span class="line">0 null</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0 null</span><br><span class="line">0 null</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li><p>解释： 在上面的类中，代码中并没有创建任何构造函数，但编译器自动提供了一个默认构造函数。默认构造函数分别为字段：id 和 name 分别提供了0和null值。</p>
@@ -236,32 +235,32 @@
 </li>
 </ul>
 <p>理解不使用静态变量的问题</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Student&#123;  </span><br><span class="line">     int rollno;  </span><br><span class="line">     String name;  </span><br><span class="line">     String college&#x3D;&quot;ITS&quot;;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Student{  </span><br><span class="line">     int rollno;  </span><br><span class="line">     String name;  </span><br><span class="line">     String college="ITS";  </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>假设在一所学校有500名学生，现在所有实例数据成员将在每次创建对象时获取内存。所有学生都有其唯一的注册ID：rollno和　name ，因此实例数据成员没有什么问题。college 指的是所有对象的共同属性。如果使它静态化(使用static关键字修饲)，这个字段将只获得内存一次。</p>
 <ul>
 <li>Java静态属性被共享给所有对象。</li>
 </ul>
-<h3 id="静态变量的实例"><a href="#静态变量的实例" class="headerlink" title="静态变量的实例"></a>静态变量的实例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Student &#123;</span><br><span class="line">    int rollno;</span><br><span class="line">    String name;</span><br><span class="line">    static String college &#x3D; &quot;ITS&quot;;</span><br><span class="line"></span><br><span class="line">    Student(int r, String n) &#123;</span><br><span class="line">        rollno &#x3D; r;</span><br><span class="line">        name &#x3D; n;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void display() &#123;</span><br><span class="line">        System.out.println(rollno + &quot; &quot; + name + &quot; &quot; + college);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String args[]) &#123;</span><br><span class="line">        Student s1 &#x3D; new Student(111, &quot;Karan&quot;);</span><br><span class="line">        Student s2 &#x3D; new Student(222, &quot;Aryan&quot;);</span><br><span class="line"></span><br><span class="line">        s1.display();</span><br><span class="line">        s2.display();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="静态变量的实例"><a href="#静态变量的实例" class="headerlink" title="静态变量的实例"></a>静态变量的实例</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Student {</span><br><span class="line">    int rollno;</span><br><span class="line">    String name;</span><br><span class="line">    static String college = "ITS";</span><br><span class="line"></span><br><span class="line">    Student(int r, String n) {</span><br><span class="line">        rollno = r;</span><br><span class="line">        name = n;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    void display() {</span><br><span class="line">        System.out.println(rollno + " " + name + " " + college);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static void main(String args[]) {</span><br><span class="line">        Student s1 = new Student(111, "Karan");</span><br><span class="line">        Student s2 = new Student(222, "Aryan");</span><br><span class="line"></span><br><span class="line">        s1.display();</span><br><span class="line">        s2.display();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>上面代码执行结果如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">111 Karan ITS</span><br><span class="line">222 Aryan ITS</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">111 Karan ITS</span><br><span class="line">222 Aryan ITS</span><br></pre></td></tr></tbody></table></figure>
 
 <h3 id="不使用静态变量的计数器程序"><a href="#不使用静态变量的计数器程序" class="headerlink" title="不使用静态变量的计数器程序"></a>不使用静态变量的计数器程序</h3><ul>
 <li>在这个例子中，我们创建了一个名为count的实例变量用来统计创建对象的数目，它在构造函数中执行递增。 由于实例变量在创建对象时要获取内存，每个对象都将具有实例变量的副本，如果它被递增了，它也不会反映到其他对象中。所以每个对象在count变量中的值还是1。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Counter &#123;</span><br><span class="line">    int count &#x3D; 0;&#x2F;&#x2F; will get memory when instance is created</span><br><span class="line"></span><br><span class="line">    Counter() &#123;</span><br><span class="line">        count++;</span><br><span class="line">        System.out.println(count);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String args[]) &#123;</span><br><span class="line"></span><br><span class="line">        Counter c1 &#x3D; new Counter();</span><br><span class="line">        Counter c2 &#x3D; new Counter();</span><br><span class="line">        Counter c3 &#x3D; new Counter();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Counter {</span><br><span class="line">    int count = 0;// will get memory when instance is created</span><br><span class="line"></span><br><span class="line">    Counter() {</span><br><span class="line">        count++;</span><br><span class="line">        System.out.println(count);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static void main(String args[]) {</span><br><span class="line"></span><br><span class="line">        Counter c1 = new Counter();</span><br><span class="line">        Counter c2 = new Counter();</span><br><span class="line">        Counter c3 = new Counter();</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>执行结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">1</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">1</span><br><span class="line">1</span><br></pre></td></tr></tbody></table></figure>
 
 <h3 id="计数器静态变量的程序"><a href="#计数器静态变量的程序" class="headerlink" title="计数器静态变量的程序"></a>计数器静态变量的程序</h3><ul>
 <li>计数器静态变量的程序如上所述，静态变量将只获取一次内存，如果任何对象更改静态变量的值，它将保留其值，所有实例均可访问同一变量值。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Counter2 &#123;</span><br><span class="line">    static int count &#x3D; 0;&#x2F;&#x2F; will get memory only once and retain its value</span><br><span class="line"></span><br><span class="line">    Counter2() &#123;</span><br><span class="line">        count++;</span><br><span class="line">        System.out.println(count);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String args[]) &#123;</span><br><span class="line"></span><br><span class="line">        Counter2 c1 &#x3D; new Counter2();</span><br><span class="line">        Counter2 c2 &#x3D; new Counter2();</span><br><span class="line">        Counter2 c3 &#x3D; new Counter2();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Counter2 {</span><br><span class="line">    static int count = 0;// will get memory only once and retain its value</span><br><span class="line"></span><br><span class="line">    Counter2() {</span><br><span class="line">        count++;</span><br><span class="line">        System.out.println(count);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static void main(String args[]) {</span><br><span class="line"></span><br><span class="line">        Counter2 c1 = new Counter2();</span><br><span class="line">        Counter2 c2 = new Counter2();</span><br><span class="line">        Counter2 c3 = new Counter2();</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>上面代码执行结果如下 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="为什么java-main方法是静态的？"><a href="#为什么java-main方法是静态的？" class="headerlink" title="为什么java main方法是静态的？"></a>为什么java main方法是静态的？</h2><ul>
 <li>这是因为对象不需要调用静态方法，如果它是非静态方法，jvm首先要创建对象，然后调用main()方法，这将导致额外的内存分配的问题。</li>
@@ -282,10 +281,10 @@
 <li>用于初始化静态数据成员。</li>
 <li>它在类加载时在main方法之前执行。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class A2 &#123;</span><br><span class="line">    static &#123;</span><br><span class="line">        System.out.println(&quot;static block is invoked&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String args[]) &#123;</span><br><span class="line">        System.out.println(&quot;Hello main&quot;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class A2 {</span><br><span class="line">    static {</span><br><span class="line">        System.out.println("static block is invoked");</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    public static void main(String args[]) {</span><br><span class="line">        System.out.println("Hello main");</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
 
 <p>执行结果</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">static block is invoked</span><br><span class="line">Hello main</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">static block is invoked</span><br><span class="line">Hello main</span><br></pre></td></tr></tbody></table></figure></body></html>
       
 
       
@@ -522,7 +521,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">LeetCode刷题之旅</a>
+                <a href="javascript:void(0)" class="js-tag color2">Git 操作</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Numpy</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -530,11 +533,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Git 操作</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Numpy</a>
+                <a href="javascript:void(0)" class="js-tag color3">LeetCode刷题之旅</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -566,15 +565,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">大数据分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据挖掘</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">自我介绍</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据分析</a>
               </li>
             
             <div class="clearfix"></div>

@@ -8,20 +8,18 @@
   <link rel="dns-prefetch" href="http://ulquiola.github.io">
   <title>Sql基础 | ulquiola的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="查询数据条件查询1. WHERE12select * from &lt;表名&gt;where &lt;条件表达式&gt;   条件表达式1：满足条件1和条件2   1&lt;条件1&gt; and &lt;条件2&gt;   条件表达式2：满足条件1或条件2    1&lt;条件1&gt; or &lt;条件2&gt;   条件表达式3：不符合该条件    1Not &lt;条件&gt;  示例">
-<meta property="og:type" content="article">
+  <meta property="og:type" content="article">
 <meta property="og:title" content="Sql基础">
 <meta property="og:url" content="http://ulquiola.github.io/2020/05/03/Sql%E5%9F%BA%E7%A1%80/index.html">
 <meta property="og:site_name" content="ulquiola的博客">
-<meta property="og:description" content="查询数据条件查询1. WHERE12select * from &lt;表名&gt;where &lt;条件表达式&gt;   条件表达式1：满足条件1和条件2   1&lt;条件1&gt; and &lt;条件2&gt;   条件表达式2：满足条件1或条件2    1&lt;条件1&gt; or &lt;条件2&gt;   条件表达式3：不符合该条件    1Not &lt;条件&gt;  示例">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://ulquiola.github.io/2020/05/03/Sql%E5%9F%BA%E7%A1%80/Sql%E5%9F%BA%E7%A1%80/join.png">
+<meta property="og:image" content="http://ulquiola.github.io/2020/05/03/Sql%E5%9F%BA%E7%A1%80/05/03/Sql%E5%9F%BA%E7%A1%80/join.png">
 <meta property="article:published_time" content="2020-05-03T11:25:58.000Z">
 <meta property="article:modified_time" content="2022-06-16T16:03:56.000Z">
 <meta property="article:author" content="ulquiola">
 <meta property="article:tag" content="Sql">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://ulquiola.github.io/2020/05/03/Sql%E5%9F%BA%E7%A1%80/Sql%E5%9F%BA%E7%A1%80/join.png">
+<meta name="twitter:image" content="http://ulquiola.github.io/2020/05/03/Sql%E5%9F%BA%E7%A1%80/05/03/Sql%E5%9F%BA%E7%A1%80/join.png">
   
     <link rel="alternative" href="/atom.xml" title="ulquiola的博客" type="application/atom+xml">
   
@@ -169,28 +167,28 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h1><h2 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h2><h3 id="1-WHERE"><a href="#1-WHERE" class="headerlink" title="1. WHERE"></a>1. WHERE</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from &lt;表名&gt;</span><br><span class="line">where &lt;条件表达式&gt;</span><br></pre></td></tr></table></figure>
+        <html><head></head><body><h1 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h1><h2 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询"></a>条件查询</h2><h3 id="1-WHERE"><a href="#1-WHERE" class="headerlink" title="1. WHERE"></a>1. WHERE</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from &lt;表名&gt;</span><br><span class="line">where &lt;条件表达式&gt;</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li>条件表达式1：满足条件1和条件2 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;条件1&gt; and &lt;条件2&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;条件1&gt; and &lt;条件2&gt;</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li>条件表达式2：满足条件1或条件2  </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;条件1&gt; or &lt;条件2&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;条件1&gt; or &lt;条件2&gt;</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li>条件表达式3：不符合该条件  </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Not &lt;条件&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Not &lt;条件&gt;</span><br></pre></td></tr></tbody></table></figure>
 
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from students</span><br><span class="line">where (score &lt; 80 or score &gt; 90) and gender &#x3D; &#39;M&#39;;</span><br></pre></td></tr></table></figure>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from students</span><br><span class="line">where (score &lt; 80 or score &gt; 90) and gender = 'M';</span><br></pre></td></tr></tbody></table></figure>
 
-<h3 id="2-HAVING"><a href="#2-HAVING" class="headerlink" title="2. HAVING"></a>2. HAVING</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select &lt;列1&gt; from &lt;表名&gt;  </span><br><span class="line">having &lt;列1条件表达式&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="2-HAVING"><a href="#2-HAVING" class="headerlink" title="2. HAVING"></a>2. HAVING</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select &lt;列1&gt; from &lt;表名&gt;  </span><br><span class="line">having &lt;列1条件表达式&gt;</span><br></pre></td></tr></tbody></table></figure>
 
-<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select name from students</span><br><span class="line">having name &#x3D; &#39;张三&#39;;</span><br></pre></td></tr></table></figure>
+<h3 id="示例-1"><a href="#示例-1" class="headerlink" title="示例"></a>示例</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select name from students</span><br><span class="line">having name = '张三';</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li>注意：上面having可以用的前提是我已经筛选出了name，在这种情况下和where的效果是等效的，但是如果我没有select name 就会报错！！因为having是从前筛选的字段再筛选，而where是从数据表中的字段直接进行的筛选的。</li>
@@ -247,9 +245,9 @@
 <td>%表示任意字符，例如’ab%’将匹配’ab’，’abc’，’abcd’</td>
 </tr>
 </tbody></table>
-<h2 id="投影查询"><a href="#投影查询" class="headerlink" title="投影查询"></a>投影查询</h2><h3 id="查询具体某一列或某几列数据"><a href="#查询具体某一列或某几列数据" class="headerlink" title="查询具体某一列或某几列数据"></a>查询具体某一列或某几列数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 列1 列2 列3... from &lt;表名&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="投影查询"><a href="#投影查询" class="headerlink" title="投影查询"></a>投影查询</h2><h3 id="查询具体某一列或某几列数据"><a href="#查询具体某一列或某几列数据" class="headerlink" title="查询具体某一列或某几列数据"></a>查询具体某一列或某几列数据</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 列1 列2 列3... from &lt;表名&gt;</span><br></pre></td></tr></tbody></table></figure>
 
-<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例"></a>示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select id,name from students</span><br><span class="line">where gender &#x3D; &#39;M&#39;;</span><br></pre></td></tr></table></figure>
+<h3 id="示例-2"><a href="#示例-2" class="headerlink" title="示例"></a>示例</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select id,name from students</span><br><span class="line">where gender = 'M';</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><ul>
 <li><p>通常上查询结果集是按主键id排序</p>
@@ -260,12 +258,12 @@
 <h3 id="升序"><a href="#升序" class="headerlink" title="升序"></a>升序</h3><ul>
 <li>通常默认是升序，也可以指定asc升序排列</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select id,name,score from students</span><br><span class="line">where class_id &#x3D; 1</span><br><span class="line">order by score asc;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select id,name,score from students</span><br><span class="line">where class_id = 1</span><br><span class="line">order by score asc;</span><br></pre></td></tr></tbody></table></figure>
 
 <h3 id="降序"><a href="#降序" class="headerlink" title="降序"></a>降序</h3><ul>
 <li>在order by 后上desc指定降序排列</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select id,name,score from students</span><br><span class="line">where class_id &#x3D; 1</span><br><span class="line">order by score desc;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select id,name,score from students</span><br><span class="line">where class_id = 1</span><br><span class="line">order by score desc;</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="分页查询"><a href="#分页查询" class="headerlink" title="分页查询"></a>分页查询</h2><p>查询表达式：limit m offset n</p>
 <ul>
@@ -273,10 +271,10 @@
 <li>n为索引，从0开始</li>
 <li>查询第N页记录</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">limit 为 pageSize,pageIndex(从1开始)</span><br><span class="line">offset &#x3D; pageSize*(pageIndex -1)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">limit 为 pageSize,pageIndex(从1开始)</span><br><span class="line">offset = pageSize*(pageIndex -1)</span><br></pre></td></tr></tbody></table></figure>
 
 <p>示例</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select id,name,score from students</span><br><span class="line">order by score desc</span><br><span class="line">limit 10 offset 10;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select id,name,score from students</span><br><span class="line">order by score desc</span><br><span class="line">limit 10 offset 10;</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="聚合查询"><a href="#聚合查询" class="headerlink" title="聚合查询"></a>聚合查询</h2><h3 id="常用聚合函数"><a href="#常用聚合函数" class="headerlink" title="常用聚合函数"></a>常用聚合函数</h3><table>
 <thead>
@@ -309,7 +307,7 @@
 <ul>
 <li>示例</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select count(*) num from student;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select count(*) num from student;</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li>注意：count 查询结果是个二维表<table>
@@ -364,32 +362,33 @@
 <td>99</td>
 </tr>
 </tbody></table>
-<h3 id="查询语法"><a href="#查询语法" class="headerlink" title="查询语法"></a>查询语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT ... FROM &lt;表1&gt; JOIN &lt;表2&gt; ON &lt;条件...&gt;;</span><br></pre></td></tr></table></figure>
+<h3 id="查询语法"><a href="#查询语法" class="headerlink" title="查询语法"></a>查询语法</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT ... FROM &lt;表1&gt; JOIN &lt;表2&gt; ON &lt;条件...&gt;;</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li>JOIN查询仍然可以使用WHERE条件和ORDER BY排序。</li>
 </ul>
-<h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select * from table1 join table2</span><br><span class="line">on table1.id &#x3D; table2.id</span><br><span class="line">order by score desc</span><br></pre></td></tr></table></figure>
+<h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select * from table1 join table2</span><br><span class="line">on table1.id = table2.id</span><br><span class="line">order by score desc</span><br></pre></td></tr></tbody></table></figure>
 
 <ul>
 <li>iner join、left outer join、right outer join和full outer join 的区别 </li>
 </ul>
 <p>查询语句：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select ... from tableA</span><br><span class="line">??? join tableB </span><br><span class="line">on tableA.column1 &#x3D; tableB.column2;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">select ... from tableA</span><br><span class="line">??? join tableB </span><br><span class="line">on tableA.column1 = tableB.column2;</span><br></pre></td></tr></tbody></table></figure>
 
-<p><img src="Sql%E5%9F%BA%E7%A1%80/join.png" alt="Join区别"></p>
-<h1 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h1><h2 id="Insert"><a href="#Insert" class="headerlink" title="Insert"></a>Insert</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insert to &lt;表名&gt;</span><br><span class="line">values(值1，值2...);</span><br></pre></td></tr></table></figure>
+<img src="/2020/05/03/Sql%E5%9F%BA%E7%A1%80/05/03/Sql%E5%9F%BA%E7%A1%80/join.png" class="" title="Join区别">
 
-<h3 id="示例-3"><a href="#示例-3" class="headerlink" title="示例"></a>示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insert to table1</span><br><span class="line">values(4,&#39;吴六&#39;);</span><br></pre></td></tr></table></figure>
+<h1 id="修改数据"><a href="#修改数据" class="headerlink" title="修改数据"></a>修改数据</h1><h2 id="Insert"><a href="#Insert" class="headerlink" title="Insert"></a>Insert</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insert to &lt;表名&gt;</span><br><span class="line">values(值1，值2...);</span><br></pre></td></tr></tbody></table></figure>
 
-<h2 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h2><h3 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">update &lt;表名&gt;</span><br><span class="line">set 字段1&#x3D;值1，字段二&#x3D;值2</span><br><span class="line">where...;</span><br></pre></td></tr></table></figure>
+<h3 id="示例-3"><a href="#示例-3" class="headerlink" title="示例"></a>示例</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">insert to table1</span><br><span class="line">values(4,'吴六');</span><br></pre></td></tr></tbody></table></figure>
 
-<h3 id="示例-4"><a href="#示例-4" class="headerlink" title="示例"></a>示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">update table1</span><br><span class="line">set name &#x3D; &#39;李姐&#39;</span><br><span class="line">where id &#x3D; 3;</span><br></pre></td></tr></table></figure>
+<h2 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h2><h3 id="语法-1"><a href="#语法-1" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">update &lt;表名&gt;</span><br><span class="line">set 字段1=值1，字段二=值2</span><br><span class="line">where...;</span><br></pre></td></tr></tbody></table></figure>
 
-<h2 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h2><h3 id="语法-2"><a href="#语法-2" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">delete from &lt;表名&gt;</span><br><span class="line">where...;</span><br></pre></td></tr></table></figure>
+<h3 id="示例-4"><a href="#示例-4" class="headerlink" title="示例"></a>示例</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">update table1</span><br><span class="line">set name = '李姐'</span><br><span class="line">where id = 3;</span><br></pre></td></tr></tbody></table></figure>
 
-<h3 id="示例-5"><a href="#示例-5" class="headerlink" title="示例"></a>示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">delete from table1</span><br><span class="line">where id &#x3D; 3;</span><br></pre></td></tr></table></figure>
+<h2 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h2><h3 id="语法-2"><a href="#语法-2" class="headerlink" title="语法"></a>语法</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">delete from &lt;表名&gt;</span><br><span class="line">where...;</span><br></pre></td></tr></tbody></table></figure>
 
+<h3 id="示例-5"><a href="#示例-5" class="headerlink" title="示例"></a>示例</h3><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">delete from table1</span><br><span class="line">where id = 3;</span><br></pre></td></tr></tbody></table></figure>
+</body></html>
       
 
       
@@ -626,7 +625,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">LeetCode刷题之旅</a>
+                <a href="javascript:void(0)" class="js-tag color2">Git 操作</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Numpy</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -634,11 +637,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Git 操作</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Numpy</a>
+                <a href="javascript:void(0)" class="js-tag color3">LeetCode刷题之旅</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -670,15 +669,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">大数据分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据挖掘</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">自我介绍</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据分析</a>
               </li>
             
             <div class="clearfix"></div>

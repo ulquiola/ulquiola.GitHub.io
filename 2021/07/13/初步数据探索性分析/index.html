@@ -8,20 +8,18 @@
   <link rel="dns-prefetch" href="http://ulquiola.github.io">
   <title>初步数据探索性分析 | ulquiola的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一、数据载入及初步观察1、创建虚环境1conda create -n data_analysis python&#x3D;3.8  2、安装jupyter及pandas123conda activate data_analysisconda install jupyter notebookconda install pandas  3、导入数据集 4、载入数据12345678import nump">
-<meta property="og:type" content="article">
+  <meta property="og:type" content="article">
 <meta property="og:title" content="初步数据探索性分析">
 <meta property="og:url" content="http://ulquiola.github.io/2021/07/13/%E5%88%9D%E6%AD%A5%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="ulquiola的博客">
-<meta property="og:description" content="一、数据载入及初步观察1、创建虚环境1conda create -n data_analysis python&#x3D;3.8  2、安装jupyter及pandas123conda activate data_analysisconda install jupyter notebookconda install pandas  3、导入数据集 4、载入数据12345678import nump">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://ulquiola.github.io/2021/07/13/%E5%88%9D%E6%AD%A5%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/%E5%88%9D%E6%AD%A5%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E9%9B%86.png">
+<meta property="og:image" content="http://ulquiola.github.io/2021/07/13/%E5%88%9D%E6%AD%A5%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/07/13/%E5%88%9D%E6%AD%A5%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E9%9B%86.png">
 <meta property="article:published_time" content="2021-07-12T23:20:14.000Z">
 <meta property="article:modified_time" content="2022-06-16T16:03:56.000Z">
 <meta property="article:author" content="ulquiola">
 <meta property="article:tag" content="动手学数据分析">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://ulquiola.github.io/2021/07/13/%E5%88%9D%E6%AD%A5%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/%E5%88%9D%E6%AD%A5%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E9%9B%86.png">
+<meta name="twitter:image" content="http://ulquiola.github.io/2021/07/13/%E5%88%9D%E6%AD%A5%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/07/13/%E5%88%9D%E6%AD%A5%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E9%9B%86.png">
   
     <link rel="alternative" href="/atom.xml" title="ulquiola的博客" type="application/atom+xml">
   
@@ -169,31 +167,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一、数据载入及初步观察"><a href="#一、数据载入及初步观察" class="headerlink" title="一、数据载入及初步观察"></a>一、数据载入及初步观察</h2><h4 id="1、创建虚环境"><a href="#1、创建虚环境" class="headerlink" title="1、创建虚环境"></a>1、创建虚环境</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n data_analysis python&#x3D;3.8</span><br></pre></td></tr></table></figure>
+        <html><head></head><body><h2 id="一、数据载入及初步观察"><a href="#一、数据载入及初步观察" class="headerlink" title="一、数据载入及初步观察"></a>一、数据载入及初步观察</h2><h4 id="1、创建虚环境"><a href="#1、创建虚环境" class="headerlink" title="1、创建虚环境"></a>1、创建虚环境</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n data_analysis python=3.8</span><br></pre></td></tr></tbody></table></figure>
 
-<h4 id="2、安装jupyter及pandas"><a href="#2、安装jupyter及pandas" class="headerlink" title="2、安装jupyter及pandas"></a>2、安装jupyter及pandas</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda activate data_analysis</span><br><span class="line">conda install jupyter notebook</span><br><span class="line">conda install pandas</span><br></pre></td></tr></table></figure>
+<h4 id="2、安装jupyter及pandas"><a href="#2、安装jupyter及pandas" class="headerlink" title="2、安装jupyter及pandas"></a>2、安装jupyter及pandas</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda activate data_analysis</span><br><span class="line">conda install jupyter notebook</span><br><span class="line">conda install pandas</span><br></pre></td></tr></tbody></table></figure>
 
-<h4 id="3、导入数据集"><a href="#3、导入数据集" class="headerlink" title="3、导入数据集"></a>3、导入数据集</h4><p><img src="%E5%88%9D%E6%AD%A5%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E9%9B%86.png" alt=""></p>
-<h4 id="4、载入数据"><a href="#4、载入数据" class="headerlink" title="4、载入数据"></a>4、载入数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import pandas as pd</span><br><span class="line"># 使用相对路径载入数据</span><br><span class="line">df1 &#x3D; pd.read_csv(&#39;dataset&#x2F;train.csv&#39;)</span><br><span class="line">df1.head()</span><br><span class="line"># 使用绝对路径载入数据</span><br><span class="line">df2 &#x3D; pd.read_csv(&#39;&#x2F;home&#x2F;ulquiola&#x2F;WorkSpace&#x2F;data_analysis&#x2F;hands-on-data-analysis&#x2F;dataset&#x2F;train.csv&#39;)</span><br><span class="line">df2.head()</span><br></pre></td></tr></table></figure>
+<h4 id="3、导入数据集"><a href="#3、导入数据集" class="headerlink" title="3、导入数据集"></a>3、导入数据集</h4><img src="/2021/07/13/%E5%88%9D%E6%AD%A5%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/07/13/%E5%88%9D%E6%AD%A5%E6%95%B0%E6%8D%AE%E6%8E%A2%E7%B4%A2%E6%80%A7%E5%88%86%E6%9E%90/%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E9%9B%86.png" class="">
 
-<h4 id="5、逐块读取"><a href="#5、逐块读取" class="headerlink" title="5、逐块读取"></a>5、逐块读取</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chunker &#x3D; pd.read_csv(&#39;dataset&#x2F;train.csv&#39;, chunksize&#x3D;1000)</span><br><span class="line">for i in chunker:</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
+<h4 id="4、载入数据"><a href="#4、载入数据" class="headerlink" title="4、载入数据"></a>4、载入数据</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import numpy as np</span><br><span class="line">import pandas as pd</span><br><span class="line"># 使用相对路径载入数据</span><br><span class="line">df1 = pd.read_csv('dataset/train.csv')</span><br><span class="line">df1.head()</span><br><span class="line"># 使用绝对路径载入数据</span><br><span class="line">df2 = pd.read_csv('/home/ulquiola/WorkSpace/data_analysis/hands-on-data-analysis/dataset/train.csv')</span><br><span class="line">df2.head()</span><br></pre></td></tr></tbody></table></figure>
 
-<h4 id="6、修改表头"><a href="#6、修改表头" class="headerlink" title="6、修改表头"></a>6、修改表头</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df &#x3D; pd.read_csv(&#39;dataset&#x2F;train.csv&#39;, names&#x3D;[&#39;乘客ID&#39;,&#39;是否幸存&#39;,&#39;仓位等级&#39;,&#39;姓名&#39;,&#39;性别&#39;,&#39;年龄&#39;,&#39;兄弟姐妹个数&#39;,&#39;父母子女个数&#39;,&#39;船票信息&#39;,&#39;票价&#39;,&#39;客舱&#39;,&#39;登船港口&#39;],index_col&#x3D;&#39;乘客ID&#39;,header&#x3D;0)</span><br><span class="line">df.head()</span><br></pre></td></tr></table></figure>
+<h4 id="5、逐块读取"><a href="#5、逐块读取" class="headerlink" title="5、逐块读取"></a>5、逐块读取</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chunker = pd.read_csv('dataset/train.csv', chunksize=1000)</span><br><span class="line">for i in chunker:</span><br><span class="line">    print(i)</span><br></pre></td></tr></tbody></table></figure>
 
-<h4 id="7、查看数据的基本信息"><a href="#7、查看数据的基本信息" class="headerlink" title="7、查看数据的基本信息"></a>7、查看数据的基本信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.info()</span><br></pre></td></tr></table></figure>
+<h4 id="6、修改表头"><a href="#6、修改表头" class="headerlink" title="6、修改表头"></a>6、修改表头</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df = pd.read_csv('dataset/train.csv', names=['乘客ID','是否幸存','仓位等级','姓名','性别','年龄','兄弟姐妹个数','父母子女个数','船票信息','票价','客舱','登船港口'],index_col='乘客ID',header=0)</span><br><span class="line">df.head()</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="7、查看数据的基本信息"><a href="#7、查看数据的基本信息" class="headerlink" title="7、查看数据的基本信息"></a>7、查看数据的基本信息</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.info()</span><br></pre></td></tr></tbody></table></figure>
 
 <p>【提示】有多个函数可以这样做，你可以做一下总结</p>
-<h4 id="8、观察表格前10行的数据和后15行的数据"><a href="#8、观察表格前10行的数据和后15行的数据" class="headerlink" title="8、观察表格前10行的数据和后15行的数据"></a>8、观察表格前10行的数据和后15行的数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.head(10)</span><br></pre></td></tr></table></figure>
+<h4 id="8、观察表格前10行的数据和后15行的数据"><a href="#8、观察表格前10行的数据和后15行的数据" class="headerlink" title="8、观察表格前10行的数据和后15行的数据"></a>8、观察表格前10行的数据和后15行的数据</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.head(10)</span><br></pre></td></tr></tbody></table></figure>
 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.tail(10)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.tail(10)</span><br></pre></td></tr></tbody></table></figure>
 
-<h4 id="9、判断数据是否为空，为空的地方返回True，其余地方返回False"><a href="#9、判断数据是否为空，为空的地方返回True，其余地方返回False" class="headerlink" title="9、判断数据是否为空，为空的地方返回True，其余地方返回False"></a>9、判断数据是否为空，为空的地方返回True，其余地方返回False</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.isnull().head()</span><br></pre></td></tr></table></figure>
+<h4 id="9、判断数据是否为空，为空的地方返回True，其余地方返回False"><a href="#9、判断数据是否为空，为空的地方返回True，其余地方返回False" class="headerlink" title="9、判断数据是否为空，为空的地方返回True，其余地方返回False"></a>9、判断数据是否为空，为空的地方返回True，其余地方返回False</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.isnull().head()</span><br></pre></td></tr></tbody></table></figure>
 
-<h4 id="10、保存数据"><a href="#10、保存数据" class="headerlink" title="10、保存数据"></a>10、保存数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.to_csv(&#39;dataset&#x2F;train_chinese.csv&#39;)</span><br></pre></td></tr></table></figure>
+<h4 id="10、保存数据"><a href="#10、保存数据" class="headerlink" title="10、保存数据"></a>10、保存数据</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.to_csv('dataset/train_chinese.csv')</span><br></pre></td></tr></tbody></table></figure>
 
-<h2 id="二、Pandas-基础"><a href="#二、Pandas-基础" class="headerlink" title="二、Pandas 基础"></a>二、Pandas 基础</h2><h4 id="1、数据筛选"><a href="#1、数据筛选" class="headerlink" title="1、数据筛选"></a>1、数据筛选</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#  筛选”Age“为10岁以上和50岁以下的乘客</span><br><span class="line">df[(df[&quot;Age&quot;]&gt;10)&amp; (df[&quot;Age&quot;]&lt;50)]</span><br></pre></td></tr></table></figure>
+<h2 id="二、Pandas-基础"><a href="#二、Pandas-基础" class="headerlink" title="二、Pandas 基础"></a>二、Pandas 基础</h2><h4 id="1、数据筛选"><a href="#1、数据筛选" class="headerlink" title="1、数据筛选"></a>1、数据筛选</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#  筛选”Age“为10岁以上和50岁以下的乘客</span><br><span class="line">df[(df["Age"]&gt;10)&amp; (df["Age"]&lt;50)]</span><br></pre></td></tr></tbody></table></figure>
 
-<h4 id="2、排序"><a href="#2、排序" class="headerlink" title="2、排序"></a>2、排序</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 对年龄进行倒序排序</span><br><span class="line">df.sort_values(by &#x3D; &#39;Age&#39;,ascending&#x3D;False)</span><br><span class="line"># 对年龄和票价进行排序</span><br><span class="line">df.sort_values(by&#x3D;[&#39;Age&#39;,&#39;Fare&#39;])</span><br></pre></td></tr></table></figure>
+<h4 id="2、排序"><a href="#2、排序" class="headerlink" title="2、排序"></a>2、排序</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 对年龄进行倒序排序</span><br><span class="line">df.sort_values(by = 'Age',ascending=False)</span><br><span class="line"># 对年龄和票价进行排序</span><br><span class="line">df.sort_values(by=['Age','Fare'])</span><br></pre></td></tr></tbody></table></figure>
 
 <h4 id="3、索引"><a href="#3、索引" class="headerlink" title="3、索引"></a>3、索引</h4><ul>
 <li><p>loc对标签进行索引</p>
@@ -201,20 +200,20 @@
 <li><p>iloc对切片进行索引（主要）</p>
 </li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 行索引为0，列索引为‘Age’</span><br><span class="line">df.loc[0,&#39;Age&#39;]</span><br><span class="line"># 取列索引为5，即为‘Age&#39;列</span><br><span class="line">df.iloc[:,5:6]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 行索引为0，列索引为‘Age’</span><br><span class="line">df.loc[0,'Age']</span><br><span class="line"># 取列索引为5，即为‘Age'列</span><br><span class="line">df.iloc[:,5:6]</span><br></pre></td></tr></tbody></table></figure>
 
-<h2 id="三、探索性数据分析"><a href="#三、探索性数据分析" class="headerlink" title="三、探索性数据分析"></a>三、探索性数据分析</h2><h4 id="1、相当于对数据集进行概览，会输出该数据集的计数、最大值、最小值等"><a href="#1、相当于对数据集进行概览，会输出该数据集的计数、最大值、最小值等" class="headerlink" title="1、相当于对数据集进行概览，会输出该数据集的计数、最大值、最小值等"></a>1、相当于对数据集进行概览，会输出该数据集的计数、最大值、最小值等</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.describe()</span><br></pre></td></tr></table></figure>
+<h2 id="三、探索性数据分析"><a href="#三、探索性数据分析" class="headerlink" title="三、探索性数据分析"></a>三、探索性数据分析</h2><h4 id="1、相当于对数据集进行概览，会输出该数据集的计数、最大值、最小值等"><a href="#1、相当于对数据集进行概览，会输出该数据集的计数、最大值、最小值等" class="headerlink" title="1、相当于对数据集进行概览，会输出该数据集的计数、最大值、最小值等"></a>1、相当于对数据集进行概览，会输出该数据集的计数、最大值、最小值等</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.describe()</span><br></pre></td></tr></tbody></table></figure>
 
 
-<h4 id="2、计算最小、最大值对应的索引标签"><a href="#2、计算最小、最大值对应的索引标签" class="headerlink" title="2、计算最小、最大值对应的索引标签"></a>2、计算最小、最大值对应的索引标签</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.idxmin()</span><br><span class="line">df.idxmax()</span><br></pre></td></tr></table></figure>
+<h4 id="2、计算最小、最大值对应的索引标签"><a href="#2、计算最小、最大值对应的索引标签" class="headerlink" title="2、计算最小、最大值对应的索引标签"></a>2、计算最小、最大值对应的索引标签</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">df.idxmin()</span><br><span class="line">df.idxmax()</span><br></pre></td></tr></tbody></table></figure>
 
-<h4 id="3、统计非空数据的数量。"><a href="#3、统计非空数据的数量。" class="headerlink" title="3、统计非空数据的数量。"></a>3、统计非空数据的数量。</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.count()</span><br></pre></td></tr></table></figure>
+<h4 id="3、统计非空数据的数量。"><a href="#3、统计非空数据的数量。" class="headerlink" title="3、统计非空数据的数量。"></a>3、统计非空数据的数量。</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.count()</span><br></pre></td></tr></tbody></table></figure>
 
-<h4 id="4、计算数值数据的总和"><a href="#4、计算数值数据的总和" class="headerlink" title="4、计算数值数据的总和"></a>4、计算数值数据的总和</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.sum()</span><br></pre></td></tr></table></figure>
-<h4 id="5、计算数值数据的平均值"><a href="#5、计算数值数据的平均值" class="headerlink" title="5、计算数值数据的平均值"></a>5、计算数值数据的平均值</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.mean()</span><br></pre></td></tr></table></figure>
+<h4 id="4、计算数值数据的总和"><a href="#4、计算数值数据的总和" class="headerlink" title="4、计算数值数据的总和"></a>4、计算数值数据的总和</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.sum()</span><br></pre></td></tr></tbody></table></figure>
+<h4 id="5、计算数值数据的平均值"><a href="#5、计算数值数据的平均值" class="headerlink" title="5、计算数值数据的平均值"></a>5、计算数值数据的平均值</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.mean()</span><br></pre></td></tr></tbody></table></figure>
 
-<h4 id="6、计算数值数据的算术中值"><a href="#6、计算数值数据的算术中值" class="headerlink" title="6、计算数值数据的算术中值"></a>6、计算数值数据的算术中值</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.median()</span><br></pre></td></tr></table></figure>
-
+<h4 id="6、计算数值数据的算术中值"><a href="#6、计算数值数据的算术中值" class="headerlink" title="6、计算数值数据的算术中值"></a>6、计算数值数据的算术中值</h4><figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df.median()</span><br></pre></td></tr></tbody></table></figure>
+</body></html>
       
 
       
@@ -451,7 +450,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">LeetCode刷题之旅</a>
+                <a href="javascript:void(0)" class="js-tag color2">Git 操作</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Numpy</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -459,11 +462,7 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Git 操作</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Numpy</a>
+                <a href="javascript:void(0)" class="js-tag color3">LeetCode刷题之旅</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -495,15 +494,15 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">大数据分析</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据挖掘</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">自我介绍</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">大数据分析</a>
               </li>
             
             <div class="clearfix"></div>
